@@ -33,6 +33,41 @@
       ],
       "restore_behavior": "FDM is not in the curated dependencies or baseline inventories. The restore installer does not enforce its removal on other systems.",
       "replacement_status": "No replacement installer or extension was installed by this change."
+    },
+    {
+      "date": "2026-10-19",
+      "action": "installed",
+      "application": "Persepolis Download Manager",
+      "package": "persepolis",
+      "version": "5.2.0-3",
+      "source": "Arch Linux extra repository",
+      "upstream": "https://persepolisdm.github.io/",
+      "license": "GPL-3.0-or-later",
+      "installed_packages": {
+        "persepolis": "5.2.0-3",
+        "shiboken6": "6.11.2-1",
+        "pyside6": "6.11.2-1",
+        "python-dasbus": "1.7-5",
+        "python-pysocks": "1.7.1-12",
+        "python-setproctitle": "1.3.7-2"
+      },
+      "installation_command": "omarchy pkg add persepolis",
+      "update_behavior": "Updated with normal Omarchy/Arch package updates; no independent binary updater is configured.",
+      "removal_command": "omarchy pkg drop persepolis",
+      "firefox_extension": "https://addons.mozilla.org/en-US/firefox/addon/persepolis-dlm-integration/",
+      "first_run": "Launch persepolis as the normal desktop user; it generates per-user settings and browser native-messaging connectors.",
+      "manual_setup": "Install the official Firefox extension interactively, then enable Interrupt downloads and Context menu.",
+      "privacy": "Settings, history, native-host manifests with home paths, browser profiles, cookies, URLs and downloads are generated locally and excluded from the public package.",
+      "verification": [
+        "Installed package version confirmed",
+        "Application version command passed",
+        "A mapped Hyprland application window was observed",
+        "Firefox native manifest targets an existing executable and allows the official extension ID"
+      ],
+      "unverified": [
+        "Firefox extension installation and end-to-end download capture require the user",
+        "OneDrive authentication, download speed and successful archive delivery are not established by application installation"
+      ]
     }
   ]
 }

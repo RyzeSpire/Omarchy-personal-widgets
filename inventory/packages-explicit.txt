@@ -114,6 +114,7 @@ omarchy-settings
 omawrite
 pacman-contrib
 pamixer
+persepolis
 pinta
 pipewire
 pipewire-alsa
