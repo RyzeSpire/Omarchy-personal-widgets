@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "ryze.steam",
+  "name": "Steam library",
+  "version": "1.3.0",
+  "author": "ryze",
+  "description": "Steam collections, friends and in-widget game details with playtime and achievements",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "SteamWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Steam",
+    "description": "Browse and launch installed Steam games",
+    "category": "Apps",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}

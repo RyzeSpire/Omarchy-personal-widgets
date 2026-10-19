@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "ryze.spotify",
+  "name": "Spotify",
+  "version": "1.7.5",
+  "author": "ryze",
+  "description": "Spotify player with playlist browsing, song selection, queue sidebar, volume, shuffle and repeat",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "SpotifyWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Spotify",
+    "description": "Spotify playback controls, account playlist picker and catalog search",
+    "category": "Media",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}

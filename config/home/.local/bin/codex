@@ -1,0 +1,17 @@
+#!/bin/bash
+# Route interactive Codex sessions to workspace 9 without affecting headless commands.
+if [[ -t 0 && -t 1 ]]; then
+  codex_route_window=true
+  for codex_launch_arg in "$@"; do
+    case "$codex_launch_arg" in
+      -h|--help|-V|--version|exec|e|review|app-server|mcp|mcp-server|login|logout|completion|debug|apply|a|cloud|features)
+        codex_route_window=false ;;
+    esac
+  done
+  if $codex_route_window; then
+    "$HOME/.local/bin/omarchy-codex-workspace" >/dev/null 2>&1 || true
+  fi
+fi
+export MISE_MINIMUM_RELEASE_AGE=0
+mise use -g --quiet "codex" || exit 1
+exec mise x "codex" -- "codex" "$@"

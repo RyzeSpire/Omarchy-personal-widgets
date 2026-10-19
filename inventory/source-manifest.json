@@ -1,0 +1,422 @@
+[
+  {
+    "source": "~/.config/omarchy/plugins/ryze.codex-launcher/manifest.json",
+    "package": "plugins/ryze.codex-launcher/manifest.json",
+    "source_sha256": "f5e9ae54a5639fb8010c5163e941654295dcdf8b866bbe9daa43621c967b82fe",
+    "package_sha256": "f5e9ae54a5639fb8010c5163e941654295dcdf8b866bbe9daa43621c967b82fe"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.codex-launcher/CodexWidget.qml",
+    "package": "plugins/ryze.codex-launcher/CodexWidget.qml",
+    "source_sha256": "eacc3c42e0186bdc69e43673beb9cb56d9af8d2f8de57a8f0b75c03945d0f2ce",
+    "package_sha256": "eacc3c42e0186bdc69e43673beb9cb56d9af8d2f8de57a8f0b75c03945d0f2ce"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.codex-launcher/launch_codex.py",
+    "package": "plugins/ryze.codex-launcher/launch_codex.py",
+    "source_sha256": "4cb3808e50ec23846abcea6add7687e141ff42dc7e1e52ef329af1a0c0c67bc7",
+    "package_sha256": "4cb3808e50ec23846abcea6add7687e141ff42dc7e1e52ef329af1a0c0c67bc7"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.codex-launcher/README.md",
+    "package": "plugins/ryze.codex-launcher/README.md",
+    "source_sha256": "2b4a6026ed2272c8b719a27b954dfa515565c99dc8085dbb49606a8fe9702b5f",
+    "package_sha256": "2b4a6026ed2272c8b719a27b954dfa515565c99dc8085dbb49606a8fe9702b5f"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.discord-launcher/manifest.json",
+    "package": "plugins/ryze.discord-launcher/manifest.json",
+    "source_sha256": "3296730da0131a88af867293c5bdc28d2a391f68bb61036fc4501442a6f264d4",
+    "package_sha256": "3296730da0131a88af867293c5bdc28d2a391f68bb61036fc4501442a6f264d4"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.discord-launcher/DiscordWidget.qml",
+    "package": "plugins/ryze.discord-launcher/DiscordWidget.qml",
+    "source_sha256": "0170142a011a5609661af99068376a5a4ffe20e62f2016a3ad77f7d5b3af289e",
+    "package_sha256": "0170142a011a5609661af99068376a5a4ffe20e62f2016a3ad77f7d5b3af289e"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.discord-launcher/launch_discord.py",
+    "package": "plugins/ryze.discord-launcher/launch_discord.py",
+    "source_sha256": "b7ad9cb5518a02dd8d1b698705bc72fa4aa5be585568b29cebbadd41e144c7b4",
+    "package_sha256": "b7ad9cb5518a02dd8d1b698705bc72fa4aa5be585568b29cebbadd41e144c7b4"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.discord-launcher/README.md",
+    "package": "plugins/ryze.discord-launcher/README.md",
+    "source_sha256": "3c62a1dc7236dd40f9eded2f0fe5edee8e9ad4f3df909dcb7e250942b471cf93",
+    "package_sha256": "3c62a1dc7236dd40f9eded2f0fe5edee8e9ad4f3df909dcb7e250942b471cf93"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/KeyboardLayout.qml",
+    "package": "plugins/ryze.keyboard-layout/KeyboardLayout.qml",
+    "source_sha256": "9f9a26a3a13ff947bf3384de9d4f3a7dbc95c85caa14a17212fbe969e10429ce",
+    "package_sha256": "9f9a26a3a13ff947bf3384de9d4f3a7dbc95c85caa14a17212fbe969e10429ce"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/KeyboardLayoutModel.js",
+    "package": "plugins/ryze.keyboard-layout/KeyboardLayoutModel.js",
+    "source_sha256": "722e0e4eeaac0fa01660175d2da7fc6a2ba5f2b01d71843a8c731591979d2c2d",
+    "package_sha256": "722e0e4eeaac0fa01660175d2da7fc6a2ba5f2b01d71843a8c731591979d2c2d"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/manifest.json",
+    "package": "plugins/ryze.keyboard-layout/manifest.json",
+    "source_sha256": "a4f828c73666d5cb3a16ac1f054e4c623b7f36d1a3f451958b3acad0700cd5b9",
+    "package_sha256": "a4f828c73666d5cb3a16ac1f054e4c623b7f36d1a3f451958b3acad0700cd5b9"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/manifest.json",
+    "package": "plugins/ryze.spotify/manifest.json",
+    "source_sha256": "9a2880ad6229c4057b3e48874eaa0fec81c221cf81738d0721642663ec63a1f0",
+    "package_sha256": "9a2880ad6229c4057b3e48874eaa0fec81c221cf81738d0721642663ec63a1f0"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/SpotifyIcon.qml",
+    "package": "plugins/ryze.spotify/SpotifyIcon.qml",
+    "source_sha256": "bdd9413a516cefaa3c3ecf30f0f2aa21bcabcca5814500eb95bde8d6f4c74fdb",
+    "package_sha256": "bdd9413a516cefaa3c3ecf30f0f2aa21bcabcca5814500eb95bde8d6f4c74fdb"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/SpotifyWidget.qml",
+    "package": "plugins/ryze.spotify/SpotifyWidget.qml",
+    "source_sha256": "cd4cefa53b080e296fbc1592d4569b55e63e0a174a9dbb629ddd251c69ef1292",
+    "package_sha256": "dc498757edeed43d2de0d744c4bcc64ef053c82a51418cb0fb174df8a9b05d3b"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/LibraryMenu.qml",
+    "package": "plugins/ryze.spotify/LibraryMenu.qml",
+    "source_sha256": "29a8d7b4f1a26114fa38c13a678c3e095cc407a6fe2256e3347819c5c6d463e0",
+    "package_sha256": "29a8d7b4f1a26114fa38c13a678c3e095cc407a6fe2256e3347819c5c6d463e0"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/spotify_library.py",
+    "package": "plugins/ryze.spotify/spotify_library.py",
+    "source_sha256": "c224f4f9a57e6528eebbe60b9f2ee4dab67e918805adb7c6a1d8714e564be70d",
+    "package_sha256": "c224f4f9a57e6528eebbe60b9f2ee4dab67e918805adb7c6a1d8714e564be70d"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/spotify_api.py",
+    "package": "plugins/ryze.spotify/spotify_api.py",
+    "source_sha256": "09396923fd0b4d63eb4c44fe678077156d22eaf1ca757333c9be0fc06f1c64d3",
+    "package_sha256": "09396923fd0b4d63eb4c44fe678077156d22eaf1ca757333c9be0fc06f1c64d3"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/SearchResults.qml",
+    "package": "plugins/ryze.spotify/SearchResults.qml",
+    "source_sha256": "6f72c58be75b5ee1e0053d5acee3aaf00a86d5083dd35f8eb9c9b67d91f3df5c",
+    "package_sha256": "6f72c58be75b5ee1e0053d5acee3aaf00a86d5083dd35f8eb9c9b67d91f3df5c"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/spotify_desktop.py",
+    "package": "plugins/ryze.spotify/spotify_desktop.py",
+    "source_sha256": "42ad4374f83ecccf3af107222d1daed1555bf049ba5ad1f9eb350f7f9bf07389",
+    "package_sha256": "42ad4374f83ecccf3af107222d1daed1555bf049ba5ad1f9eb350f7f9bf07389"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/spotify_playback.py",
+    "package": "plugins/ryze.spotify/spotify_playback.py",
+    "source_sha256": "cfb0c31bc4734a759f7b0533c8744e4aabdbf8031ab4f6b9e0eefad9494879c7",
+    "package_sha256": "cfb0c31bc4734a759f7b0533c8744e4aabdbf8031ab4f6b9e0eefad9494879c7"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/TrackList.qml",
+    "package": "plugins/ryze.spotify/TrackList.qml",
+    "source_sha256": "f6e8bb6e7f3c9baee7b125a7c3b81e6bb3ba25d2a7a991cdeed0d9b449ebe681",
+    "package_sha256": "f6e8bb6e7f3c9baee7b125a7c3b81e6bb3ba25d2a7a991cdeed0d9b449ebe681"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/PlaylistBrowser.qml",
+    "package": "plugins/ryze.spotify/PlaylistBrowser.qml",
+    "source_sha256": "4cc2823e057ccf6e4c915d839d32e0dad61a13dc577abb6b9bfb91d00e004a87",
+    "package_sha256": "4cc2823e057ccf6e4c915d839d32e0dad61a13dc577abb6b9bfb91d00e004a87"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/QueuePanel.qml",
+    "package": "plugins/ryze.spotify/QueuePanel.qml",
+    "source_sha256": "cac7d3c6bc579b492dfd72364c09465f2e7b27c8bf4ef2cd745c24638e1aa14f",
+    "package_sha256": "cac7d3c6bc579b492dfd72364c09465f2e7b27c8bf4ef2cd745c24638e1aa14f"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.spotify/README.md",
+    "package": "plugins/ryze.spotify/README.md",
+    "source_sha256": "dbe6fa4bbeb73f8dd44d1960b96aecb07c41946078f90e0d2915a2b6f98e162e",
+    "package_sha256": "dbe6fa4bbeb73f8dd44d1960b96aecb07c41946078f90e0d2915a2b6f98e162e"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/manifest.json",
+    "package": "plugins/ryze.steam/manifest.json",
+    "source_sha256": "d7a0175d974ac2da55d450fcc10db345108435e8fb75d6db19062b3423159ddb",
+    "package_sha256": "d7a0175d974ac2da55d450fcc10db345108435e8fb75d6db19062b3423159ddb"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/steam_backend.py",
+    "package": "plugins/ryze.steam/steam_backend.py",
+    "source_sha256": "fc637a1eb4ed1a527795934e95049697a267061f6d3e8a86e05936c8a2cc2949",
+    "package_sha256": "fc637a1eb4ed1a527795934e95049697a267061f6d3e8a86e05936c8a2cc2949"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/GameCard.qml",
+    "package": "plugins/ryze.steam/GameCard.qml",
+    "source_sha256": "b1e3f420c77ff7b4dd41e91f315dbe8420ad58e2ed789a164234b461a88fa30f",
+    "package_sha256": "b1e3f420c77ff7b4dd41e91f315dbe8420ad58e2ed789a164234b461a88fa30f"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/SteamPanel.qml",
+    "package": "plugins/ryze.steam/SteamPanel.qml",
+    "source_sha256": "027bd2f06052af075d537f1ab8ceaf4516b5c1b66d39eed9a5ed48805cf95005",
+    "package_sha256": "027bd2f06052af075d537f1ab8ceaf4516b5c1b66d39eed9a5ed48805cf95005"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/SteamWidget.qml",
+    "package": "plugins/ryze.steam/SteamWidget.qml",
+    "source_sha256": "4e97b373b6fa38b4cd87268b641c22597f1bc65221ac950f812d2b228a146435",
+    "package_sha256": "4e97b373b6fa38b4cd87268b641c22597f1bc65221ac950f812d2b228a146435"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/README.md",
+    "package": "plugins/ryze.steam/README.md",
+    "source_sha256": "a98a589b8f2e221633b4fe5e4e213d79813fbc8297e476b9faf6072e32d27693",
+    "package_sha256": "a98a589b8f2e221633b4fe5e4e213d79813fbc8297e476b9faf6072e32d27693"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/test_backend.py",
+    "package": "plugins/ryze.steam/test_backend.py",
+    "source_sha256": "977cb7a4dfde913e8ddee4ab406f0259e98e2409dbcea09bb70a27fb5e804246",
+    "package_sha256": "977cb7a4dfde913e8ddee4ab406f0259e98e2409dbcea09bb70a27fb5e804246"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/steam_collections.py",
+    "package": "plugins/ryze.steam/steam_collections.py",
+    "source_sha256": "85d2f4246f68401065a566d4a9f33470ac6d0e05c9dd61fd6d3528f3870308dc",
+    "package_sha256": "85d2f4246f68401065a566d4a9f33470ac6d0e05c9dd61fd6d3528f3870308dc"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/LibraryDropdown.qml",
+    "package": "plugins/ryze.steam/LibraryDropdown.qml",
+    "source_sha256": "0852079e68a3d53e143161d5a27aa037fd0899bcc3f4cb8f127fced1b1750c63",
+    "package_sha256": "0852079e68a3d53e143161d5a27aa037fd0899bcc3f4cb8f127fced1b1750c63"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/ClientDropdown.qml",
+    "package": "plugins/ryze.steam/ClientDropdown.qml",
+    "source_sha256": "3e4b8fd594d34550509db188f5f471cec6c08efd35045a56067ac24e8e9b4b80",
+    "package_sha256": "3e4b8fd594d34550509db188f5f471cec6c08efd35045a56067ac24e8e9b4b80"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/steam_friends.py",
+    "package": "plugins/ryze.steam/steam_friends.py",
+    "source_sha256": "b8392ddd740c254a3171f550147b691d03892fc8788bac562270150fc3144b63",
+    "package_sha256": "b8392ddd740c254a3171f550147b691d03892fc8788bac562270150fc3144b63"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/FriendsDropdown.qml",
+    "package": "plugins/ryze.steam/FriendsDropdown.qml",
+    "source_sha256": "0f0fd366f2194bad0e02e3371d8c9831ef5e7c595b45e5bfe1fbd7ca36cc5b6b",
+    "package_sha256": "0f0fd366f2194bad0e02e3371d8c9831ef5e7c595b45e5bfe1fbd7ca36cc5b6b"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/test_friends.py",
+    "package": "plugins/ryze.steam/test_friends.py",
+    "source_sha256": "b297c74756c88c4afbc5aa49a3626a4d4ec79ed7d5c16715aad0131ff56f495f",
+    "package_sha256": "b297c74756c88c4afbc5aa49a3626a4d4ec79ed7d5c16715aad0131ff56f495f"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/steam_game_info.py",
+    "package": "plugins/ryze.steam/steam_game_info.py",
+    "source_sha256": "49a2d3e2c9172c77e68e409f14b634546433094110f78ca59ee27c884760ff8f",
+    "package_sha256": "49a2d3e2c9172c77e68e409f14b634546433094110f78ca59ee27c884760ff8f"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/GameDetails.qml",
+    "package": "plugins/ryze.steam/GameDetails.qml",
+    "source_sha256": "833fd4e6e32802d6822b7c731c2b7f75aef3fff3a6f5d96cb61192a498429d92",
+    "package_sha256": "833fd4e6e32802d6822b7c731c2b7f75aef3fff3a6f5d96cb61192a498429d92"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/GameInfoController.qml",
+    "package": "plugins/ryze.steam/GameInfoController.qml",
+    "source_sha256": "fd325f88deaf093d14287da0eb175478bd7bf6879d961622f4bc5493352de57a",
+    "package_sha256": "fd325f88deaf093d14287da0eb175478bd7bf6879d961622f4bc5493352de57a"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.steam/test_game_info.py",
+    "package": "plugins/ryze.steam/test_game_info.py",
+    "source_sha256": "c58655c748a37267fc79ff72d06d8dfbbd6b5fb7caf963fc781a9f6c828923d3",
+    "package_sha256": "c58655c748a37267fc79ff72d06d8dfbbd6b5fb7caf963fc781a9f6c828923d3"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/.gitignore",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/.gitignore",
+    "source_sha256": "e35389d462b784ed2cb7b8e77c8b90a85eaebf6b9eb8a2ac8e2398632aaccd17",
+    "package_sha256": "e35389d462b784ed2cb7b8e77c8b90a85eaebf6b9eb8a2ac8e2398632aaccd17"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/CONTRIBUTING.md",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/CONTRIBUTING.md",
+    "source_sha256": "52b5f4ac6353d3c5373ce2ca43b4545ba258f6b9fb342f927680876eeab206ea",
+    "package_sha256": "52b5f4ac6353d3c5373ce2ca43b4545ba258f6b9fb342f927680876eeab206ea"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/LICENSE",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/LICENSE",
+    "source_sha256": "2cabe1f79afb402cc03e883015068084b91d7c03537f0523b963bffd50671af9",
+    "package_sha256": "2cabe1f79afb402cc03e883015068084b91d7c03537f0523b963bffd50671af9"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/Model.js",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/Model.js",
+    "source_sha256": "95d24e8ec85738557f87d3ccb2a6aee784d0ad9df7c3676934ac1c60e360133f",
+    "package_sha256": "95d24e8ec85738557f87d3ccb2a6aee784d0ad9df7c3676934ac1c60e360133f"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/Panel.qml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/Panel.qml",
+    "source_sha256": "a1776f624eb40c178148bef21af9438d5e717be00fd597d6badfdc0c37980ea3",
+    "package_sha256": "a1776f624eb40c178148bef21af9438d5e717be00fd597d6badfdc0c37980ea3"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/ProtonIcon.qml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/ProtonIcon.qml",
+    "source_sha256": "7559a21b08c3fb9892a2fa0b0497baa266a415f4b9e5fb1a15ee4f63e26130a0",
+    "package_sha256": "7559a21b08c3fb9892a2fa0b0497baa266a415f4b9e5fb1a15ee4f63e26130a0"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/README.md",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/README.md",
+    "source_sha256": "ddb120a97aa31bf0a70444499d89cb96e362f22a6b992ec5a1b788f4d8387046",
+    "package_sha256": "ddb120a97aa31bf0a70444499d89cb96e362f22a6b992ec5a1b788f4d8387046"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/RELEASING.md",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/RELEASING.md",
+    "source_sha256": "c6e8b57fc53bdfa5547029dfafdc356161fe9066020dd6f5ced10dfa2460e310",
+    "package_sha256": "c6e8b57fc53bdfa5547029dfafdc356161fe9066020dd6f5ced10dfa2460e310"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/SECURITY.md",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/SECURITY.md",
+    "source_sha256": "18ccadc2c1a207aae4e37f85147675730dc128bee4b4a61c310f048aec297169",
+    "package_sha256": "18ccadc2c1a207aae4e37f85147675730dc128bee4b4a61c310f048aec297169"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/Service.qml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/Service.qml",
+    "source_sha256": "001e9ee4c94fa136ba4c3ce76849b0fbe17e10def09380bfb02ff4570b2f2219",
+    "package_sha256": "001e9ee4c94fa136ba4c3ce76849b0fbe17e10def09380bfb02ff4570b2f2219"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/Traffic.qml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/Traffic.qml",
+    "source_sha256": "ccdb92861ebe2d743c38e0722aa4748d01545c32f44632e86315d46a55df48aa",
+    "package_sha256": "ccdb92861ebe2d743c38e0722aa4748d01545c32f44632e86315d46a55df48aa"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/World.js",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/World.js",
+    "source_sha256": "43c4c3b3b0034745fe8f305fac820c4bd57bf7d4d6a4476d71d9550d8d7572ea",
+    "package_sha256": "43c4c3b3b0034745fe8f305fac820c4bd57bf7d4d6a4476d71d9550d8d7572ea"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/WorldMap.qml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/WorldMap.qml",
+    "source_sha256": "0261c3decc66e8fbb7160354659817565eaf9159955bc46886661cb841d82bbe",
+    "package_sha256": "0261c3decc66e8fbb7160354659817565eaf9159955bc46886661cb841d82bbe"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/apps.py",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/apps.py",
+    "source_sha256": "af244499c6fd93805329e23f0ef3fd1100d7d393cb8283d747a5011a682ed5f8",
+    "package_sha256": "af244499c6fd93805329e23f0ef3fd1100d7d393cb8283d747a5011a682ed5f8"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/manifest.json",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/manifest.json",
+    "source_sha256": "80f61e3bbb25489b9900acdecb342881e1206444473d9f6305303c581693039f",
+    "package_sha256": "80f61e3bbb25489b9900acdecb342881e1206444473d9f6305303c581693039f"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/port.py",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/port.py",
+    "source_sha256": "d70ea72529bc7ea4f311b210beba40ae0d03957f5624950aebc6a02610285db7",
+    "package_sha256": "d70ea72529bc7ea4f311b210beba40ae0d03957f5624950aebc6a02610285db7"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/preview.png",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/preview.png",
+    "source_sha256": "bec1d430f37302b777ee24fdf217f7d088ebdf46c32664c3a273344e095d9402",
+    "package_sha256": "bec1d430f37302b777ee24fdf217f7d088ebdf46c32664c3a273344e095d9402"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/servers.py",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/servers.py",
+    "source_sha256": "744c9eefdf9a9bf3b55754352c96fe29bdfdf6cb56368ca039c0119cade4f6e8",
+    "package_sha256": "744c9eefdf9a9bf3b55754352c96fe29bdfdf6cb56368ca039c0119cade4f6e8"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/.github/PULL_REQUEST_TEMPLATE.md",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/.github/PULL_REQUEST_TEMPLATE.md",
+    "source_sha256": "d761c2eea7a89236f107d0d6d71c525af781780456594fc97f003d7eba42c495",
+    "package_sha256": "d761c2eea7a89236f107d0d6d71c525af781780456594fc97f003d7eba42c495"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/docs/city-list.png",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/docs/city-list.png",
+    "source_sha256": "53a9910c673d06dc8d3dbad072c82bff75c7104e75c880ce6f3d74e5fe3287df",
+    "package_sha256": "53a9910c673d06dc8d3dbad072c82bff75c7104e75c880ce6f3d74e5fe3287df"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/docs/kill-switch-confirm.png",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/docs/kill-switch-confirm.png",
+    "source_sha256": "0b079f417611e8ca3908d2d230d45ad6163c8008a2f753e816902ac6dfc6e4bb",
+    "package_sha256": "0b079f417611e8ca3908d2d230d45ad6163c8008a2f753e816902ac6dfc6e4bb"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/docs/map.png",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/docs/map.png",
+    "source_sha256": "f32260853ec5199a1497ca6b70b1d5f654c2aca9dbb524d348282160865e1888",
+    "package_sha256": "f32260853ec5199a1497ca6b70b1d5f654c2aca9dbb524d348282160865e1888"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/docs/omaproton.gif",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/docs/omaproton.gif",
+    "source_sha256": "ef00db99d0fa1c0d33fc5c654500aa3bf02a00679c84cac5186d3cd9b95172d2",
+    "package_sha256": "ef00db99d0fa1c0d33fc5c654500aa3bf02a00679c84cac5186d3cd9b95172d2"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/docs/panel.png",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/docs/panel.png",
+    "source_sha256": "ca3252cbcc275c8d32f2a52baa5b6efc1861bfa299ff8e6a9844eca379f1efc6",
+    "package_sha256": "ca3252cbcc275c8d32f2a52baa5b6efc1861bfa299ff8e6a9844eca379f1efc6"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/docs/protection-tab.png",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/docs/protection-tab.png",
+    "source_sha256": "c0969e42a695d36aa876acdb879b0c3f66a825774ab9a95bfaf0a3d731283aa2",
+    "package_sha256": "c0969e42a695d36aa876acdb879b0c3f66a825774ab9a95bfaf0a3d731283aa2"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/docs/traffic.png",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/docs/traffic.png",
+    "source_sha256": "d6174e063349078cdeaa151a01c5f8e0b60f58a1eab6cc6f4f1202996550feb7",
+    "package_sha256": "d6174e063349078cdeaa151a01c5f8e0b60f58a1eab6cc6f4f1202996550feb7"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/.github/ISSUE_TEMPLATE/bug_report.yml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/.github/ISSUE_TEMPLATE/bug_report.yml",
+    "source_sha256": "cd46b64b884e21b5bc8f54545f83f590b1af3551f7c8ac3532ed1b93a87c12d2",
+    "package_sha256": "cd46b64b884e21b5bc8f54545f83f590b1af3551f7c8ac3532ed1b93a87c12d2"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/.github/ISSUE_TEMPLATE/config.yml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/.github/ISSUE_TEMPLATE/config.yml",
+    "source_sha256": "ef8f6055bc3857aaed97fc8daa5e703c47e4532e08fc9a754c7f84c8468f82c1",
+    "package_sha256": "ef8f6055bc3857aaed97fc8daa5e703c47e4532e08fc9a754c7f84c8468f82c1"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/.github/ISSUE_TEMPLATE/feature_request.yml",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/.github/ISSUE_TEMPLATE/feature_request.yml",
+    "source_sha256": "f8f449f28b8fa682adf8c74515520521c0d540433a22b4b07eaf9cf24b1ea841",
+    "package_sha256": "f8f449f28b8fa682adf8c74515520521c0d540433a22b4b07eaf9cf24b1ea841"
+  }
+]

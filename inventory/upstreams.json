@@ -1,0 +1,13 @@
+{
+  "vpn": {
+    "url": "https://github.com/grichard99/omaproton-vpn",
+    "commit": "7db0d72234d38bcc727c261e720c1429e4d81f6e",
+    "license": "MIT"
+  },
+  "keyboard_layout": {
+    "origin": "Omarchy keyboard-layout clone",
+    "url": "https://github.com/omacom/omarchy",
+    "license": "MIT"
+  },
+  "repository": "https://github.com/RyzeSpire/Omarchy-personal-widgets"
+}

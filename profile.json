@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "name": "Ryze personal Omarchy setup",
+  "baseline": {
+    "omarchy": "4.0.4",
+    "hyprland": "0.56.2",
+    "quickshell": "0.3.1",
+    "qt": "6.11.2"
+  },
+  "theme": "ethereal",
+  "background": "1-cosmic.jpg",
+  "secondary_monitor": "HDMI-A-1",
+  "workspaces": {
+    "codex_widget": 7,
+    "discord": 8,
+    "legacy_codex": 9,
+    "spotify_full": 10
+  },
+  "keyboard": {
+    "layout": "us,br",
+    "variant": ",abnt2",
+    "options": "compose:caps,shift:both_capslock_cancel,grp:alts_toggle"
+  },
+  "idle_seconds": 3600,
+  "dependency_packages": [
+    "python",
+    "quickshell",
+    "hyprland",
+    "qt6-imageformats",
+    "foot",
+    "spotify",
+    "ffmpeg4.4",
+    "discord",
+    "firefox",
+    "steam",
+    "proton-vpn-cli",
+    "obs-studio",
+    "v4l2loopback-dkms",
+    "libxkbcommon",
+    "libnotify",
+    "uwsm",
+    "xdg-terminal-exec",
+    "woff2-font-awesome",
+    "ttf-jetbrains-mono-nerd-basic"
+  ],
+  "mise_tools": {
+    "codex": "latest",
+    "gh": "latest",
+    "node": "26.8.2"
+  }
+}

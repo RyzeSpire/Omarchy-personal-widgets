@@ -1,0 +1,76 @@
+# Installation and migration
+
+This is a multi-plugin personal setup bundle. Use `install.sh`; do not pass the repository root to `omarchy plugin add`, which expects one plugin manifest at its root. Source targets x86-64 Omarchy Quattro 4.0.4 / Hyprland Lua 0.56 / Quickshell 0.3.1. Test newer versions before applying. Standard `~/.config`, `~/.local/share` and `~/.local/state` directories are assumed; custom XDG roots are explicitly rejected rather than silently installing into the wrong location.
+
+## Fresh Omarchy installation
+
+```bash
+git clone https://github.com/RyzeSpire/Omarchy-personal-widgets.git
+cd Omarchy-personal-widgets
+./install.sh check
+./install.sh                         # inspect the plan
+./install.sh --apply --packages --theme --reload
+```
+
+Run as your normal desktop user, not root. The optional `--packages` action uses Omarchy package management and may ask for your password. It installs only the curated dependencies in `profile.json`; a full historical package inventory is supplied for review, not blindly replayed. In particular, don't reinstall another machine's kernel/GPU/bootloader packages. No packages are installed merely by cloning or previewing. Verify the package name `ffmpeg4.4` remains available: the captured Spotify release uses its libraries for local MP3s.
+
+Close OBS, Vencord/Discord and Proton before applying their configuration. No app is stopped or started automatically. Applying the Hyprland module can move matching windows as window rules take effect. The saved bar layout takes effect automatically. `--reload` restarts the desktop shell; Spotify/Steam/Discord themselves remain running. `--theme` applies the packaged ethereal theme and recorded background; user custom themes are not downloaded.
+
+For a different external connector use `--monitor DP-2`. `auto` detects connected external screens at installation time, preferring HDMI-A-1. When no session/output is available it keeps the recorded HDMI preference, which falls back to available outputs; rerun with the correct connector after connecting the new display. Workspace preferences remain 7=Codex widget, 8=Discord, 9=legacy Codex wrapper, 10/key 0=full Spotify. Change `profile.json` and corresponding rules/helpers for a different workspace scheme; these are your preferences, not universally reserved IDs.
+
+Choose a subset using `--components widgets,desktop` or `--components widgets` (the latter installs bar widgets but intentionally omits window/binding/keyboard integration). Default is `widgets,desktop,obs,vpn,vencord`. `--home /tmp/test-home --apply` performs an isolated file-only installation; it never installs packages, changes the live session or loads kernel modules. Do not treat that as a real desktop validation.
+
+## Account and client setup
+
+- **Spotify:** install/sign in to native Spotify. In the widget connect your own Spotify developer application's Client ID, registered loopback redirect `http://127.0.0.1:8765/callback`. Approve the PKCE scopes. No shared Client ID/token is bundled. Spotify's API features depend on Premium, development-mode account rules and endpoint availability. Existing playlist shortcuts/caches can migrate privately, otherwise the library is fetched again. For local music, copy your own files and enable the folder in Spotify's Local Files settings; the native client must index it. The widget never decodes music files.
+- **Steam:** install/sign in to Steam. Its libraries/collections are read from that installation. Enter your own Steam Web API key privately under the widget's Friends tab. Library folders/game files, account caches and widget pins are not public assets. Some friend/achievement data remains inaccessible due to privacy settings.
+- **Proton:** sign in with the official CLI/widget. The preset enables include-only split tunneling for native Discord and Chromium, leaves Firefox outside that list, uses WireGuard and has kill switch off. Review this before connecting. The installer only writes settings; it does not activate a VPN, move a connection or log in. If Proton resets preferences during first sign-in, reapply `./install.sh --components vpn --apply` while its apps are closed/disconnected.
+- **Codex and GitHub:** the launcher resolves the mise-managed executable directly. Install tools explicitly after Omarchy's agent setup, e.g. `mise use -g codex@latest gh@latest node@26.8.2`, then authenticate each separately. `~/.config/omarchy/defaults/agent` is set to Codex. The older interactive `~/.local/bin/codex` wrapper is retained for workspace 9; commands that bypass it retain their own placement. The new button uses workspace 7 independently.
+- **Discord/Vencord:** native Discord is a package dependency. The Vencord preset contains sanitized plugin preferences, not Discord itself or its patcher. Apply the official [Vencord installer](https://docs.vencord.dev/installing/) to your current Discord version separately, then start Discord. No proprietary Discord payload or Vencord build binaries are republished. Cloud tokens, pinned conversations and account-specific plugin lists require private migration/reconfiguration.
+
+## Both screens camera
+
+```bash
+python3 scripts/camera-system.py                 # preview
+sudo python3 scripts/camera-system.py --apply --load
+```
+
+This separate, explicit root step installs only `/etc/modprobe.d/ryze-obs-camera.conf` and `/etc/modules-load.d/ryze-obs-camera.conf`, with a reversible system journal. It requires `v4l2loopback-dkms` and headers matching the running kernel. The recorded machine uses linux-omarchy-headers; choose the headers for the new machine rather than copying that assumption. If video42 is already in use, adjust `config/system/etc/modprobe.d/ryze-obs-camera.conf` before applying. It does not unload a camera currently in use. A reboot may be needed if an existing loaded module has different parameters.
+
+Open **Discord Both Screens**, select the two monitors again when the portal prompts, then select **OBS Both Screens** under Discord's camera settings. Layout is laptop left/external right, 3840x1080 canvas, 2560x720 at 30fps output. Output is a camera feed, not desktop-audio screen sharing. Renew audio-device choices in the new session; the Bluetooth A2DP rule is portable, saved microphone/route choices are not. There is no bundled persistent hardware-specific microphone fix.
+
+## Private data, optional
+
+Do not put private backups in this repository, even if it becomes private. Encryption is not a reason to publish account backups. Close the affected apps before a consistent profile export.
+
+```bash
+python3 scripts/private-data.py export                    # sizes only
+python3 scripts/private-data.py export --apply            # private widget state/preferences
+# To also migrate all ~/.config preferences/profiles, Firefox/Steam profiles, local music and keyrings:
+python3 scripts/private-data.py export --profiles --media --keyrings --apply \
+  --output "$HOME/omarchy-full-private.tar.gz.gpg"
+```
+
+GPG asks for a passphrase in your terminal. Plaintext is streamed into encryption and is not written to a temporary archive. The encrypted destination is mode 0600 outside the repository; existing files are never overwritten. Keyrings may still require the old login password. OAuth sessions may expire or be bound to another device; signing in again is normal. File contents are private even if their directory names look harmless.
+
+On the new machine:
+
+```bash
+python3 scripts/private-data.py restore --archive "$HOME/omarchy-full-private.tar.gz.gpg"
+python3 scripts/private-data.py restore --archive "$HOME/omarchy-full-private.tar.gz.gpg" --apply
+```
+
+Decryption goes into an empty `~/omarchy-migration-review` directory. Inspect it and selectively copy data back with apps closed. It never extracts directly over your live home. Browser profiles, keyrings, audio names and Spotify's local index may need manual adjustment. With --profiles, all ~/.config files are included (including additional retained application preferences such as CurseForge/Vortex), excluding cache/log/backup directories. The encrypted helper is not a whole-disk backup: game binaries, general documents, SSH/GPG keys, Wi-Fi/system NetworkManager secrets, bootloader files and disk partitions need your normal backup process. It includes only the documented allowlist; account backups and all local music are optional flags. Original working-machine backups remain untouched.
+
+## Updates and removal
+
+```bash
+git pull --ff-only
+./install.sh                         # review the next version
+./install.sh --apply --reload
+./install.sh uninstall               # preview restoration
+./install.sh uninstall --apply --reload
+sudo python3 scripts/camera-system.py uninstall --apply   # only if you installed the camera step
+```
+
+Before-files and original metadata live in `~/.local/state/omarchy-personal-widgets`; camera originals live in `/var/lib/omarchy-personal-widgets/camera`. Originals survive package updates. Uninstall restores original files only if the installed file has not been edited since; edited files are kept and reported. Retain the local backups until satisfied. Empty plugin directories may remain; unrelated files in those directories are never deleted. Authentication data, music, downloaded games, packages, running apps and backup history are not deleted. Uninstall never unloads an active camera or disconnects a VPN. OBS permission grants are renewed rather than imported.

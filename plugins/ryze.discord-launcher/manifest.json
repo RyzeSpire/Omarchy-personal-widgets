@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "ryze.discord-launcher",
+  "name": "Discord launcher",
+  "version": "1.1.0",
+  "author": "ryze",
+  "description": "Native Discord launcher on workspace 8 with background-process status",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "DiscordWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Discord",
+    "description": "Open Discord desktop; gray when closed, blue while running",
+    "category": "Apps",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}

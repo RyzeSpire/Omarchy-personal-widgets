@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Official Discord Desktop
+Comment=Official stable Discord desktop client
+Exec=/usr/bin/discord --url -- %u
+Icon=discord
+Type=Application
+Terminal=false
+StartupWMClass=discord
+Categories=Network;InstantMessaging;

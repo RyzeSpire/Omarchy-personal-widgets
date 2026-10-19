@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "ryze.codex-launcher",
+  "name": "Codex resume launcher",
+  "version": "1.0.0",
+  "author": "ryze",
+  "description": "Open the Codex resume picker on workspace 7",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "CodexWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Codex",
+    "description": "Open Codex's saved-chat picker on workspace 7",
+    "category": "Apps",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}

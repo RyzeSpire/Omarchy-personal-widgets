@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Discord Both Screens
+Comment=Start the two-monitor OBS camera for Discord
+Exec=uwsm-app -- obs --profile "Both Screens" --collection "Both Screens" --startvirtualcam
+Icon=com.obsproject.Studio
+Terminal=false
+Categories=AudioVideo;Video;
+StartupNotify=true

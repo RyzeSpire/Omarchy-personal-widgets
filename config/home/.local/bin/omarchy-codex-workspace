@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""Route the calling Codex terminal, leaving other terminals and headless jobs alone."""
+import json
+import os
+from pathlib import Path
+import subprocess
+
+
+def hypr(*args):
+    return subprocess.check_output(["hyprctl", *args], text=True, timeout=2)
+
+
+def parent_pids(pid):
+    seen = set()
+    while pid > 1 and pid not in seen:
+        seen.add(pid)
+        yield pid
+        try:
+            # A process name may contain spaces or parentheses.
+            fields = Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()
+            pid = int(fields[1])
+        except (OSError, ValueError, IndexError):
+            break
+
+
+def route():
+    if not os.environ.get("HYPRLAND_INSTANCE_SIGNATURE"):
+        return
+    clients = json.loads(hypr("clients", "-j"))
+    by_pid = {w["pid"]: w for w in clients}
+    window = next((by_pid[p] for p in parent_pids(os.getppid()) if p in by_pid), None)
+    if window is None:
+        return
+    monitors = json.loads(hypr("monitors", "-j"))
+    external = next((m for m in monitors if m["name"] == "HDMI-A-1"), None)
+    if external:
+        workspaces = json.loads(hypr("workspaces", "-j"))
+        target = next((w for w in workspaces if w["id"] == 9), None)
+        if target and target["monitor"] != external["name"]:
+            hypr("dispatch", 'hl.dsp.workspace.move({ workspace="9", monitor="HDMI-A-1" })')
+    selector = json.dumps("address:" + window["address"])
+    hypr("dispatch", 'hl.dsp.window.move({ workspace="9", follow=true, window=' + selector + ' })')
+
+
+if __name__ == "__main__":
+    try:
+        route()
+    except (OSError, ValueError, KeyError, subprocess.SubprocessError):
+        # Desktop placement must never prevent Codex from starting.
+        pass
