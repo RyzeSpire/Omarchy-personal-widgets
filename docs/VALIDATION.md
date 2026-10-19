@@ -14,3 +14,7 @@ Completed against the separate package without installing it over the working de
 - GPG encrypted/decrypted a fake private-state fixture in an isolated temporary GPG home. No real personal backup or production keyring was created/modified by that test.
 
 Not claimed: a fresh graphical Omarchy installation, new-machine OAuth, native app sign-ins, real OBS permission dialogs, or end-to-end playback on new hardware. Follow TESTING.md to validate those. Dependency installation, live configuration application and private account export have not been run on the source machine. Current working widget files and services remain unchanged.
+
+## v0.1.1 — persistent instruction policy
+
+26 affected packaging/Spotify tests pass, including preserving unrelated global instructions, respecting AGENTS.override.md, idempotent policy merge, restoration on uninstall and rejecting incomplete policy blocks. The archive allowlist includes the repository and global instruction payloads. All six plugin manifests and QML/Lua/Python/JSON validation pass. Existing Steam/backend code is unchanged from the validated initial release; its earlier 30 isolated test results remain the baseline.

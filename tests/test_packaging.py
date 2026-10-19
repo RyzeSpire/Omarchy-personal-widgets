@@ -122,9 +122,44 @@ class PackagingTests(unittest.TestCase):
         files = [str(p.relative_to(ROOT)) for p in release.public_files()]
         self.assertFalse(any('.git/' in p or p.endswith(('oauth.json', 'friends.json', '.gpg', '.pyc')) for p in files))
         self.assertIn('install.sh', files)
+        self.assertIn('AGENTS.md', files)
+        self.assertIn('config/home/.codex/AGENTS.md', files)
         scene = json.loads((ROOT / 'config/home/.config/obs-studio/basic/scenes/Both_Screens.json').read_text())
         self.assertFalse(any('RestoreToken' in s.get('settings', {}) for s in scene['sources']))
         self.assertNotIn('cloud', json.loads((ROOT / 'config/vencord-settings.json').read_text()))
+
+    def test_global_policy_merge_preserves_existing_instructions_and_removal(self):
+        target = self.home / '.codex/AGENTS.md'; target.parent.mkdir()
+        original = '# Existing preferences\n\nKeep my unrelated coding conventions.\n'
+        target.write_text(original)
+        plan = manage.install_plan(self.home, 'DP-2', {'desktop', 'widgets'})
+        text = plan['.codex/AGENTS.md'][0].decode()
+        self.assertEqual(plan['.codex/AGENTS.md'][1], 0o600)
+        self.assertIn(original.rstrip(), text)
+        self.assertEqual(text.count('<!-- BEGIN OMARCHY-PACKAGING-POLICY -->'), 1)
+        manage.apply_files(self.home, self.state, plan)
+        again = manage.install_plan(self.home, 'DP-2', {'desktop', 'widgets'})
+        self.assertEqual(again['.codex/AGENTS.md'][0], plan['.codex/AGENTS.md'][0])
+        manage.remove_files(self.home, self.state, True)
+        self.assertEqual(target.read_text(), original)
+
+    def test_global_override_receives_policy_without_replacing_other_guidance(self):
+        directory = self.home / '.codex'; directory.mkdir()
+        (directory / 'AGENTS.md').write_text('Existing base rules\n')
+        (directory / 'AGENTS.override.md').write_text('Existing active override\n')
+        plan = manage.install_plan(self.home, 'DP-2', {'desktop', 'widgets'})
+        self.assertNotIn('.codex/AGENTS.md', plan)
+        self.assertIn('Existing active override', plan['.codex/AGENTS.override.md'][0].decode())
+        self.assertIn('OMARCHY-PACKAGING-POLICY', plan['.codex/AGENTS.override.md'][0].decode())
+        self.assertEqual((directory / 'AGENTS.md').read_text(), 'Existing base rules\n')
+
+    def test_malformed_global_policy_fails_without_writing(self):
+        target = self.home / '.codex/AGENTS.md'; target.parent.mkdir()
+        original = '<!-- BEGIN OMARCHY-PACKAGING-POLICY -->\nunfinished user edit\n'
+        target.write_text(original)
+        with self.assertRaises(ValueError):
+            manage.install_plan(self.home, 'DP-2', {'desktop', 'widgets'})
+        self.assertEqual(target.read_text(), original)
 
     def test_private_export_is_opt_in_for_profiles_and_media(self):
         for name in ('.local/state/omarchy/spotify-widget/oauth.json', '.config/chromium/Local State', 'Music/Spotify_local/song.mp3'):

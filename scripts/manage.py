@@ -207,7 +207,23 @@ def install_plan(home, monitor, components):
         if (is_obs and 'obs' not in components) or (not is_obs and 'desktop' not in components):
             continue
         text = source.read_text().replace('@HOME@', str(home)).replace('HDMI-A-1', monitor)
-        put(relative, text, source.stat().st_mode & 0o777)
+        if relative == '.codex/AGENTS.md':
+            override = home / '.codex/AGENTS.override.md'
+            if override.is_file() and override.read_text().strip():
+                relative = '.codex/AGENTS.override.md'
+            current = home / relative
+            original = current.read_text() if current.exists() else ''
+            begin = '<!-- BEGIN OMARCHY-PACKAGING-POLICY -->'
+            end = '<!-- END OMARCHY-PACKAGING-POLICY -->'
+            if (begin in original) != (end in original):
+                raise ValueError('Incomplete existing packaging policy block; preserve and review it first.')
+            block = text[text.index(begin):text.index(end) + len(end)]
+            if begin in original:
+                text = original[:original.index(begin)] + block + original[original.index(end) + len(end):]
+            else:
+                text = (original.rstrip() + '\n\n' if original.strip() else '') + block + '\n'
+        policy_file = relative in ('.codex/AGENTS.md', '.codex/AGENTS.override.md')
+        put(relative, text, 0o600 if policy_file else source.stat().st_mode & 0o777)
     if 'desktop' in components:
         module = (ROOT / 'config/hypr/personal-widgets.lua').read_text().replace('HDMI-A-1', monitor)
         put('.config/hypr/personal-widgets.lua', module, 0o644)

@@ -13,7 +13,7 @@ REPO = Path(__file__).resolve().parents[1]
 STATE = ['.local/state/omarchy/spotify-widget', '.local/state/omarchy/steam-widget',
          '.config/omarchy/steam-widget', '.local/state/omarchy-protonvpn',
          '.config/Proton', '.local/state/wireplumber', '.config/Vencord/settings',
-         '.config/spotify', '.config/mise/config.toml', '.codex/config.toml', '.codex/skills']
+         '.config/spotify', '.config/mise/config.toml', '.codex/config.toml', '.codex/skills', '.codex/AGENTS.md', '.codex/AGENTS.override.md']
 PROFILES = ['.config', '.mozilla',
             '.local/share/Steam/config', '.local/share/Steam/userdata', '.config/obs-studio', '.config/dconf/user']
 SKIP = {'__pycache__', 'Cache', 'Code Cache', 'GPUCache', 'ShaderCache', 'DawnGraphiteCache',

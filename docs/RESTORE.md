@@ -74,3 +74,7 @@ sudo python3 scripts/camera-system.py uninstall --apply   # only if you installe
 ```
 
 Before-files and original metadata live in `~/.local/state/omarchy-personal-widgets`; camera originals live in `/var/lib/omarchy-personal-widgets/camera`. Originals survive package updates. Uninstall restores original files only if the installed file has not been edited since; edited files are kept and reported. Retain the local backups until satisfied. Empty plugin directories may remain; unrelated files in those directories are never deleted. Authentication data, music, downloaded games, packages, running apps and backup history are not deleted. Uninstall never unloads an active camera or disconnects a VPN. OBS permission grants are renewed rather than imported.
+
+## Persistent Codex workflow
+
+The desktop component restores the marked global packaging policy into `~/.codex/AGENTS.md`, preserving unrelated instructions. If a nonempty `AGENTS.override.md` is active, the block is merged into that file instead. Restart Codex afterward. For a custom `CODEX_HOME`, install the block in that profile manually. This makes packaging/publishing the expected completion workflow for future Codex-assisted Omarchy changes; it does not monitor manual changes. See [PACKAGING_POLICY.md](PACKAGING_POLICY.md).

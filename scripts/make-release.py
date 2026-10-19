@@ -9,7 +9,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = {'plugins', 'vendor', 'config', 'inventory', 'docs', 'scripts', 'tests', 'licenses', '.github'}
-TOP = {'README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', '.gitignore', 'profile.json', 'install.sh'}
+TOP = {'AGENTS.md', 'README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', '.gitignore', 'profile.json', 'install.sh'}
 
 
 def public_files():

@@ -1,7 +1,9 @@
-First complete personal Omarchy restoration bundle.
+Persistent packaging policy for future Codex-assisted Omarchy changes.
 
-Includes five personal widgets, a pinned OmaProton VPN source snapshot, audited desktop/keyboard/workspace/browser/idle/audio/OBS presets, dependency inventories, a dry-run/reversible installer, account-preserving removal, optional camera-driver setup and encrypted private-data migration outside Git.
+- Global working instruction installed in Codex home and supplied in the desktop restore payload.
+- Repository AGENTS.md and docs/PACKAGING_POLICY.md define the packaging, verification, privacy and publication completion workflow.
+- Installer merges the managed block without replacing unrelated instructions, supports active global override files, and restores originals on removal.
+- Policy files are included in the source archive; both global instruction files can also migrate through the private encrypted export.
+- 26 isolated packaging/Spotify regression checks passed; QML/Lua/Python/JSON and all six manifests validated. Existing widget playback code is unchanged.
 
-53 isolated tests passed, all six manifests validated, QML/Lua parsing passed, and the actual source archive completed a staged install/update/remove cycle. A clean graphical installation and account/portal interactions remain manual verification steps. No private credentials, account profiles, music or chat history are published.
-
-Start with README.md and docs/RESTORE.md. Download the tarball plus SHA256SUMS, verify the checksum, extract, and run ./install.sh to preview. The live working desktop was not changed during export preparation.
+Restart other already-open Codex sessions to load the guidance. This is a Codex working rule; changes made outside Codex still need an explicit audit/export. No credentials or chat history are published.
