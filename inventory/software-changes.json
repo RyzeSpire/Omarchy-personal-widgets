@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "changes": [
+    {
+      "date": "2026-10-19",
+      "action": "removed",
+      "application": "Free Download Manager",
+      "packages": {
+        "freedownloadmanager": "6.35.1.7021-1",
+        "freedownloadmanager-debug": "6.35.1.7021-1",
+        "libtorrent": "0.16.22-1"
+      },
+      "upstream": "https://www.freedownloadmanager.org/",
+      "reason": "User requested removal of the package-managed copy before considering a different installation.",
+      "removal_command": "omarchy pkg drop freedownloadmanager freedownloadmanager-debug",
+      "unused_dependency_note": "libtorrent was installed solely for FDM and removed by the package manager.",
+      "removed_user_integrations": [
+        ".config/autostart/FDM.desktop",
+        ".local/share/applications/freedownloadmanager_torrent.desktop",
+        ".local/share/applications/freedownloadmanager_magnet_up.desktop",
+        ".local/share/applications/freedownloadmanager_fdm_up.desktop",
+        ".mozilla/native-messaging-hosts/org.freedownloadmanager.fdm5.cnh.json"
+      ],
+      "removed_mime_handler_ids": [
+        "freedownloadmanager_torrent.desktop",
+        "freedownloadmanager_magnet_up.desktop",
+        "freedownloadmanager_fdm_up.desktop"
+      ],
+      "preserved": [
+        "All downloaded files and Firefox partial transfers",
+        "FDM personal settings and history",
+        "Firefox extension and browser profile"
+      ],
+      "restore_behavior": "FDM is not in the curated dependencies or baseline inventories. The restore installer does not enforce its removal on other systems.",
+      "replacement_status": "No replacement installer or extension was installed by this change."
+    }
+  ]
+}

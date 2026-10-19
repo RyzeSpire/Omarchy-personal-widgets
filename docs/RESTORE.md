@@ -78,3 +78,16 @@ Before-files and original metadata live in `~/.local/state/omarchy-personal-widg
 ## Persistent Codex workflow
 
 The desktop component restores the marked global packaging policy into `~/.codex/AGENTS.md`, preserving unrelated instructions. If a nonempty `AGENTS.override.md` is active, the block is merged into that file instead. Restart Codex afterward. For a custom `CODEX_HOME`, install the block in that profile manually. This makes packaging/publishing the expected completion workflow for future Codex-assisted Omarchy changes; it does not monitor manual changes. See [PACKAGING_POLICY.md](PACKAGING_POLICY.md).
+
+
+## Recorded application removals
+
+See `inventory/software-changes.json` for changes after the original package snapshot. Those records explain removals; the restore installer does not automatically uninstall applications from another machine.
+
+Free Download Manager (`freedownloadmanager` and `freedownloadmanager-debug`, version `6.35.1.7021-1`) was removed on 2026-10-19 at the user's request. The package manager also removed `libtorrent 0.16.22-1`, which was installed solely for FDM. None of these packages is in the curated restore dependencies or original inventories.
+
+To remove the package-managed copy on another Omarchy installation, close FDM and run `omarchy pkg drop freedownloadmanager freedownloadmanager-debug`. Review the dependency transaction before applying removal on a different machine; unrelated applications may now use those dependencies.
+
+FDM-created per-user integrations may outlive package removal. If their executable still points to `/opt/freedownloadmanager/`, remove `.config/autostart/FDM.desktop`, the three `.local/share/applications/freedownloadmanager_{torrent,magnet_up,fdm_up}.desktop` launchers, and `.mozilla/native-messaging-hosts/org.freedownloadmanager.fdm5.cnh.json`, all relative to the user's home. In `.config/mimeapps.list`, remove only the FDM desktop IDs from association values, preserving other handlers. Run `update-desktop-database "$HOME/.local/share/applications"` afterward. Do not apply this cleanup after reinstalling FDM at that same path.
+
+Downloads, partial transfers, FDM settings/history and Firefox profiles/extensions are preserved. No replacement application is installed automatically. If reinstalling later, review the vendor's current Linux instructions and Firefox native-messaging integration; the reason for removing this copy does not establish that an AUR build cannot support the extension. Do not restore another user's browser profile or download history from this public bundle.
