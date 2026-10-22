@@ -114,8 +114,66 @@ function layoutIndex(keyboard) {
   return (keyboard && keyboard.active_layout_index) || 0
 }
 
+// XKB's catalog supplies labels; only layouts already configured in Hyprland
+// become menu choices. Unknown/custom variants keep their configured identity.
+function unquote(value) {
+  value = String(value || "").trim()
+  if (value[0] === "'" && value[value.length - 1] === "'") return value.slice(1, -1).replace(/''/g, "'")
+  return value
+}
+
+function layoutKey(code, variant) { return JSON.stringify([code, variant || ""]) }
+
+function layoutCatalog(text) {
+  var catalog = {}
+  var record = null
+  String(text || "").split("\n").forEach(function(line) {
+    if (/^- /.test(line)) {
+      var layout = line.match(/^- layout: (.*)$/)
+      record = layout ? {code: unquote(layout[1]), variant: ""} : null
+    }
+    if (!record) return
+    var field = line.match(/^  (variant|description): (.*)$/)
+    if (!field) return
+    if (field[1] === "variant") record.variant = unquote(field[2])
+    else catalog[layoutKey(record.code, record.variant)] = unquote(field[2])
+  })
+  return catalog
+}
+
+function configuredLayouts(keyboard, catalog) {
+  if (!keyboard || !keyboard.layout) return []
+  var variants = String(keyboard.variant || "").split(",")
+  return String(keyboard.layout).split(",").map(function(value, index) {
+    var code = value.trim()
+    var variant = String(variants[index] || "").trim()
+    var key = layoutKey(code, variant)
+    var label = (catalog || {})[key]
+    if (typeof label !== "string" || !label) {
+      label = (catalog || {})[layoutKey(code, "")] || code
+      if (variant) label += " [" + variant + "]"
+    }
+    return {index: index, code: code, variant: variant, label: label}
+  }).filter(function(option) { return option.code !== "" })
+}
+
+function selectionTargets(keyboards, option) {
+  if (!option || typeof option.code !== "string" || !option.code) return []
+  return (keyboards || []).filter(function(keyboard) {
+    return keyboard.name && isTypedKeyboard(keyboard.name)
+  }).map(function(keyboard) {
+    var choice = configuredLayouts(keyboard, {}).find(function(item) {
+      return item.code === option.code && item.variant === option.variant
+    })
+    return choice ? {name: String(keyboard.name), index: choice.index} : null
+  }).filter(function(target) { return target !== null })
+}
+
 if (typeof module !== "undefined") {
   module.exports = {
+    layoutCatalog: layoutCatalog,
+    configuredLayouts: configuredLayouts,
+    selectionTargets: selectionTargets,
     eventKeyboardName: eventKeyboardName,
     isTypedKeyboard: isTypedKeyboard,
     layoutBriefs: layoutBriefs,

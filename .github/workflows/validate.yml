@@ -18,6 +18,10 @@ jobs:
       - name: Isolated package and keyring checks
         run: /usr/bin/python3 -B -m unittest discover -s tests -v
       - run: python -B -m unittest discover -s plugins/ryze.steam -p 'test_*.py' -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/test_keyboard_layout.cjs
       - run: python -B scripts/make-release.py
       - uses: actions/upload-artifact@v4
         with:

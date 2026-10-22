@@ -110,6 +110,33 @@ class PackagingTests(unittest.TestCase):
         self.assertNotIn(b'ryze_spotify_close', plan['.config/hypr/bindings.lua'][0])
         self.assertEqual(plan['.config/hypr/hyprland.lua'][0].count(manage.INTEGRATION.encode()), 1)
 
+    def test_keyboard_menu_binding_migrates_updates_and_uninstalls(self):
+        directory = self.home / '.config/hypr'; directory.mkdir(parents=True)
+        block = (ROOT / 'config/hypr/personal-widgets.lua').read_text().split('-- BEGIN RYZE KEYBOARD LAYOUT MENU', 1)[1]
+        original = '-- My unrelated shortcut\no.bind("SUPER + X", "Example", "true")\n' + '-- BEGIN RYZE KEYBOARD LAYOUT MENU' + block
+        path = directory / 'bindings.lua'; path.write_text(original)
+        components = {'desktop', 'widgets'}
+        first = manage.install_plan(self.home, 'DP-2', components)
+        self.assertNotIn(b'mouse:274', first['.config/hypr/bindings.lua'][0])
+        self.assertIn(b'SUPER + X', first['.config/hypr/bindings.lua'][0])
+        self.assertEqual(first['.config/hypr/personal-widgets.lua'][0].count(b'mouse:274'), 1)
+        self.assertIn('.config/omarchy/plugins/ryze.keyboard-layout/LayoutMenu.qml', first)
+        manage.apply_files(self.home, self.state, first)
+        second = manage.install_plan(self.home, 'DP-2', components)
+        manage.apply_files(self.home, self.state, second)
+        self.assertNotIn('mouse:274', path.read_text())
+        manage.remove_files(self.home, self.state, True)
+        self.assertEqual(path.read_text(), original)
+        self.assertFalse((directory / 'personal-widgets.lua').exists())
+
+    def test_incomplete_keyboard_shortcut_block_refuses_install(self):
+        directory = self.home / '.config/hypr'; directory.mkdir(parents=True)
+        path = directory / 'bindings.lua'
+        path.write_text('-- BEGIN RYZE KEYBOARD LAYOUT MENU\n-- Preserve this incomplete edit\n')
+        with self.assertRaisesRegex(ValueError, 'Incomplete keyboard menu'):
+            manage.install_plan(self.home, 'DP-2', {'desktop', 'widgets'})
+        self.assertIn('Preserve this incomplete edit', path.read_text())
+
     def test_vencord_preserves_private_existing_fields(self):
         target = self.home / '.config/Vencord/settings/settings.json'; target.parent.mkdir(parents=True)
         target.write_text(json.dumps({'cloud': {'token': 'private'}, 'unrelated': 123}))

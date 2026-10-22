@@ -50,20 +50,26 @@
   {
     "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/KeyboardLayout.qml",
     "package": "plugins/ryze.keyboard-layout/KeyboardLayout.qml",
-    "source_sha256": "9f9a26a3a13ff947bf3384de9d4f3a7dbc95c85caa14a17212fbe969e10429ce",
-    "package_sha256": "9f9a26a3a13ff947bf3384de9d4f3a7dbc95c85caa14a17212fbe969e10429ce"
+    "source_sha256": "d513dbed6563d2980632634b1a42d88f7811721918440c1ee5882fe4749af227",
+    "package_sha256": "d513dbed6563d2980632634b1a42d88f7811721918440c1ee5882fe4749af227",
+    "baseline_source_sha256": "9f9a26a3a13ff947bf3384de9d4f3a7dbc95c85caa14a17212fbe969e10429ce",
+    "updated_on": "2026-10-22"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/KeyboardLayoutModel.js",
     "package": "plugins/ryze.keyboard-layout/KeyboardLayoutModel.js",
-    "source_sha256": "722e0e4eeaac0fa01660175d2da7fc6a2ba5f2b01d71843a8c731591979d2c2d",
-    "package_sha256": "722e0e4eeaac0fa01660175d2da7fc6a2ba5f2b01d71843a8c731591979d2c2d"
+    "source_sha256": "b6720576e54e7bcb60402f5b7ba8ecb8fc75bb10099384ac38ddcc2618121fba",
+    "package_sha256": "b6720576e54e7bcb60402f5b7ba8ecb8fc75bb10099384ac38ddcc2618121fba",
+    "baseline_source_sha256": "722e0e4eeaac0fa01660175d2da7fc6a2ba5f2b01d71843a8c731591979d2c2d",
+    "updated_on": "2026-10-22"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/manifest.json",
     "package": "plugins/ryze.keyboard-layout/manifest.json",
-    "source_sha256": "a4f828c73666d5cb3a16ac1f054e4c623b7f36d1a3f451958b3acad0700cd5b9",
-    "package_sha256": "a4f828c73666d5cb3a16ac1f054e4c623b7f36d1a3f451958b3acad0700cd5b9"
+    "source_sha256": "9dc43e8b4ee0ce0e35878830b0506d07807cb9e653d50341816e7bf18bcb80e6",
+    "package_sha256": "9dc43e8b4ee0ce0e35878830b0506d07807cb9e653d50341816e7bf18bcb80e6",
+    "baseline_source_sha256": "a4f828c73666d5cb3a16ac1f054e4c623b7f36d1a3f451958b3acad0700cd5b9",
+    "updated_on": "2026-10-22"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.spotify/manifest.json",
@@ -418,5 +424,17 @@
     "package": "vendor/io.github.grichard99.omaproton-vpn/.github/ISSUE_TEMPLATE/feature_request.yml",
     "source_sha256": "f8f449f28b8fa682adf8c74515520521c0d540433a22b4b07eaf9cf24b1ea841",
     "package_sha256": "f8f449f28b8fa682adf8c74515520521c0d540433a22b4b07eaf9cf24b1ea841"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/LayoutMenu.qml",
+    "package": "plugins/ryze.keyboard-layout/LayoutMenu.qml",
+    "source_sha256": "ca59293b5475272ec799ba9464fa38adf274eefd4296777f4e3b9621faa64da9",
+    "package_sha256": "ca59293b5475272ec799ba9464fa38adf274eefd4296777f4e3b9621faa64da9"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.keyboard-layout/README.md",
+    "package": "plugins/ryze.keyboard-layout/README.md",
+    "source_sha256": "76f5b2865327d37a2e9802fdfacf8bfdad3e70c65cadef53c98ca2e609262068",
+    "package_sha256": "76f5b2865327d37a2e9802fdfacf8bfdad3e70c65cadef53c98ca2e609262068"
   }
 ]

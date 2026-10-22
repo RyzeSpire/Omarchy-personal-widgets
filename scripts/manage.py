@@ -237,8 +237,18 @@ def install_plan(home, monitor, components):
         if binding_file.exists():
             old_close = '-- Ask before closing' + (ROOT / 'config/hypr/bindings.lua').read_text().split('-- Ask before closing', 1)[1]
             original = binding_file.read_text()
-            if old_close in original:
-                put('.config/hypr/bindings.lua', original.replace(old_close, '').rstrip() + '\n', 0o644)
+            cleaned = original
+            begin = '-- BEGIN RYZE KEYBOARD LAYOUT MENU'
+            end = '-- END RYZE KEYBOARD LAYOUT MENU'
+            if (begin in cleaned) != (end in cleaned):
+                raise ValueError('Incomplete keyboard menu binding block; preserve and review it first.')
+            if begin in cleaned:
+                start = cleaned.index(begin)
+                stop = cleaned.index(end, start) + len(end)
+                cleaned = cleaned[:start] + cleaned[stop:]
+            cleaned = cleaned.replace(old_close, '')
+            if cleaned != original:
+                put('.config/hypr/bindings.lua', cleaned.rstrip() + '\n', 0o644)
         mime_file = home / '.config/mimeapps.list'
         import configparser
         mime = configparser.ConfigParser(interpolation=None, strict=False)

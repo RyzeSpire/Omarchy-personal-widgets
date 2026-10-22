@@ -41,3 +41,8 @@ end
 o.bind("SUPER + W", "Close window (confirm for Spotify)", function() hl.dispatch(ryze_spotify_close(true)) end)
 o.bind("ALT + F4", "Close app (confirm for Spotify)", function() hl.dispatch(ryze_spotify_close(false)) end)
 o.bind("CTRL + Q", "Quit app (confirm for Spotify)", function() hl.dispatch(ryze_spotify_close(false)) end)
+
+-- BEGIN RYZE KEYBOARD LAYOUT MENU
+-- Open the configured-layout chooser on the focused monitor.
+o.bind("SUPER + mouse:274", "Choose keyboard layout", "omarchy-shell ryze.keyboard-layout choose")
+-- END RYZE KEYBOARD LAYOUT MENU

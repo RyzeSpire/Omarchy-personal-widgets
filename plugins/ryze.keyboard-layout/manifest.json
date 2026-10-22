@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "id": "ryze.keyboard-layout",
   "name": "My Keyboard layout",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Omarchy",
-  "description": "Current xkb layout, click cycles",
+  "description": "Configured keyboard layouts with cycling and a Super + middle-click chooser",
   "kinds": [
     "bar-widget"
   ],
@@ -13,7 +13,7 @@
   },
   "barWidget": {
     "displayName": "My Keyboard layout",
-    "description": "Current xkb layout, click cycles",
+    "description": "Configured keyboard layouts with cycling and a Super + middle-click chooser",
     "category": "Compositor",
     "allowMultiple": false
   },

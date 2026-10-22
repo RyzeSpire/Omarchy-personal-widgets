@@ -111,3 +111,7 @@ The public bundle contains package names, versions and these setup instructions,
 ## Keyring recovery
 
 For the specific malformed multiline-JSON credential defect, see [GNOME Keyring text-format recovery](KEYRING_RECOVERY.md). The optional preview-by-default helper preserves an exact private backup outside Git and retains the existing credential entries and protection mode. It is never run by the installer. Private vaults and recovery backups remain excluded from the public package.
+
+## Keyboard chooser shortcut
+
+The keyboard widget now supports a configured-layout menu. Install both `widgets` and `desktop` components for Super + middle-click to open it on the focused monitor. Standalone setup and removal are documented in [the keyboard widget README](../plugins/ryze.keyboard-layout/README.md). The `desktop` component places its shortcut in the managed Hyprland integration, migrates the marked pre-bundle live binding to avoid duplicates, and uses the existing backup/edit-preserving uninstall behavior. An incomplete marked block is refused for manual review.

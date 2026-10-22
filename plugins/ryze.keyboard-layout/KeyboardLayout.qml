@@ -8,8 +8,86 @@ import "KeyboardLayoutModel.js" as KeyboardLayoutModel
 
 BarWidget {
   id: root
-  moduleName: "omarchy.keyboard-layout"
+  moduleName: "ryze.keyboard-layout"
 
+
+  property bool opened: false
+  property bool popoutSwitchClosing: false
+  property var typedDevices: []
+  property var currentKeyboard: null
+  property var layoutCatalog: ({})
+  readonly property var layoutOptions: KeyboardLayoutModel.configuredLayouts(currentKeyboard, layoutCatalog)
+  readonly property bool switching: switchProc.running
+  property var switchQueue: []
+  property string switchError: ""
+
+  function screenName() { return panel.screen ? panel.screen.name : "" }
+  function focusedInstance() {
+    const items = bar ? bar.moduleWidgets(moduleName) : [root]
+    const monitor = Hyprland.focusedMonitor
+    return items.find(item => monitor && item.screenName() === monitor.name) || items[0] || root
+  }
+  function open() {
+    switchError = ""
+    opened = true
+    refresh()
+    menu.resetCursor()
+  }
+  function close() { opened = false }
+  function closeForPopoutSwitch() { popoutSwitchClosing = true; close() }
+  function choose() {
+    const widget = focusedInstance()
+    broadcast("close")
+    widget.popoutSwitchClosing = false
+    widget.open()
+  }
+  function selectLayout(index) {
+    if (!Number.isInteger(index) || index < 0 || index >= layoutOptions.length || switchProc.running) return false
+    const targets = KeyboardLayoutModel.selectionTargets(typedDevices, layoutOptions[index])
+    if (!targets.length) return false
+    switchError = ""
+    switchQueue = targets
+    switchNext()
+    return true
+  }
+  function switchNext() {
+    if (!switchQueue.length) {
+      broadcast("refresh")
+      close()
+      return
+    }
+    const target = switchQueue[0]
+    switchQueue = switchQueue.slice(1)
+    switchProc.command = ["hyprctl", "switchxkblayout", target.name, String(target.index)]
+    switchProc.running = true
+  }
+
+  IpcHandler {
+    enabled: !!root.bar && root.bar.moduleWidgets(root.moduleName)[0] === root
+    target: "ryze.keyboard-layout"
+    function choose(): void { root.choose() }
+    function close(): void { root.broadcast("close") }
+    function select(index: int): bool { return root.focusedInstance().selectLayout(index) }
+    function status(): string {
+      const widget = root.focusedInstance()
+      return JSON.stringify({opened: widget.opened, screen: widget.screenName(),
+        activeIndex: widget.activeLayoutIndex, options: widget.layoutOptions,
+        switching: widget.switching, error: widget.switchError})
+    }
+  }
+
+  Process {
+    id: switchProc
+    onExited: function(exitCode) {
+      if (exitCode !== 0) {
+        root.switchQueue = []
+        root.switchError = "Could not switch one of the keyboards. Please try again."
+        root.broadcast("refresh")
+        return
+      }
+      Qt.callLater(root.switchNext)
+    }
+  }
 
   property string layoutFull: ""
   // The keyboard the last reading spoke for, which is the one a click switches,
@@ -19,7 +97,6 @@ BarWidget {
   // naming one that has been unplugged.
   property string keyboardName: ""
   property string typedKeyboardName: ""
-  property var keyboardNames: []
   property int activeLayoutIndex: 0
   // Keyboards on the seat, buttons and virtual ones excluded, and whether the
   // last reading left that shape in doubt.
@@ -64,22 +141,12 @@ BarWidget {
     return KeyboardLayoutModel.selectKeyboard(typed, root.typedKeyboardName)
   }
 
-  // switchxkblayout is a hyprctl command rather than a dispatcher, so it has to
-  // be run rather than sent over the dispatch socket. It switches the keyboard
-  // the last reading spoke for, so a click always advances the device the label
-  // is describing. Switching the seat together would reach the typed keyboard
-  // without having to name it, but it would also carry the buttons along, and
-  // the whole read depends on those staying where they started: once a button
-  // has been advanced too, a toggle that wraps the keyboard back to the first
-  // layout leaves the button reading as the furthest along, and the label
-  // follows the button.
+  // Cycle the configured choices, applying each by identity even when another
+  // keyboard lists the same layouts in a different order.
   function cycleLayout() {
-    if (!root.keyboardName || !root.bar) return
-    const nextIndex = root.activeLayoutIndex === 0 ? 1 : 0
-    root.keyboardNames.forEach(function(name) {
-      root.bar.run("hyprctl switchxkblayout " + Util.shellQuote(name) + " " + nextIndex)
-    })
-    refreshTimer.restart()
+    if (!layoutOptions.length) return
+    const position = layoutOptions.findIndex(option => option.index === activeLayoutIndex)
+    selectLayout((position + 1) % layoutOptions.length)
   }
 
   Component.onCompleted: {
@@ -135,8 +202,9 @@ BarWidget {
         if (!Array.isArray(listed)) return
 
         const typed = root.typedKeyboards(listed)
-        root.keyboardNames = typed.filter(k => String(k.layout || "").indexOf(",") !== -1).map(k => String(k.name))
+        root.typedDevices = typed
         const kb = root.selectKeyboard(typed)
+        root.currentKeyboard = kb || null
         if (!kb || !kb.active_keymap) {
           // Either the last keyboard has been unplugged, which the label has to
           // stop describing and the click has to stop naming, or keyboards are
@@ -170,7 +238,10 @@ BarWidget {
     command: ["xkbcli", "list", "--load-exotic"]
     stdout: StdioCollector {
       waitForEnd: true
-      onStreamFinished: root.layoutBriefs = KeyboardLayoutModel.layoutBriefs(text)
+      onStreamFinished: {
+        root.layoutBriefs = KeyboardLayoutModel.layoutBriefs(text)
+        root.layoutCatalog = KeyboardLayoutModel.layoutCatalog(text)
+      }
     }
   }
 
@@ -219,7 +290,31 @@ BarWidget {
     text: root.layoutLabel
     fontSize: Style.font.caption
     horizontalMargin: 6
-    tooltipText: root.layoutFull
-    onPressed: function() { root.cycleLayout() }
+    tooltipText: root.layoutFull + "\nLeft-click: cycle · Super + middle-click: choose layout"
+    onPressed: function(mouseButton) {
+      if (mouseButton === Qt.LeftButton) root.cycleLayout()
+      else if (mouseButton === Qt.MiddleButton || mouseButton === Qt.RightButton) root.choose()
+    }
+  }
+
+  KeyboardPanel {
+    id: panel
+    anchorItem: button
+    owner: root
+    bar: root.bar
+    open: root.opened
+    focusTarget: menu
+    contentWidth: panel.fittedContentWidth(Style.space(340))
+    contentHeight: panel.fittedContentHeight(menu.implicitHeight)
+    LayoutMenu {
+      id: menu
+      anchors.fill: parent
+      options: root.layoutOptions
+      activeIndex: root.activeLayoutIndex
+      busy: switchProc.running
+      error: root.switchError
+      onSelected: function(index) { root.selectLayout(index) }
+      onCloseRequested: root.close()
+    }
   }
 }

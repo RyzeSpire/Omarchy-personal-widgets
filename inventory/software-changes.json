@@ -91,6 +91,31 @@
         "No open keyring prompts remained"
       ],
       "private_state": "The actual keyring, private backup, account data and tokens remain outside the distributed source. Private backup roots must not be inside any Git repository."
+    },
+    {
+      "date": "2026-10-22",
+      "action": "updated",
+      "application": "Keyboard layout widget",
+      "plugin": "ryze.keyboard-layout",
+      "version": "1.1.0",
+      "behavior": "Super + middle-click opens configured layouts on the focused monitor; right/middle-click on the indicator also opens the menu; left-click cycles.",
+      "integration": "Marked shortcut in the live hypr/bindings.lua; restore installs it in hypr/personal-widgets.lua and migrates the live block to prevent duplication.",
+      "dependencies": "Existing Omarchy shell, Hyprland, Quickshell and libxkbcommon; Node is used only by development/CI tests.",
+      "verified_environment": {
+        "omarchy": "4.0.6-1",
+        "hyprland": "0.56.2-4",
+        "quickshell": "0.3.2.r7.g2b4501a-1",
+        "qt": "6.12.0"
+      },
+      "verification": [
+        "Four isolated JavaScript model checks passed",
+        "33 isolated Python checks passed, including shortcut installation/update/removal in temporary homes",
+        "QML/Lua/manifests parsed successfully",
+        "Hyprland registered one Super + mouse:274 binding with no configuration errors",
+        "User confirmed the actual shortcut, popup selection and indicator update"
+      ],
+      "reload_note": "The live shell retained its old component after hot reload; omarchy restart shell loaded the menu.",
+      "removal": "Use the restore installer edit-preserving uninstall or remove the shortcut and disable/remove the plugin independently; no credentials or layout configuration are stored by the widget."
     }
   ]
 }

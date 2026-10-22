@@ -1,3 +1,10 @@
+v0.1.3 — Keyboard layout chooser
+
+- Added a themed menu for configured keyboard layouts, opened anywhere with Super + middle-click, or by right/middle-clicking the indicator. Left-click still cycles; the chooser supports arrow keys, Enter and Escape.
+- Layout choices and variants come from the user's current Hyprland/XKB configuration. Matching physical keyboards switch together by layout identity rather than assuming identical per-device ordering. Virtual input-method devices are excluded.
+- Added focused-monitor popup routing, explicit switch error feedback, portable shortcut packaging and migration preventing a duplicate pre-bundle binding. Existing backup and edit-preserving removal remain in use.
+- Added isolated keyboard model checks, shortcut installation/update/removal coverage and CI execution. Live desktop checks and their limits are recorded in docs/TESTING.md.
+
 v0.1.2 — Native download manager and keyring recovery
 
 - Added Persepolis from Arch's official repository to the restore profile, with Firefox extension setup, updates, removal instructions and affected package inventories.
