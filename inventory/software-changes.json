@@ -156,6 +156,22 @@
         "Fresh Steam startup and other tiling layouts require further manual coverage"
       ],
       "lifecycle": "Profile workspace is configurable; existing installer tracks module/import backups and preserves subsequent user edits on removal. Disabling does not relocate or close existing windows."
+    },
+    {
+      "date": "2026-10-22",
+      "action": "updated",
+      "application": "Steam workspace fill mode and dropdown handling",
+      "workspace": 6,
+      "behavior": "Uses maximized internal mode 1 while alone, preserving bar/borders/margins. Titled secondary windows still tile and restore fill mode on close.",
+      "fix": "The verified untitled Steam Library POPUP_MENU is excluded from tiling, moves and peer counting; ordinary dropdowns no longer change main-client mode.",
+      "verification": [
+        "Eight isolated Lua policy checks passed",
+        "Live main client stayed in mode 1 with its dropdown open and the dropdown remained floating",
+        "Live Steam Settings still tiled beside Steam; closing only the test window restored mode 1",
+        "QML/Lua/Python/JSON/manifests parsed; Hyprland configuration errors were empty"
+      ],
+      "limitations": "The Lua API lacks X11 window-type metadata, so untitled Steam surfaces are excluded by title. Permanently untitled auxiliary windows and the automatic notification need separate inspection.",
+      "dependencies": "No new runtime dependencies or installer lifecycle changes."
     }
   ]
 }

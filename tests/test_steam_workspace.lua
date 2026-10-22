@@ -43,26 +43,26 @@ local function test(name, callback)
   callback(); checks = checks + 1; print("ok - " .. name)
 end
 
-test("native client moves and tiles fullscreen, while games remain untouched", function()
+test("native client moves and fills the work area, while games remain untouched", function()
   local main, game = window("steam", "Steam"), window("steam_app_123", "Game")
   local f = fixture({ main, game }); f.flush()
-  assert(main.workspace.name == "6" and not main.floating and main.fullscreen == 2)
+  assert(main.workspace.name == "6" and not main.floating and main.fullscreen == 1)
   assert(game.workspace.name == "3" and game.floating and game.fullscreen == 0)
-  assert(f.rules[1].class == "^[Ss]team$" and f.rules[1].rule.tile == true)
+  assert(f.rules[1].class.class == "^[Ss]team$" and f.rules[1].class.title == ".+" and f.rules[1].rule.tile == true)
   assert(f.rules[1].rule.suppress_event == "fullscreen maximize")
 end)
 
-test("arbitrary managed Steam notification window joins split, then fullscreen returns", function()
+test("titled Steam notification joins split, then fill mode returns", function()
   local main, notice = window("steam", "Steam", "6"), window("steam", "Automatic announcement")
   local windows = { main }; local f = fixture(windows); f.flush()
   windows[2] = notice; f.events["window.open"](notice); f.flush()
   assert(not notice.floating and notice.workspace.name == "6")
   assert(main.fullscreen == 0 and notice.fullscreen == 0)
   windows[2] = nil; f.events["window.close"](notice); f.flush()
-  assert(main.fullscreen == 2)
+  assert(main.fullscreen == 1)
 end)
 
-test("unrelated workspace peer prevents fullscreen without being moved or retiled", function()
+test("unrelated workspace peer prevents fill without being moved or retiled", function()
   local main, editor = window("Steam", "Steam", "6"), window("foot", "Work", "6")
   local f = fixture({ main, editor }); f.flush()
   assert(main.fullscreen == 0 and editor.floating and editor.workspace.name == "6")
@@ -81,7 +81,7 @@ test("hidden windows do not split the main client; events are coalesced", functi
   hidden.hidden = true
   local f = fixture({ main, hidden })
   for i = 1, 20 do f.events["window.open"](main) end
-  f.flush(); assert(main.fullscreen == 2 and hidden.workspace.name == "3")
+  f.flush(); assert(main.fullscreen == 1 and hidden.workspace.name == "3")
   local before = #f.actions
   f.events["config.reloaded"](); f.flush(); assert(#f.actions == before)
 end)
@@ -91,6 +91,25 @@ test("a secondary window temporarily titled Steam cannot leave the main fullscre
   main.fullscreen = 2
   local f = fixture({ main, duplicate }); f.flush()
   assert(main.fullscreen == 0 and duplicate.fullscreen == 0)
+end)
+
+test("opening and closing an untitled Steam dropdown preserves fill and popup state", function()
+  local main, menu = window("steam", "Steam", "6"), window("steam", "", "6")
+  local windows = { main }; local f = fixture(windows); f.flush()
+  local before = #f.actions
+  windows[2] = menu; f.events["window.open"](menu); f.flush()
+  assert(main.fullscreen == 1 and menu.floating and #f.actions == before)
+  for _, action in ipairs(f.actions) do assert(action.args.window ~= menu) end
+  windows[2] = nil; f.events["window.close"](menu); f.flush()
+  assert(main.fullscreen == 1 and #f.actions == before)
+end)
+
+test("a client with a late title becomes managed once it is named", function()
+  local main, late = window("steam", "Steam", "6"), window("steam", "")
+  local f = fixture({ main, late }); f.flush()
+  assert(main.fullscreen == 1 and late.workspace.name == "3" and late.floating)
+  late.title = "Steam Settings"; f.events["window.title"](late); f.flush()
+  assert(main.fullscreen == 0 and not late.floating and late.workspace.name == "6")
 end)
 
 print(tostring(checks) .. " Steam workspace policy checks passed")

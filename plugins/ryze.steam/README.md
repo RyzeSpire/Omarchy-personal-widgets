@@ -73,4 +73,4 @@ New components are GameDetails.qml, GameInfoController.qml and steam_game_info.p
 
 ## Desktop placement
 
-The restore bundle's desktop component now supplies a separate [Steam workspace policy](../../docs/STEAM_WORKSPACE.md): native client windows use workspace 6, fullscreen while alone and tiled together while a secondary managed Steam window is open. This is optional desktop integration, not a requirement of the widget itself. Disabling the widget does not remove those desktop rules. Games and unmanaged notification surfaces remain outside that policy.
+The restore bundle's desktop component now supplies a separate [Steam workspace policy](../../docs/STEAM_WORKSPACE.md): native client windows use workspace 6, maximized fill while alone and tiled together while a secondary managed Steam window is open. This is optional desktop integration, not a requirement of the widget itself. Disabling the widget does not remove those desktop rules. Games and unmanaged notification surfaces remain outside that policy.

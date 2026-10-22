@@ -182,8 +182,8 @@
   {
     "source": "~/.config/omarchy/plugins/ryze.steam/README.md",
     "package": "plugins/ryze.steam/README.md",
-    "source_sha256": "75b1096c427da7e4097dd3ade946b5633ad9669d0c5d3787d864d0d7a81193eb",
-    "package_sha256": "75b1096c427da7e4097dd3ade946b5633ad9669d0c5d3787d864d0d7a81193eb",
+    "source_sha256": "b0d1f2e2f98f945d9d9856f8ce97371bdfed8952ca9d8b7abeaf582941ec6a21",
+    "package_sha256": "b0d1f2e2f98f945d9d9856f8ce97371bdfed8952ca9d8b7abeaf582941ec6a21",
     "baseline_source_sha256": "a98a589b8f2e221633b4fe5e4e213d79813fbc8297e476b9faf6072e32d27693",
     "updated_on": "2026-10-22"
   },
@@ -450,7 +450,9 @@
   {
     "source": "~/.config/hypr/steam-workspace.lua",
     "package": "config/hypr/steam-workspace.lua",
-    "source_sha256": "f0f14b032af1c7703c6baf06535066b0c85e84ee22941150f80da23fbc13403f",
-    "package_sha256": "282b746d84d65a157d9a851c3bc425124605e9628be7a94dfa082930ccde3934"
+    "source_sha256": "f8c823328d5992fe554969a4dd80b582a13bcf2477894ed77b2fb1e3ec71788c",
+    "package_sha256": "4c5a95be6a64bcc8f80312e512120846c9bc2346aa8fb07335dadffcd41cbddf",
+    "baseline_source_sha256": "f0f14b032af1c7703c6baf06535066b0c85e84ee22941150f80da23fbc13403f",
+    "updated_on": "2026-10-22"
   }
 ]

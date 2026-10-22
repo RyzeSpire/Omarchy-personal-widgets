@@ -118,4 +118,4 @@ The keyboard widget now supports a configured-layout menu. Install both `widgets
 
 ## Steam client workspace
 
-The desktop component also restores [Steam's workspace/fullscreen and split-window policy](STEAM_WORKSPACE.md). Its workspace is configurable through `profile.json` (`workspaces.steam`, default 6). Managed native Steam secondary windows tile alongside the client; the automatic notification still needs confirmation when it next appears. No game placement or notification preferences are changed.
+The desktop component also restores [Steam's workspace/fill and split-window policy](STEAM_WORKSPACE.md). Its workspace is configurable through `profile.json` (`workspaces.steam`, default 6). Managed native Steam secondary windows tile alongside the client; the automatic notification still needs confirmation when it next appears. No game placement or notification preferences are changed.

@@ -1,3 +1,10 @@
+v0.1.6 — Steam fill mode and dropdown stability
+
+- Steam now uses Omarchy's maximized Full width/fill mode while alone on workspace 6, keeping the bar, borders and margins visible.
+- Fixed ordinary Steam dropdowns being counted as secondary client windows: the verified untitled popup surface is excluded from tiling and peer counting. Named secondary windows still split with Steam and restore fill mode when closed.
+- Added dropdown open/close and late-title regression cases. Eight Lua policy checks pass; live dropdown stability plus Settings split/fill restoration were verified without configuration errors.
+- Permanently untitled Steam auxiliary windows remain excluded; the automatic notification still needs inspection on its next appearance.
+
 v0.1.5 — Steam workspace and tiled secondary windows
 
 - Added a user-owned native Steam client policy overriding Omarchy's floating default. Steam opens on configurable workspace 6 and fills it while alone.
