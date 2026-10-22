@@ -1,3 +1,9 @@
+v0.1.10 — Sober PipeWire audio preference
+
+- Retain Sober's documented PipeWire workaround for occasional audio crackling, scoped to this app and preserving other permissions.
+- Install applies the preference; separate preview/apply actions enable it or restore the default driver without resetting all overrides. A restart between games is required.
+- Verified the audio setting/socket inside the Flatpak sandbox. Selective music/sprite authorization failures were investigated separately; another encounter's audio/graphics worked, but the original encounter and crackling improvement remain unverified.
+
 v0.1.9 — Sober launcher discovery
 
 - Expose the official Sober Flatpak desktop entry and icon in standard user XDG directories so launcher search works in the current session without logging out.

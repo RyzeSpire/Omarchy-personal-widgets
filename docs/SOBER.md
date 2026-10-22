@@ -28,8 +28,22 @@ Sober and its runtimes update through Flatpak (`flatpak update --user`), indepen
 
 ## Scope and verification
 
-The source machine meets Sober's x86-64/SSE4.2 CPU and Linux-kernel requirements. Actual game performance and account access require a signed-in session. No custom graphics/environment overrides, window rules or network settings are applied. Account data, Roblox APKs, proprietary Sober binaries, runtimes, caches and logs are excluded from this repository; only reproducible setup and public version metadata are packaged.
+The source machine meets Sober's x86-64/SSE4.2 CPU and Linux-kernel requirements. Actual game performance and account access require a signed-in session. No custom graphics overrides, window rules or network settings are applied. A Sober-only PipeWire audio override is retained as described below. Account data, Roblox APKs, proprietary Sober binaries, runtimes, caches and logs are excluded from this repository; only reproducible setup and public version metadata are packaged.
 
 Official references: [Sober](https://sober.vinegarhq.org/), [installation and first run](https://vinegarhq.org/Sober/Installation.html), [Flathub listing](https://flathub.org/apps/org.vinegarhq.Sober).
 
 The helper validates both installed exports and any destination conflicts before creating links. Existing custom desktop/icon files or links are preserved and reported for review; no original is overwritten, so no backup is needed for this operation. Removal deletes only links still pointing at the expected export paths, including dangling links after Flatpak has removed its exports. Replacing a managed link with a custom entry leaves that entry untouched on helper removal. A direct `flatpak uninstall` bypasses this helper cleanup; remove any remaining helper-owned links manually or use the documented helper for uninstall.
+
+## Audio crackling and selective missing content
+
+The retained audio setup follows [Sober's documented PipeWire workaround](https://vinegarhq.org/Sober/Troubleshooting.html#my-audio-is-crackling--acting-weird). Install enables `SDL_AUDIO_DRIVER=pipewire` for Sober and grants access to `xdg-run/pipewire-0`. Existing unrelated Flatpak overrides are preserved. The currently running app retains its previous environment; fully exit/reopen Sober between games to test the new backend. This is a crackling workaround, not a fix for assets rejected by Roblox.
+
+```bash
+python3 -B scripts/sober.py audio-pipewire         # preview
+python3 -B scripts/sober.py audio-pipewire --apply # enable for next launch
+python3 -B scripts/sober.py audio-default --apply  # remove driver override and revoke the added socket access
+```
+
+The rollback changes only those two settings. It does not reset all app overrides or remove other integrations. Install reapplies the retained PipeWire preference; update preserves an explicit later audio choice. App uninstall preserves overrides along with account data; use the audio-default action separately if wanted. Direct socket access was verified inside a fresh Sober sandbox. The prior live override file was backed up privately outside Git before the change; it is not distributed.
+
+Missing individual characters or music can be unrelated to the audio backend. In the inspected session, Roblox explicitly rejected particular sprite/sound loads for asset-access authorization. Other music and a different character subsequently worked, as confirmed by the user. That supports selective asset failures but does not establish whether the cause is experience permissions, a stale session or Sober/client behavior. Rejoin first; if it persists, sign out/in privately, retry, and compare the same encounter on the official client. The experience developer or Sober maintainers may need to investigate if it remains reproducible. Avoid graphics changes, cache deletion or broad audio resets without evidence; they do not grant asset access. Logs, asset/account identifiers and authentication state remain private and are never packaged.

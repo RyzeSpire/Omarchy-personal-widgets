@@ -49,3 +49,11 @@ The packaged helper was then applied against the installed user app: Flathub was
 ## Sober launcher discovery (2026-10-22)
 
 The running session's XDG_DATA_DIRS contained only system directories, so Sober's valid Flatpak export was absent from launcher search. The helper now creates standard user desktop/icon links. Four temporary-home fixtures cover repeat install and following upstream export changes, owned/dangling-link removal, preserving conflicts without partial installation, and missing export handling. All 39 isolated tests and source/manifest validation passed. The installed desktop entry passes desktop-file validation, and the standard GIO resolver finds Sober without a logout. The user confirmed Sober appears with its icon after reopening search. No shell restart, session-environment change or app restart was needed.
+
+## Sober audio investigation (2026-10-22)
+
+The user reported working effects with missing music/sprite assets and occasional menu audio crackling. Private local inspection found explicit Roblox asset-authorization errors for the affected content. The user later confirmed another encounter had working music and character graphics, supporting selective asset failures; the original encounter remains unverified. No renderer, graphics flags, login state or cache was changed.
+
+Applied the documented Sober-only PipeWire environment/socket override, preserving unrelated existing permissions and saving the original override privately outside the repository. A fresh Sober shell sandbox verified SDL_AUDIO_DRIVER=pipewire and an accessible PipeWire socket. The active game was not restarted. Hearing crackling improvement requires a later full Sober restart and user feedback; current playback does not prove that improvement. The helper packages this preference with per-setting rollback, while no private log/account data is exported.
+
+All 39 isolated restore checks and source validation passed after this helper change. All six action previews left a temporary HOME empty. Applying audio-pipewire and audio-default against a temporary XDG data directory verified actual Flatpak environment/socket changes and preservation of an unrelated filesystem permission; the live override file hash stayed unchanged during that test.

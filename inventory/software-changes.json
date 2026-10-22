@@ -221,6 +221,22 @@
       "lifecycle": "Install/update create links after export checks; uninstall removes only owned links. Custom existing destinations are preserved.",
       "verification": "39 isolated checks, desktop metadata validation, GIO discovery and user-confirmed launcher result/icon.",
       "private_state_changed": false
+    },
+    {
+      "date": "2026-10-22",
+      "action": "configured",
+      "application": "Sober audio",
+      "source": "https://vinegarhq.org/Sober/Troubleshooting.html#my-audio-is-crackling--acting-weird",
+      "environment": {
+        "SDL_AUDIO_DRIVER": "pipewire"
+      },
+      "filesystem_permission": "xdg-run/pipewire-0",
+      "scope": "user; org.vinegarhq.Sober only",
+      "restore_command": "python3 -B scripts/sober.py audio-pipewire --apply",
+      "rollback_command": "python3 -B scripts/sober.py audio-default --apply",
+      "preserved": "Existing unrelated Flatpak permissions, active game, account state, caches and renderer settings.",
+      "verification": "Fresh sandbox sees the PipeWire socket and driver environment. Crackling improvement awaits an app restart and user feedback.",
+      "private_state": "Prior overrides backed up locally outside Git; no logs or account/asset identifiers included."
     }
   ]
 }
