@@ -59,3 +59,38 @@ test('preserves existing label and physical-keyboard selection behavior', () => 
   assert.equal(model.eventKeyboardName({data:'first,English (US), extra'}),'first');
   assert.equal(model.eventKeyboardName({data:'hl-virtual-keyboard-fcitx5,English (US)'}),'');
 });
+
+
+test('pointer menu covers all six side and vertical placements', () => {
+  const size={width:300,height:160}, bounds={x:8,y:32,width:984,height:760};
+  const cases=[
+    [{x:20,y:40}, {x:32,y:52}],
+    [{x:980,y:40}, {x:668,y:52}],
+    [{x:20,y:780}, {x:32,y:608}],
+    [{x:980,y:780}, {x:668,y:608}],
+    [{x:20,y:400}, {x:32,y:320}],
+    [{x:980,y:400}, {x:668,y:320}],
+  ];
+  for (const [point,expected] of cases) assert.deepEqual(model.menuPosition(point,size,bounds,12),expected);
+});
+
+test('pointer menu stays inside bounds when neither side has enough space', () => {
+  const bounds={x:8,y:32,width:360,height:220};
+  for (const point of [{x:8,y:32},{x:185,y:130},{x:367,y:251}]) {
+    const p=model.menuPosition(point,{width:340,height:180},bounds,12);
+    assert.ok(p.x >= 8 && p.x + 340 <= 368);
+    assert.ok(p.y >= 32 && p.y + 180 <= 252);
+  }
+});
+
+test('pointer monitor routing supports negative origins and logical scaled geometry', () => {
+  const screens=[
+    {name:'left',x:-1280,y:100,width:1280,height:720},
+    {name:'right',x:0,y:0,width:1920,height:1080},
+  ];
+  assert.equal(model.pointerScreen({x:-1,y:200},screens).name,'left');
+  assert.equal(model.pointerScreen({x:0,y:200},screens).name,'right');
+  assert.equal(model.pointerScreen({x:-100,y:99},screens),null);
+  assert.equal(model.pointerScreen(null,screens),null);
+  assert.equal(model.pointerScreen({x:NaN,y:0},screens),null);
+});

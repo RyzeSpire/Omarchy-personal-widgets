@@ -116,6 +116,24 @@
       ],
       "reload_note": "The live shell retained its old component after hot reload; omarchy restart shell loaded the menu.",
       "removal": "Use the restore installer edit-preserving uninstall or remove the shortcut and disable/remove the plugin independently; no credentials or layout configuration are stored by the widget."
+    },
+    {
+      "date": "2026-10-22",
+      "action": "updated",
+      "application": "Keyboard layout widget",
+      "plugin": "ryze.keyboard-layout",
+      "version": "1.1.1",
+      "behavior": "Keyboard chooser opens beside a snapshot of the pointer, flips left/up at screen edges and centers vertically beside it elsewhere. It uses the pointer monitor with logical coordinate conversion.",
+      "implementation": "Plugin-owned CursorPanel.qml adapts the MIT Omarchy 4.0.6 keyboard panel; no shared shell files, keybindings or global configuration changed.",
+      "dependencies": "No new runtime dependencies.",
+      "verification": [
+        "Seven isolated keyboard model checks passed, covering all six example placements, constrained space and monitor offsets",
+        "QML/manifests/Lua/Python/JSON parsing passed",
+        "Live menu geometry verified beside the pointer with no widget runtime exceptions",
+        "New panel install/update/removal passed in an isolated temporary home with spaces in its path"
+      ],
+      "fallback": "If reading the pointer fails or exceeds the bounded timeout, use the focused monitor and ordinary bar anchoring.",
+      "lifecycle": "Existing widget installer and edit-preserving removal include the local panel; upstream source hash and MIT attribution are recorded."
     }
   ]
 }

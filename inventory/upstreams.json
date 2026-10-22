@@ -9,5 +9,14 @@
     "url": "https://github.com/omacom/omarchy",
     "license": "MIT"
   },
-  "repository": "https://github.com/RyzeSpire/Omarchy-personal-widgets"
+  "repository": "https://github.com/RyzeSpire/Omarchy-personal-widgets",
+  "keyboard_cursor_panel": {
+    "origin": "Omarchy Ui/KeyboardPanel.qml",
+    "version": "Omarchy 4.0.6",
+    "upstream": "https://github.com/omacom/omarchy",
+    "license": "MIT",
+    "source_sha256": "c8b3b0fd52d8a79469675e925ff851e1dd0588eb1eeb90bd4df004a4c7d72a0a",
+    "local_file": "plugins/ryze.keyboard-layout/CursorPanel.qml",
+    "changes": "Added pointer anchor and edge-aware card position; remaining focus/dismissal/theme behavior is copied from the installed upstream component."
+  }
 }

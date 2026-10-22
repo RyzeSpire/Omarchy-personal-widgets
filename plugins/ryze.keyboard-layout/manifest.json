@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ryze.keyboard-layout",
   "name": "My Keyboard layout",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Omarchy",
   "description": "Configured keyboard layouts with cycling and a Super + middle-click chooser",
   "kinds": [

@@ -12,6 +12,8 @@ BarWidget {
 
 
   property bool opened: false
+  property var pointerAnchor: null
+  property bool cursorRequested: false
   property bool popoutSwitchClosing: false
   property var typedDevices: []
   property var currentKeyboard: null
@@ -27,19 +29,34 @@ BarWidget {
     const monitor = Hyprland.focusedMonitor
     return items.find(item => monitor && item.screenName() === monitor.name) || items[0] || root
   }
-  function open() {
-    switchError = ""
-    opened = true
-    refresh()
-    menu.resetCursor()
+  function screenInfo() {
+    const screen = panel.screen
+    return screen ? {name: screen.name, x: screen.x, y: screen.y, width: screen.width, height: screen.height} : null
   }
-  function close() { opened = false }
+  function activeInstance() {
+    const items = bar ? bar.moduleWidgets(moduleName) : [root]
+    return items.find(item => item.opened) || focusedInstance()
+  }
+  function open() { choose() }
+  function showPointerMenu(point) {
+    const items = bar ? bar.moduleWidgets(moduleName) : [root]
+    const screen = KeyboardLayoutModel.pointerScreen(point, items.map(item => item.screenInfo()).filter(item => item))
+    const widget = items.find(item => screen && item.screenName() === screen.name) || focusedInstance()
+    const target = widget.screenInfo()
+    broadcast("close")
+    widget.pointerAnchor = point && target ? Qt.point(point.x - target.x, point.y - target.y) : null
+    widget.popoutSwitchClosing = false
+    widget.switchError = ""
+    widget.opened = true
+    widget.refresh()
+    widget.menuReset()
+  }
+  function menuReset() { menu.resetCursor() }
+  function close() { cursorRequested = false; opened = false }
   function closeForPopoutSwitch() { popoutSwitchClosing = true; close() }
   function choose() {
-    const widget = focusedInstance()
-    broadcast("close")
-    widget.popoutSwitchClosing = false
-    widget.open()
+    cursorRequested = true
+    if (!cursorProc.running) cursorProc.running = true
   }
   function selectLayout(index) {
     if (!Number.isInteger(index) || index < 0 || index >= layoutOptions.length || switchProc.running) return false
@@ -67,12 +84,45 @@ BarWidget {
     target: "ryze.keyboard-layout"
     function choose(): void { root.choose() }
     function close(): void { root.broadcast("close") }
-    function select(index: int): bool { return root.focusedInstance().selectLayout(index) }
+    function select(index: int): bool { return root.activeInstance().selectLayout(index) }
     function status(): string {
-      const widget = root.focusedInstance()
+      const widget = root.activeInstance()
       return JSON.stringify({opened: widget.opened, screen: widget.screenName(),
         activeIndex: widget.activeLayoutIndex, options: widget.layoutOptions,
-        switching: widget.switching, error: widget.switchError})
+        switching: widget.switching, error: widget.switchError,
+        pointer: widget.pointerAnchor, screenGeometry: widget.screenInfo(), menuRect: widget.menuRect()})
+    }
+  }
+
+  function menuRect() {
+    return {x: panel.cardOrigin.x, y: panel.cardOrigin.y, width: panel.contentWidth, height: panel.contentHeight}
+  }
+
+  Process {
+    id: cursorProc
+    property var result: null
+    command: ["hyprctl", "-j", "cursorpos"]
+    onStarted: { result = null; cursorTimeout.restart() }
+    stdout: StdioCollector {
+      waitForEnd: true
+      onStreamFinished: {
+        try {
+          const point = JSON.parse(text)
+          if (Number.isFinite(point.x) && Number.isFinite(point.y)) cursorProc.result = point
+        } catch (error) {}
+      }
+    }
+    onExited: {
+      cursorTimeout.stop()
+      if (root.cursorRequested) root.showPointerMenu(result)
+    }
+  }
+  Timer {
+    id: cursorTimeout
+    interval: 1500
+    onTriggered: {
+      cursorProc.running = false
+      if (root.cursorRequested) root.showPointerMenu(null)
     }
   }
 
@@ -297,8 +347,9 @@ BarWidget {
     }
   }
 
-  KeyboardPanel {
+  CursorPanel {
     id: panel
+    pointerAnchor: root.pointerAnchor
     anchorItem: button
     owner: root
     bar: root.bar

@@ -1,3 +1,10 @@
+v0.1.4 — Pointer-positioned keyboard menu
+
+- The keyboard chooser now opens next to the mouse on its monitor, flipping left near the right edge and above near the bottom. Mid-screen placement centers vertically beside the pointer; coordinates stay fixed after opening.
+- Supports logical display scaling, monitor offsets and negative origins, with bounded placement and a bar-anchor fallback if pointer lookup fails.
+- Added a local MIT adaptation of Omarchy's keyboard panel for placement while preserving its focus/dismissal/theme behavior; shared shell source and global configuration remain untouched.
+- Seven keyboard model checks pass, covering all six illustrated placements, tight bounds and monitor routing. Live pointer/menu coordinates were checked on the running desktop; manual confirmation is recorded separately.
+
 v0.1.3 — Keyboard layout chooser
 
 - Added a themed menu for configured keyboard layouts, opened anywhere with Super + middle-click, or by right/middle-clicking the indicator. Left-click still cycles; the chooser supports arrow keys, Enter and Escape.

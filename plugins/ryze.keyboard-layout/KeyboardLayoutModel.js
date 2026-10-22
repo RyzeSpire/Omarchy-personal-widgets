@@ -169,8 +169,35 @@ function selectionTargets(keyboards, option) {
   }).filter(function(target) { return target !== null })
 }
 
+// Pointer and screen geometry use compositor logical pixels. Snapshot the
+// pointer when opening; moving into the menu must never make the menu chase it.
+function pointerScreen(point, screens) {
+  if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) return null
+  return (screens || []).find(function(screen) {
+    return point.x >= screen.x && point.x < screen.x + screen.width &&
+      point.y >= screen.y && point.y < screen.y + screen.height
+  }) || null
+}
+
+function menuPosition(point, size, bounds, gap) {
+  var left = bounds.x, top = bounds.y
+  var right = left + bounds.width, bottom = top + bounds.height
+  var spaceRight = right - point.x - gap, spaceLeft = point.x - gap - left
+  var x = spaceRight >= size.width || spaceRight >= spaceLeft
+    ? point.x + gap : point.x - size.width - gap
+  var y = point.y - size.height / 2
+  if (y < top) y = point.y + gap
+  else if (y + size.height > bottom) y = point.y - size.height - gap
+  return {
+    x: Math.round(Math.max(left, Math.min(x, Math.max(left, right - size.width)))),
+    y: Math.round(Math.max(top, Math.min(y, Math.max(top, bottom - size.height))))
+  }
+}
+
 if (typeof module !== "undefined") {
   module.exports = {
+    pointerScreen: pointerScreen,
+    menuPosition: menuPosition,
     layoutCatalog: layoutCatalog,
     configuredLayouts: configuredLayouts,
     selectionTargets: selectionTargets,
