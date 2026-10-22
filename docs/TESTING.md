@@ -45,3 +45,7 @@ The public package contains installation/update/removal commands and version/sou
 Live installation completed: Sober 1.8.0, user scope, stable Flathub origin, GNOME Platform 51. Its mapped first-run window was verified after launch. Public app/ref/commit/runtime metadata is recorded in `inventory/flatpak-apps.json`; completion of the Roblox download and sign-in awaits user interaction.
 
 The packaged helper was then applied against the installed user app: Flathub was preserved, the installed Sober ref was skipped successfully, and the command exited cleanly without launching or deleting app data.
+
+## Sober launcher discovery (2026-10-22)
+
+The running session's XDG_DATA_DIRS contained only system directories, so Sober's valid Flatpak export was absent from launcher search. The helper now creates standard user desktop/icon links. Four temporary-home fixtures cover repeat install and following upstream export changes, owned/dangling-link removal, preserving conflicts without partial installation, and missing export handling. All 39 isolated tests and source/manifest validation passed. The installed desktop entry passes desktop-file validation, and the standard GIO resolver finds Sober without a logout. The user confirmed Sober appears with its icon after reopening search. No shell restart, session-environment change or app restart was needed.

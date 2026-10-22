@@ -1,3 +1,9 @@
+v0.1.9 — Sober launcher discovery
+
+- Expose the official Sober Flatpak desktop entry and icon in standard user XDG directories so launcher search works in the current session without logging out.
+- Install/update maintain export links; a standalone launcher action repairs existing installations. Removal deletes only owned links and preserves custom replacements.
+- Four isolated link lifecycle fixtures added; all 39 restore checks pass. Desktop-file validation and live discovery passed, and the user confirmed the search result and icon.
+
 v0.1.8 — Roblox through Sober
 
 - Added user-scoped Sober installation from official Flathub, with Flatpak as a curated native dependency.

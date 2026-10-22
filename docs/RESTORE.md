@@ -125,3 +125,5 @@ Steam UI size: the widget starts native Steam at 90% scale, and the desktop comp
 ## Roblox / Sober
 
 The retained Roblox setup uses the user Flatpak `org.vinegarhq.Sober` from Flathub. Native `flatpak` is included with `--packages`; restore Sober separately using `python3 -B scripts/sober.py install --apply`, then complete its automatic Roblox download and account sign-in. See [Sober lifecycle](SOBER.md) for preview, updates, removal and independent Flatpak maintenance.
+
+Sober launcher integration: its helper now links the official exported desktop entry and icon into standard user XDG directories during install/update. For an existing app missing from search, run `python3 -B scripts/sober.py launcher --apply` and reopen the launcher. Helper uninstall removes only its owned links, preserving custom replacements.

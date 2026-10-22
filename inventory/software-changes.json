@@ -207,6 +207,20 @@
       "uninstall_command": "python3 -B scripts/sober.py uninstall --apply",
       "manual_setup": "Complete automatic Roblox download in Sober and sign in independently.",
       "private_state": "No account state, application profiles, APKs or proprietary binaries are packaged."
+    },
+    {
+      "date": "2026-10-22",
+      "action": "configured",
+      "application": "Sober launcher discovery",
+      "reason": "Current session XDG_DATA_DIRS lacks Flatpak exports because Flatpak was installed during the session.",
+      "managed_links": {
+        ".local/share/applications/org.vinegarhq.Sober.desktop": ".local/share/flatpak/exports/share/applications/org.vinegarhq.Sober.desktop",
+        ".local/share/icons/hicolor/scalable/apps/org.vinegarhq.Sober.svg": ".local/share/flatpak/exports/share/icons/hicolor/scalable/apps/org.vinegarhq.Sober.svg"
+      },
+      "restore_command": "python3 -B scripts/sober.py launcher --apply",
+      "lifecycle": "Install/update create links after export checks; uninstall removes only owned links. Custom existing destinations are preserved.",
+      "verification": "39 isolated checks, desktop metadata validation, GIO discovery and user-confirmed launcher result/icon.",
+      "private_state_changed": false
     }
   ]
 }
