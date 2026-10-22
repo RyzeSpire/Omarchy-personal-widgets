@@ -1,3 +1,9 @@
+v0.1.7 — Smaller Steam UI and Special Offers tiling
+
+- Steam launches from the widget and user desktop entry default to 90% UI scale, preserving global display scaling and all launch actions. Existing explicit widget environment overrides remain supported.
+- Fixed the real Special Offers popup refusing tiling because of fixed-size X11 hints. A Steam-only size-limit override lets it split with the main client; ordinary untitled menus remain excluded.
+- Added child-environment/URI regression coverage, validated the desktop metadata and retained the existing backup/update/removal lifecycle. Live and isolated verification details are in docs/TESTING.md.
+
 v0.1.6 — Steam fill mode and dropdown stability
 
 - Steam now uses Omarchy's maximized Full width/fill mode while alone on workspace 6, keeping the bar, borders and margins visible.

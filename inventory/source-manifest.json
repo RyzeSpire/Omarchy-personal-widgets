@@ -158,8 +158,10 @@
   {
     "source": "~/.config/omarchy/plugins/ryze.steam/steam_backend.py",
     "package": "plugins/ryze.steam/steam_backend.py",
-    "source_sha256": "fc637a1eb4ed1a527795934e95049697a267061f6d3e8a86e05936c8a2cc2949",
-    "package_sha256": "fc637a1eb4ed1a527795934e95049697a267061f6d3e8a86e05936c8a2cc2949"
+    "source_sha256": "b9adcd1b2b3c8274fb082002631bd8730e2807b07605ab168b0e1cb3f9ee2ed8",
+    "package_sha256": "b9adcd1b2b3c8274fb082002631bd8730e2807b07605ab168b0e1cb3f9ee2ed8",
+    "baseline_source_sha256": "fc637a1eb4ed1a527795934e95049697a267061f6d3e8a86e05936c8a2cc2949",
+    "updated_on": "2026-10-22"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.steam/GameCard.qml",
@@ -182,8 +184,8 @@
   {
     "source": "~/.config/omarchy/plugins/ryze.steam/README.md",
     "package": "plugins/ryze.steam/README.md",
-    "source_sha256": "b0d1f2e2f98f945d9d9856f8ce97371bdfed8952ca9d8b7abeaf582941ec6a21",
-    "package_sha256": "b0d1f2e2f98f945d9d9856f8ce97371bdfed8952ca9d8b7abeaf582941ec6a21",
+    "source_sha256": "d8edec3871de80808e3b7f1acf25437697c316449041b734e3947cdf08055bb7",
+    "package_sha256": "d8edec3871de80808e3b7f1acf25437697c316449041b734e3947cdf08055bb7",
     "baseline_source_sha256": "a98a589b8f2e221633b4fe5e4e213d79813fbc8297e476b9faf6072e32d27693",
     "updated_on": "2026-10-22"
   },
@@ -450,9 +452,16 @@
   {
     "source": "~/.config/hypr/steam-workspace.lua",
     "package": "config/hypr/steam-workspace.lua",
-    "source_sha256": "f8c823328d5992fe554969a4dd80b582a13bcf2477894ed77b2fb1e3ec71788c",
-    "package_sha256": "4c5a95be6a64bcc8f80312e512120846c9bc2346aa8fb07335dadffcd41cbddf",
+    "source_sha256": "0c4dc72fa1e95d5d0267e4ebb6e2529fc07e9ab75f0041cb73b430ae6c700b0f",
+    "package_sha256": "74992545a74f02213de0d23a4d0320e85f01354c796020e934b2bb8d1b811386",
     "baseline_source_sha256": "f0f14b032af1c7703c6baf06535066b0c85e84ee22941150f80da23fbc13403f",
+    "updated_on": "2026-10-22"
+  },
+  {
+    "source": "~/.local/share/applications/steam.desktop",
+    "package": "config/home/.local/share/applications/steam.desktop",
+    "source_sha256": "b5e2776b63007f0c337b98e783073e31d37bc0936b94367294e408e45ec750bd",
+    "package_sha256": "b5e2776b63007f0c337b98e783073e31d37bc0936b94367294e408e45ec750bd",
     "updated_on": "2026-10-22"
   }
 ]

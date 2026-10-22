@@ -74,3 +74,7 @@ New components are GameDetails.qml, GameInfoController.qml and steam_game_info.p
 ## Desktop placement
 
 The restore bundle's desktop component now supplies a separate [Steam workspace policy](../../docs/STEAM_WORKSPACE.md): native client windows use workspace 6, maximized fill while alone and tiled together while a secondary managed Steam window is open. This is optional desktop integration, not a requirement of the widget itself. Disabling the widget does not remove those desktop rules. Games and unmanaged notification surfaces remain outside that policy.
+
+## Interface size
+
+Native Steam launches default to 90% desktop UI scale through Valve's `-forcedesktopscaling` option and child-only `STEAM_FORCE_DESKTOPUI_SCALING`. An explicit value already present in the environment overrides the widget default. Restart Steam fully to apply a changed scale. The desktop restore component supplies a matching user desktop entry for app/URI launches. See [scale configuration and removal](../../docs/STEAM_WORKSPACE.md#steam-interface-scale); no Steam profiles or global desktop scale settings are changed.

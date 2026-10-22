@@ -172,6 +172,21 @@
       ],
       "limitations": "The Lua API lacks X11 window-type metadata, so untitled Steam surfaces are excluded by title. Permanently untitled auxiliary windows and the automatic notification need separate inspection.",
       "dependencies": "No new runtime dependencies or installer lifecycle changes."
+    },
+    {
+      "date": "2026-10-22",
+      "action": "configured",
+      "application": "Steam",
+      "package": "steam 1.0.0.87-3",
+      "desktop_ui_scale": 0.9,
+      "integration": [
+        "Widget native-client dispatch: child-only environment and explicit desktop scale flag",
+        "User steam.desktop: all ten Exec actions use matching scale",
+        "Steam workspace policy: no_max_size permits fixed-size Special Offers tiling"
+      ],
+      "dependencies_changed": false,
+      "private_state_changed": false,
+      "documentation": "docs/STEAM_WORKSPACE.md"
     }
   ]
 }

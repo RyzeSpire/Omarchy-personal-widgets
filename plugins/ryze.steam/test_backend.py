@@ -87,7 +87,7 @@ class BackendTests(Fixture):
             return '/usr/bin/'+name if name in ('steam', 'uwsm-app') else None
         with patch.object(backend.shutil, 'which', side_effect=executable), patch.object(backend.subprocess, 'Popen') as popen, patch.object(backend, 'focus_client', return_value=True):
             self.assertTrue(backend.launch('123')['submitted'])
-            self.assertEqual(popen.call_args.args[0], ['/usr/bin/uwsm-app', '--', '/usr/bin/steam', 'steam://rungameid/123'])
+            self.assertEqual(popen.call_args.args[0], ['/usr/bin/uwsm-app', '--', '/usr/bin/steam', '-forcedesktopscaling', os.environ.get('STEAM_FORCE_DESKTOPUI_SCALING', '0.9'), 'steam://rungameid/123'])
             backend.main(['open', 'friends'])
             self.assertEqual(popen.call_args.args[0][-1], 'steam://open/friends')
             for value in ('123;echo hi', '../123', '0', '4294967296', '999'):
@@ -99,6 +99,22 @@ class BackendTests(Fixture):
         with patch.object(backend.shutil, 'which', return_value=None):
             with self.assertRaisesRegex(ValueError, 'not installed'):
                 backend.dispatch('steam://open/games')
+
+    def test_scaling_is_steam_only_and_preserves_uri_without_wrapper(self):
+        with patch.dict(os.environ, {'GDK_SCALE': '2'}):
+            os.environ.pop('STEAM_FORCE_DESKTOPUI_SCALING', None)
+            before = os.environ.copy()
+            with patch.object(backend.shutil, 'which', side_effect=lambda name: '/usr/bin/steam' if name == 'steam' else None), patch.object(backend.subprocess, 'Popen') as popen:
+                backend.dispatch('steam://open/games')
+                self.assertEqual(popen.call_args.args[0], ['/usr/bin/steam', '-forcedesktopscaling', '0.9', 'steam://open/games'])
+                child = popen.call_args.kwargs['env']
+                self.assertEqual(child['STEAM_FORCE_DESKTOPUI_SCALING'], '0.9')
+                self.assertEqual(child['GDK_SCALE'], '2')
+                self.assertEqual(dict(os.environ), before)
+                os.environ['STEAM_FORCE_DESKTOPUI_SCALING'] = '1.1'
+                backend.dispatch('steam://open/friends')
+                self.assertEqual(popen.call_args.args[0][-2:], ['1.1', 'steam://open/friends'])
+                self.assertEqual(popen.call_args.kwargs['env']['STEAM_FORCE_DESKTOPUI_SCALING'], '1.1')
 
     def test_focus_selects_client_and_preserves_workspace(self):
         clients = [{'mapped': True, 'class': 'steam_app_123', 'title': 'Game', 'address': '0x12'},

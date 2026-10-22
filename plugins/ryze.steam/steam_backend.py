@@ -230,9 +230,12 @@ def dispatch(uri):
     if not client:
         raise ValueError('Steam is not installed or is missing from PATH.')
     wrapper = shutil.which('uwsm-app')
-    command = [wrapper, '--', client, uri] if wrapper else [client, uri]
+    environment = os.environ.copy()
+    scale = environment.setdefault('STEAM_FORCE_DESKTOPUI_SCALING', '0.9')
+    arguments = [client, '-forcedesktopscaling', scale, uri]
+    command = [wrapper, '--', *arguments] if wrapper else arguments
     subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
-                     stderr=subprocess.DEVNULL, start_new_session=True)
+                     stderr=subprocess.DEVNULL, start_new_session=True, env=environment)
     return {'submitted': True}
 
 

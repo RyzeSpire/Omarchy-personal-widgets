@@ -49,6 +49,7 @@ test("native client moves and fills the work area, while games remain untouched"
   assert(main.workspace.name == "6" and not main.floating and main.fullscreen == 1)
   assert(game.workspace.name == "3" and game.floating and game.fullscreen == 0)
   assert(f.rules[1].class.class == "^[Ss]team$" and f.rules[1].class.title == ".+" and f.rules[1].rule.tile == true)
+  assert(f.rules[1].rule.no_max_size == true)
   assert(f.rules[1].rule.suppress_event == "fullscreen maximize")
 end)
 

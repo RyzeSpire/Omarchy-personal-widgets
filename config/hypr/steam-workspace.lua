@@ -7,6 +7,8 @@ o.window({ class = class_pattern, title = ".+" }, {
   workspace = workspace_name,
   float = false,
   tile = true,
+  -- Fixed-size X11 Special Offers otherwise refuses manual tiling too.
+  no_max_size = true,
   suppress_event = "fullscreen maximize",
 })
 
