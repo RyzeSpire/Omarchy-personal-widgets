@@ -106,3 +106,8 @@ A signed-in OneDrive page may need to pass cookies or a current download URL thr
 To uninstall, close Persepolis and run `omarchy pkg drop persepolis`; inspect dependencies before applying removal on another machine. User preferences and download history are preserved by default. To disable Firefox capture, turn off **Interrupt downloads** or disable the extension. After uninstalling, remove only `com.persepolis.pdmchromewrapper.json` native-messaging registrations whose path belongs to that removed installation; first-run initialization can create these for Firefox and other supported browsers. Preserve unrelated browser connectors and personal downloads. Removal of settings/history remains a separate explicit user choice.
 
 The public bundle contains package names, versions and these setup instructions, not application binaries, browser profiles, cookies, download URLs, manifests containing personal paths or download history. Desktop startup, version reporting and the Firefox native-host manifest were verified on the source system; extension installation, actual browser capture, and clean-machine graphical behavior still require interactive verification.
+
+
+## Keyring recovery
+
+For the specific malformed multiline-JSON credential defect, see [GNOME Keyring text-format recovery](KEYRING_RECOVERY.md). The optional preview-by-default helper preserves an exact private backup outside Git and retains the existing credential entries and protection mode. It is never run by the installer. Private vaults and recovery backups remain excluded from the public package.

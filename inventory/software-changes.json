@@ -68,6 +68,29 @@
         "Firefox extension installation and end-to-end download capture require the user",
         "OneDrive authentication, download speed and successful archive delivery are not established by application installation"
       ]
+    },
+    {
+      "date": "2026-10-22",
+      "action": "repaired",
+      "component": "GNOME Keyring text-format credential syntax",
+      "method": "scripts/repair-keyring.py (explicit apply, private backup, atomic replacement)",
+      "documentation": "docs/KEYRING_RECOVERY.md",
+      "cause": "A JSON credential contained physical line breaks that were not encoded for the GNOME text-keyring container.",
+      "preservation": "Credential entries and JSON values are preserved; the existing protection mode is unchanged. No vault reset, PAM change, account sign-in or password change was performed.",
+      "dependencies": [
+        "python",
+        "python-gobject",
+        "gnome-keyring",
+        "libsecret"
+      ],
+      "verification": [
+        "Fabricated-data repair, idempotence, backup, symlink, concurrency and Git-backup guard tests",
+        "Default collection loaded and unlocked after reload",
+        "Proton VPN status succeeded",
+        "Existing GitHub CLI authentication succeeded",
+        "No open keyring prompts remained"
+      ],
+      "private_state": "The actual keyring, private backup, account data and tokens remain outside the distributed source. Private backup roots must not be inside any Git repository."
     }
   ]
 }

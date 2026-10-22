@@ -1,3 +1,13 @@
+v0.1.2 — Native download manager and keyring recovery
+
+- Added Persepolis from Arch's official repository to the restore profile, with Firefox extension setup, updates, removal instructions and affected package inventories.
+- Recorded FDM package removal and cleanup of its obsolete integrations while preserving personal downloads/settings.
+- Added an optional, preview-by-default repair for malformed multiline JSON in an existing GNOME text keyring. It preserves the credential entries and protection mode, backs up outside Git and replaces the file atomically. Actual vaults, tokens and private backups are excluded.
+- Added five fabricated-data recovery tests and distribution GLib support to CI. All 31 isolated packaging/Spotify/recovery checks passed locally; source/manifests/QML/Lua validation passed.
+- Existing widget implementation files are unchanged. The repair helper is not run automatically by the installer.
+
+v0.1.1 — Persistent packaging policy
+
 Persistent packaging policy for future Codex-assisted Omarchy changes.
 
 - Global working instruction installed in Codex home and supplied in the desktop restore payload.
