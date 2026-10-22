@@ -43,7 +43,8 @@
     "xdg-terminal-exec",
     "woff2-font-awesome",
     "ttf-jetbrains-mono-nerd-basic",
-    "persepolis"
+    "persepolis",
+    "flatpak"
   ],
   "mise_tools": {
     "codex": "latest",

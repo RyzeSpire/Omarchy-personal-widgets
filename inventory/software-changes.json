@@ -187,6 +187,26 @@
       "dependencies_changed": false,
       "private_state_changed": false,
       "documentation": "docs/STEAM_WORKSPACE.md"
+    },
+    {
+      "date": "2026-10-22",
+      "action": "installed",
+      "application": "Roblox through Sober",
+      "native_packages": {
+        "accountsservice": "26.27.3-1",
+        "composefs": "1.0.8-1",
+        "libmalcontent": "0.14.0-4",
+        "ostree": "2026.4-1",
+        "flatpak": "1:1.18.4-2"
+      },
+      "app_id": "org.vinegarhq.Sober",
+      "source": "https://flathub.org/apps/org.vinegarhq.Sober",
+      "scope": "user",
+      "restore_command": "python3 -B scripts/sober.py install --apply",
+      "update_command": "python3 -B scripts/sober.py update --apply",
+      "uninstall_command": "python3 -B scripts/sober.py uninstall --apply",
+      "manual_setup": "Complete automatic Roblox download in Sober and sign in independently.",
+      "private_state": "No account state, application profiles, APKs or proprietary binaries are packaged."
     }
   ]
 }

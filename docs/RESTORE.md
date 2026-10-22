@@ -121,3 +121,7 @@ The keyboard widget now supports a configured-layout menu. Install both `widgets
 The desktop component also restores [Steam's workspace/fill and split-window policy](STEAM_WORKSPACE.md). Its workspace is configurable through `profile.json` (`workspaces.steam`, default 6). Managed native Steam secondary windows tile alongside the client; the automatic notification still needs confirmation when it next appears. No game placement or notification preferences are changed.
 
 Steam UI size: the widget starts native Steam at 90% scale, and the desktop component installs a matching user `steam.desktop` override for app/URI launches. Fully exit/reopen Steam after applying; an already-running client keeps its scale. Both files use the normal backup/update/edit-preserving removal lifecycle. See [Steam configuration](STEAM_WORKSPACE.md) to change the default or launch manually. The Steam-only `no_max_size` rule permits fixed-size Special Offers to join the tiled split.
+
+## Roblox / Sober
+
+The retained Roblox setup uses the user Flatpak `org.vinegarhq.Sober` from Flathub. Native `flatpak` is included with `--packages`; restore Sober separately using `python3 -B scripts/sober.py install --apply`, then complete its automatic Roblox download and account sign-in. See [Sober lifecycle](SOBER.md) for preview, updates, removal and independent Flatpak maintenance.

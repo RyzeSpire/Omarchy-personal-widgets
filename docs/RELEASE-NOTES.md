@@ -1,3 +1,10 @@
+v0.1.8 — Roblox through Sober
+
+- Added user-scoped Sober installation from official Flathub, with Flatpak as a curated native dependency.
+- Added a standalone preview-first install/update/uninstall helper and first-run, maintenance and removal instructions. Uninstall preserves account data and shared runtimes.
+- Recorded relevant native packages and public Flatpak version metadata. Proprietary binaries, Roblox APKs and account state are excluded from the restore archive.
+- Validated helper previews in a temporary home and passed all 35 isolated restore checks; actual sign-in/gameplay remain interactive.
+
 v0.1.7 — Smaller Steam UI and Special Offers tiling
 
 - Steam launches from the widget and user desktop entry default to 90% UI scale, preserving global display scaling and all launch actions. Existing explicit widget environment overrides remain supported.

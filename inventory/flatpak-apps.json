@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "recorded_on": "2026-10-22",
+  "scope": "user",
+  "remote": {
+    "name": "flathub",
+    "url": "https://dl.flathub.org/repo/"
+  },
+  "applications": [
+    {
+      "id": "org.vinegarhq.Sober",
+      "version": "1.8.0",
+      "ref": "app/org.vinegarhq.Sober/x86_64/stable",
+      "commit": "7b6430c703e8178baa536062099fc5a1e0c7cf213c0789695fa7660b62cb9d26",
+      "runtime": "org.gnome.Platform/x86_64/51",
+      "source": "https://flathub.org/apps/org.vinegarhq.Sober",
+      "restore_helper": "scripts/sober.py"
+    }
+  ],
+  "installed_apps_and_runtimes": [
+    {
+      "ref": "org.freedesktop.Platform.GL.default/x86_64/26.08",
+      "version": "26.2.5",
+      "origin": "flathub"
+    },
+    {
+      "ref": "org.freedesktop.Platform.GL.default/x86_64/26.08-extra",
+      "version": "26.2.5",
+      "origin": "flathub"
+    },
+    {
+      "ref": "org.freedesktop.Platform.GL.nvidia-615-78-08/x86_64/1.4",
+      "version": "",
+      "origin": "flathub"
+    },
+    {
+      "ref": "org.freedesktop.Platform.VAAPI.nvidia/x86_64/26.08",
+      "version": "",
+      "origin": "flathub"
+    },
+    {
+      "ref": "org.freedesktop.Platform.codecs-extra/x86_64/26.08-extra",
+      "version": "",
+      "origin": "flathub"
+    },
+    {
+      "ref": "org.gnome.Platform/x86_64/51",
+      "version": "",
+      "origin": "flathub"
+    },
+    {
+      "ref": "org.gtk.Gtk3theme.Adwaita-dark/x86_64/3.22",
+      "version": "",
+      "origin": "flathub"
+    },
+    {
+      "ref": "org.vinegarhq.Sober/x86_64/stable",
+      "version": "1.8.0",
+      "origin": "flathub"
+    }
+  ],
+  "policy": "Public software metadata only; profiles, account state, caches, logs, downloaded APKs and proprietary binaries are excluded. Install current stable releases rather than pinning these recorded commits."
+}

@@ -32,3 +32,5 @@ Create an export artifact with `python3 scripts/make-release.py`. Recreate accou
 [Validation guide](docs/TESTING.md) · [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 Persistent Codex instructions require future retained Omarchy changes to be packaged and published here. See [the packaging policy](docs/PACKAGING_POLICY.md). The desktop installer restores this global policy while preserving existing unrelated guidance. Restart existing Codex sessions to load new global instructions.
+
+Roblox is available through the separately restored [Sober Flatpak](docs/SOBER.md). Its helper previews by default and supports installation, updates and account-preserving removal; proprietary binaries and account state remain outside the bundle.
