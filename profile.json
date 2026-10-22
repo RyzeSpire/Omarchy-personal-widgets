@@ -14,7 +14,8 @@
     "codex_widget": 7,
     "discord": 8,
     "legacy_codex": 9,
-    "spotify_full": 10
+    "spotify_full": 10,
+    "steam": 6
   },
   "keyboard": {
     "layout": "us,br",

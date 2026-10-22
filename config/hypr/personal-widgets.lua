@@ -46,3 +46,6 @@ o.bind("CTRL + Q", "Quit app (confirm for Spotify)", function() hl.dispatch(ryze
 -- Open the configured-layout chooser on the focused monitor.
 o.bind("SUPER + mouse:274", "Choose keyboard layout", "omarchy-shell ryze.keyboard-layout choose")
 -- END RYZE KEYBOARD LAYOUT MENU
+
+-- Steam client fullscreen/split policy.
+require("hypr.steam-workspace")

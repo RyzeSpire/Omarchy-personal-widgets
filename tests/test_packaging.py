@@ -137,6 +137,30 @@ class PackagingTests(unittest.TestCase):
             manage.install_plan(self.home, 'DP-2', {'desktop', 'widgets'})
         self.assertIn('Preserve this incomplete edit', path.read_text())
 
+    def test_steam_workspace_module_migrates_and_restores_originals(self):
+        directory = self.home / '.config/hypr'; directory.mkdir(parents=True)
+        main = directory / 'hyprland.lua'
+        original = '-- Keep my configuration\n-- BEGIN RYZE STEAM WORKSPACE\nrequire("hypr.steam-workspace")\n-- END RYZE STEAM WORKSPACE\n'
+        main.write_text(original)
+        module = directory / 'steam-workspace.lua'; module.write_text('-- Original Steam customization\n')
+        first = manage.install_plan(self.home, 'DP-2', {'desktop'})
+        self.assertNotIn(b'hypr.steam-workspace', first['.config/hypr/hyprland.lua'][0])
+        self.assertEqual(first['.config/hypr/personal-widgets.lua'][0].count(b'require("hypr.steam-workspace")'), 1)
+        self.assertIn(b'local workspace_name = "6"', first['.config/hypr/steam-workspace.lua'][0])
+        manage.apply_files(self.home, self.state, first)
+        manage.apply_files(self.home, self.state, manage.install_plan(self.home, 'DP-2', {'desktop'}))
+        manage.remove_files(self.home, self.state, True)
+        self.assertEqual(main.read_text(), original)
+        self.assertEqual(module.read_text(), '-- Original Steam customization\n')
+
+    def test_steam_workspace_is_configurable_and_validated(self):
+        with patch.dict(manage.PROFILE['workspaces'], {'steam': 12}):
+            plan = manage.install_plan(self.home, 'DP-2', {'desktop'})
+            self.assertIn(b'local workspace_name = "12"', plan['.config/hypr/steam-workspace.lua'][0])
+        for value in ('6;bad', 0, True):
+            with patch.dict(manage.PROFILE['workspaces'], {'steam': value}), self.assertRaises(ValueError):
+                manage.install_plan(self.home, 'DP-2', {'desktop'})
+
     def test_vencord_preserves_private_existing_fields(self):
         target = self.home / '.config/Vencord/settings/settings.json'; target.parent.mkdir(parents=True)
         target.write_text(json.dumps({'cloud': {'token': 'private'}, 'unrelated': 123}))

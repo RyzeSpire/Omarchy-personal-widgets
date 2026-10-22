@@ -115,3 +115,7 @@ For the specific malformed multiline-JSON credential defect, see [GNOME Keyring 
 ## Keyboard chooser shortcut
 
 The keyboard widget now supports a configured-layout menu. Install both `widgets` and `desktop` components for Super + middle-click to open it beside the pointer on its monitor. Standalone setup and removal are documented in [the keyboard widget README](../plugins/ryze.keyboard-layout/README.md). The `desktop` component places its shortcut in the managed Hyprland integration, migrates the marked pre-bundle live binding to avoid duplicates, and uses the existing backup/edit-preserving uninstall behavior. An incomplete marked block is refused for manual review.
+
+## Steam client workspace
+
+The desktop component also restores [Steam's workspace/fullscreen and split-window policy](STEAM_WORKSPACE.md). Its workspace is configurable through `profile.json` (`workspaces.steam`, default 6). Managed native Steam secondary windows tile alongside the client; the automatic notification still needs confirmation when it next appears. No game placement or notification preferences are changed.

@@ -225,12 +225,25 @@ def install_plan(home, monitor, components):
         policy_file = relative in ('.codex/AGENTS.md', '.codex/AGENTS.override.md')
         put(relative, text, 0o600 if policy_file else source.stat().st_mode & 0o777)
     if 'desktop' in components:
+        steam_workspace = PROFILE['workspaces'].get('steam', 6)
+        if isinstance(steam_workspace, bool) or not isinstance(steam_workspace, int) or not 1 <= steam_workspace <= 99:
+            raise ValueError('Steam workspace must be an integer from 1 to 99.')
+        steam_module = (ROOT / 'config/hypr/steam-workspace.lua').read_text().replace('@STEAM_WORKSPACE@', str(steam_workspace))
+        put('.config/hypr/steam-workspace.lua', steam_module, 0o644)
         module = (ROOT / 'config/hypr/personal-widgets.lua').read_text().replace('HDMI-A-1', monitor)
         put('.config/hypr/personal-widgets.lua', module, 0o644)
         old_tail = '-- Keep Spotify' + (ROOT / 'config/hypr/hyprland.lua').read_text().split('-- Keep Spotify', 1)[1]
         fallback = (ROOT / 'config/hypr/hyprland.lua').read_text().replace(old_tail, '')
         main_file = home / '.config/hypr/hyprland.lua'
         current = main_file.read_text() if main_file.exists() else fallback
+        begin = '-- BEGIN RYZE STEAM WORKSPACE'
+        end = '-- END RYZE STEAM WORKSPACE'
+        if (begin in current) != (end in current):
+            raise ValueError('Incomplete Steam workspace block; preserve and review it first.')
+        if begin in current:
+            start = current.index(begin)
+            stop = current.index(end, start) + len(end)
+            current = current[:start] + current[stop:]
         current = current.replace(old_tail, '').replace('-- Personal widget integrations.\n' + INTEGRATION + '\n', '').replace(INTEGRATION, '').rstrip()
         put('.config/hypr/hyprland.lua', current + '\n\n-- Personal widget integrations.\n' + INTEGRATION + '\n', 0o644)
         binding_file = home / '.config/hypr/bindings.lua'

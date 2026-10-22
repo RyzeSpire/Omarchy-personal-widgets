@@ -1,3 +1,10 @@
+v0.1.5 — Steam workspace and tiled secondary windows
+
+- Added a user-owned native Steam client policy overriding Omarchy's floating default. Steam opens on configurable workspace 6 and fills it while alone.
+- Secondary managed Steam windows join the tiling layout; main-client fullscreen is removed while sharing, then restored after they close. Unrelated peers prevent fullscreen, and game classes are excluded.
+- Added portable module rendering, owned-import migration, backup/edit-preserving removal documentation, six isolated Lua scenarios and 35 Python installer/backend checks.
+- Live Steam Settings verified the side-by-side transition and fullscreen restoration. The already-dismissed automatic notification remains unverified until its next appearance; unmanaged toasts and menus cannot be tiled as client windows.
+
 v0.1.4 — Pointer-positioned keyboard menu
 
 - The keyboard chooser now opens next to the mouse on its monitor, flipping left near the right edge and above near the bottom. Mid-screen placement centers vertically beside the pointer; coordinates stay fixed after opening.

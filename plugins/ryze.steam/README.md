@@ -70,3 +70,7 @@ Friends who play loads on explicit expansion. It checks visible owned-game/play-
 New components are GameDetails.qml, GameInfoController.qml and steam_game_info.py. The controller delivers local details first, enriches asynchronously, ignores responses from previously selected games, and preserves favorite changes across responses. `python3 -B test_game_info.py` uses isolated fixtures and mocked API/native actions. `omarchy-shell ryze.steam game 284160` opens a known title's widget popup for keyboard bindings or inspection; it does not launch the game or official client.
 
 `omarchy-shell ryze.steam gameSection about|achievements|friends|actions` expands an information section of the selected game, for keyboard-driven navigation. This interface never activates Play/Install. Backend replies include a request tag to reject cancelled or previous requests when games are reopened or switched.
+
+## Desktop placement
+
+The restore bundle's desktop component now supplies a separate [Steam workspace policy](../../docs/STEAM_WORKSPACE.md): native client windows use workspace 6, fullscreen while alone and tiled together while a secondary managed Steam window is open. This is optional desktop integration, not a requirement of the widget itself. Disabling the widget does not remove those desktop rules. Games and unmanaged notification surfaces remain outside that policy.

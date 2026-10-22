@@ -182,8 +182,10 @@
   {
     "source": "~/.config/omarchy/plugins/ryze.steam/README.md",
     "package": "plugins/ryze.steam/README.md",
-    "source_sha256": "a98a589b8f2e221633b4fe5e4e213d79813fbc8297e476b9faf6072e32d27693",
-    "package_sha256": "a98a589b8f2e221633b4fe5e4e213d79813fbc8297e476b9faf6072e32d27693"
+    "source_sha256": "75b1096c427da7e4097dd3ade946b5633ad9669d0c5d3787d864d0d7a81193eb",
+    "package_sha256": "75b1096c427da7e4097dd3ade946b5633ad9669d0c5d3787d864d0d7a81193eb",
+    "baseline_source_sha256": "a98a589b8f2e221633b4fe5e4e213d79813fbc8297e476b9faf6072e32d27693",
+    "updated_on": "2026-10-22"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.steam/test_backend.py",
@@ -444,5 +446,11 @@
     "package": "plugins/ryze.keyboard-layout/CursorPanel.qml",
     "source_sha256": "6967c93841cce2ec0727b7dee80d2f42a72fda9d564df5bbb963347a7dc5b0f0",
     "package_sha256": "6967c93841cce2ec0727b7dee80d2f42a72fda9d564df5bbb963347a7dc5b0f0"
+  },
+  {
+    "source": "~/.config/hypr/steam-workspace.lua",
+    "package": "config/hypr/steam-workspace.lua",
+    "source_sha256": "f0f14b032af1c7703c6baf06535066b0c85e84ee22941150f80da23fbc13403f",
+    "package_sha256": "282b746d84d65a157d9a851c3bc425124605e9628be7a94dfa082930ccde3934"
   }
 ]

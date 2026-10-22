@@ -134,6 +134,28 @@
       ],
       "fallback": "If reading the pointer fails or exceeds the bounded timeout, use the focused monitor and ordinary bar anchoring.",
       "lifecycle": "Existing widget installer and edit-preserving removal include the local panel; upstream source hash and MIT attribution are recorded."
+    },
+    {
+      "date": "2026-10-22",
+      "action": "configured",
+      "application": "Native Steam desktop window placement",
+      "workspace": 6,
+      "source": "User-owned hypr/steam-workspace.lua loaded after Omarchy defaults",
+      "behavior": "Exact Steam client class is tiled on workspace 6. Main client uses compositor fullscreen while alone, yields to normal tiling with secondary windows, and restores fullscreen when alone again.",
+      "scope": "Managed native Steam client windows; excludes game classes and unmanaged X11 menus/toasts. Unrelated workspace peers are preserved and prevent fullscreen.",
+      "dependencies": "Existing Hyprland Lua API; no runtime package changes. CI installs Lua 5.4 for isolated fixtures.",
+      "verification": [
+        "Six synthetic compositor policy checks passed",
+        "35 isolated Python checks passed including workspace rendering and install/update/removal migration",
+        "Live Steam and Steam Settings formed side-by-side non-floating tiles on workspace 6",
+        "Closing only the test Settings window restored Steam fullscreen",
+        "Hyprland configuration errors were empty"
+      ],
+      "unverified": [
+        "Automatic notification was already closed and needs confirmation on its next natural appearance",
+        "Fresh Steam startup and other tiling layouts require further manual coverage"
+      ],
+      "lifecycle": "Profile workspace is configurable; existing installer tracks module/import backups and preserves subsequent user edits on removal. Disabling does not relocate or close existing windows."
     }
   ]
 }
