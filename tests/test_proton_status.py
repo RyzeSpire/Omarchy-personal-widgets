@@ -35,6 +35,7 @@ class ProtonStatus(unittest.TestCase):
         desktop = proton.Desktop.__new__(proton.Desktop)
         desktop.dbus = MagicMock()
         desktop.session = MagicMock()
+        desktop.session.name_has_owner.return_value = False
         desktop.running = MagicMock(return_value=running)
         desktop.tray_menu = MagicMock(return_value=(None, []))
         desktop.props = MagicMock(side_effect=[{"ActiveConnections": ["/test/tunnel"]},

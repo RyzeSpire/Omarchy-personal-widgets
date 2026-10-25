@@ -24,8 +24,10 @@
     "origin": "Original personal widget; local official-app integration",
     "app_version_verified": "4.18.7-1",
     "status_interface": "org.freedesktop.NetworkManager.Connection.Active",
-    "control_interface": "Official GTK app StatusNotifierItem / com.canonical.dbusmenu",
+    "control_interface": "Local adapter in official GTK App/Controller process; native tray fallback for unadapted entry point",
     "artwork": "proton-vpn-sign from installed official package; no artwork redistributed",
-    "source": "plugins/ryze.proton-vpn"
+    "source": "plugins/ryze.proton-vpn",
+    "adapter_file": "plugins/ryze.proton-vpn/proton_widget_app.py",
+    "search_source": "Official controller server model; no additional account/session/cache export"
   }
 }

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Proton VPN
+Comment=Official Proton VPN app with local widget server selection
+Exec=python3 -B "@HOME@/.config/omarchy/plugins/ryze.proton-vpn/proton_widget_app.py"
+TryExec=protonvpn-app
+Terminal=false
+Type=Application
+Icon=proton-vpn-logo
+StartupWMClass=proton.vpn.app.gtk
+Categories=Network;

@@ -15,6 +15,8 @@ NM = "org.freedesktop.NetworkManager"
 ACTIVE = NM + ".Connection.Active"
 PROPS = "org.freedesktop.DBus.Properties"
 MENU = "com.canonical.dbusmenu"
+PICKER_BUS = "io.github.ryzespire.ProtonWidget"
+PICKER_OBJECT = "/io/github/ryzespire/ProtonWidget"
 
 
 def connection_state(connections):
@@ -90,10 +92,29 @@ class Desktop:
                                         signature="iias", dbus_interface=MENU, timeout=2)
         return obj, layout[2]
 
+    def picker(self):
+        if not self.running() or not self.session.name_has_owner(PICKER_BUS):
+            raise ValueError("Start Proton VPN from its launcher or this widget to enable server search.")
+        daemon = self.session.get_object("org.freedesktop.DBus", "/org/freedesktop/DBus", introspect=False)
+        def pid(name):
+            return daemon.GetConnectionUnixProcessID(name, dbus_interface="org.freedesktop.DBus", timeout=2)
+        if pid(APP) != pid(PICKER_BUS):
+            raise ValueError("The server picker is not part of the official app process.")
+        return self.session.get_object(PICKER_BUS, PICKER_OBJECT, introspect=False)
+
+    def picker_call(self, method, *args):
+        obj = self.picker()
+        signature = {"Info": "", "Search": "su", "Validate": "s", "Connect": "s", "QuickConnect": "", "Disconnect": ""}[method]
+        result = getattr(obj, method)(*args, signature=signature, dbus_interface=PICKER_BUS, timeout=8)
+        data = json.loads(str(result))
+        if not isinstance(data, dict):
+            raise ValueError("Invalid server picker response.")
+        return data
+
     def status(self):
         running = self.running()
         result = dict(ok=True, running=running, state="unknown", server="",
-                      can_connect=False, can_disconnect=False, error="")
+                      can_connect=False, can_disconnect=False, picker_available=False, selection_allowed=False, picker_pending=False, picker_error="", error="")
         try:
             bus = self.dbus.SystemBus()
             active = self.props(bus, NM, "/org/freedesktop/NetworkManager", NM)["ActiveConnections"]
@@ -114,6 +135,19 @@ class Desktop:
             except Exception:
                 # A missing tray must not hide a connected tunnel or invent controls.
                 pass
+        if running:
+            try:
+                info = self.picker_call("Info")
+                result.update(picker_available=info.get("ok") is True,
+                              selection_allowed=info.get("selection_allowed") is True,
+                              picker_pending=info.get("pending") is True,
+                              picker_error=info.get("error", ""))
+                if result["picker_available"]:
+                    ready = info.get("ready") is True and not result["picker_pending"]
+                    result["can_connect"] = ready and result["state"] == "disconnected"
+                    result["can_disconnect"] = ready and result["state"] in ("connected", "connecting")
+            except Exception:
+                pass
         return result
 
     def action(self, action):
@@ -122,7 +156,7 @@ class Desktop:
                 obj = self.session.get_object(APP, "/proton/vpn/app/gtk", introspect=False)
                 obj.Activate({}, signature="a{sv}", dbus_interface="org.freedesktop.Application", timeout=3)
             else:
-                subprocess.Popen(["protonvpn-app"], stdin=subprocess.DEVNULL,
+                subprocess.Popen([sys.executable, "-B", str(Path(__file__).with_name("proton_widget_app.py"))], stdin=subprocess.DEVNULL,
                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                                  start_new_session=True)
             return
@@ -130,6 +164,11 @@ class Desktop:
             raise ValueError("Unknown action.")
         if not self.running():
             raise ValueError("Open Proton VPN and sign in first.")
+        if self.session.name_has_owner(PICKER_BUS):
+            response = self.picker_call("QuickConnect" if action == "connect" else "Disconnect")
+            if not response.get("ok"):
+                raise ValueError(response.get("error", "Could not complete the Proton request."))
+            return
         obj, items = self.tray_menu()
         item_id = menu_action(items, action)
         if obj is None or item_id is None:
@@ -140,19 +179,25 @@ class Desktop:
 
 
 def main():
-    action = sys.argv[1] if len(sys.argv) == 2 else ""
-    if action not in ("status", "open", "connect", "disconnect"):
-        print(json.dumps(dict(ok=False, error="Expected status, open, connect or disconnect.")))
+    args = sys.argv[1:]
+    action = args[0] if args else ""
+    if not ((action in ("status", "open", "connect", "disconnect") and len(args) == 1)
+            or (action == "search" and len(args) == 3)
+            or (action in ("select", "validate") and len(args) == 2)):
+        print(json.dumps(dict(ok=False, error="Invalid widget request.")))
         return 2
     try:
         desktop = Desktop()
         if action == "status":
             result = desktop.status()
+        elif action == "search":
+            result = desktop.picker_call("Search", args[1], desktop.dbus.UInt32(int(args[2])))
+        elif action in ("select", "validate"):
+            result = desktop.picker_call("Connect" if action == "select" else "Validate", args[1])
         else:
             desktop.action(action)
             result = dict(ok=True)
     except Exception as error:
-        # D-Bus errors can carry private arguments; return a safe UI message only.
         message = str(error) if isinstance(error, ValueError) else "Proton VPN is unavailable. Open the official app and try again."
         result = dict(ok=False, running=False, state="unknown", server="", error=message)
     print(json.dumps(result))

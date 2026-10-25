@@ -1,3 +1,11 @@
+v0.1.17 — Search and select Proton servers in the widget
+
+- Add debounced country/city/server search, a scrollable 50-result page, cached loads and location/feature labels. Selecting a row does not connect; an explicit Connect button submits that exact server.
+- Keep all connection controls in the official app process through a small local adapter. Honor native account/plan checks and revalidate availability; no separate CLI, VPN engine, credential export or pinned-server edits.
+- Add a reversible user launcher, native-compatible startup handling and full reinstall/removal documentation. Retain the compact full-color logo and lock badge.
+- Prevent NetworkManager from reviving older saved Proton tunnels during switches, using scoped manual-connect flags, private original-value backups and explicit rollback; kill-switch profiles remain unchanged.
+- All 74 isolated checks and source validation pass. Live search, native GUI/tray and read-only selection validation checked. The user confirmed search/selection and a switch without the Brazil detour.
+
 v0.1.16 — Restore the full Proton logo and compact badge
 
 - Keep the official logo's original purple/teal gradients and inner shape when the app runs; use grayscale when it is off. Artwork comes from the installed app, with no image binary redistributed.

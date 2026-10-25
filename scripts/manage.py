@@ -255,6 +255,10 @@ def install_plan(home, monitor, components):
                     if source.suffix in ('.py', '.qml', '.lua'):
                         data = data.decode().replace('HDMI-A-1', monitor).encode()
                     put(relative, data, source.stat().st_mode & 0o777)
+        # Only the widgets component owns this launcher; rollback restores any original.
+        desktop_home = str(home).replace('\\', '\\\\\\\\').replace('"', '\\\\"').replace('`', '\\\\`').replace('$', '\\\\$').replace('%', '%%')
+        launcher = (ROOT / 'config/proton-app.desktop').read_text().replace('@HOME@', desktop_home)
+        put('.local/share/applications/proton.vpn.app.gtk.desktop', launcher, 0o644)
         saved = read_json(ROOT / 'config/shell.json', {})
         put('.config/omarchy/shell.json', json_bytes(merge_shell(read_json(home / '.config/omarchy/shell.json', {}), saved)))
     for source in sorted((ROOT / 'config/home').rglob('*')):

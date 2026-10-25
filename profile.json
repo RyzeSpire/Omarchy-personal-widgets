@@ -46,7 +46,8 @@
     "persepolis",
     "flatpak",
     "python-dbus",
-    "networkmanager"
+    "networkmanager",
+    "python-gobject"
   ],
   "mise_tools": {
     "codex": "latest",
