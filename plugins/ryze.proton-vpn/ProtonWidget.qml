@@ -74,14 +74,14 @@ Ui.BarWidget {
         target: root.moduleName
         function open(): void { root.open() }
         function close(): void { root.close() }
-        function status(): string { return JSON.stringify({opened: root.opened, status: root.status, error: root.error}) }
+        function status(): string { return JSON.stringify({opened: root.opened, status: root.status, error: root.error, iconSize: button.opticalSize, slotSize: button.slotSize}) }
     }
     Ui.BarIconButton {
         id: button
         anchors.fill: parent
         bar: root.bar
         slotSize: Commons.Style.bar.statusSlot
-        opticalSize: Commons.Style.bar.iconCanvas
+        opticalSize: Commons.Style.space(12)
         iconComponent: Component {
             ProtonIcon { appRunning: root.status.running === true; connectionState: root.status.state || "unknown" }
         }

@@ -6,31 +6,27 @@ Item {
     id: root
     property bool appRunning: false
     property string connectionState: "unknown"
-    readonly property color tint: appRunning ? "#FFFFFF" : "#8B8D98"
     readonly property color lockColor: connectionState === "connected" ? "#30C88B"
         : connectionState === "disconnected" ? "#F25F68"
         : connectionState === "unknown" ? "#8B8D98" : "#F2BC65"
     Image {
         id: logo
-        x: 0; y: parent.height * 0.22
-        width: parent.width * 0.82; height: parent.height * 0.78
+        x: 0; y: parent.height * 0.16
+        width: parent.width * 0.90; height: parent.height * 0.84
         source: Quickshell.iconPath("proton-vpn-sign")
         sourceSize.width: 64; sourceSize.height: 64
         fillMode: Image.PreserveAspectFit
-        visible: false
-        layer.enabled: true
-    }
-    MultiEffect {
-        anchors.fill: logo
-        source: logo
-        colorization: 1.0
-        colorizationColor: root.tint
-        brightness: root.appRunning ? 0.6 : 0.15
+        // Preserve the installed logo's inner shape and original gradients.
+        layer.enabled: !root.appRunning
+        layer.effect: MultiEffect {
+            saturation: -1.0
+            brightness: -0.12
+        }
     }
     Canvas {
         id: lock
-        x: parent.width * 0.48; y: 0
-        width: parent.width * 0.52; height: parent.height * 0.62
+        x: parent.width * 0.60; y: 0
+        width: parent.width * 0.40; height: parent.height * 0.50
         onWidthChanged: requestPaint()
         onHeightChanged: requestPaint()
         Connections {

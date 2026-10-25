@@ -1,3 +1,9 @@
+v0.1.16 — Restore the full Proton logo and compact badge
+
+- Keep the official logo's original purple/teal gradients and inner shape when the app runs; use grayscale when it is off. Artwork comes from the installed app, with no image binary redistributed.
+- Reduce the combined bar icon to a 12 logical pixel canvas and a smaller corner lock. Expose the live icon size in IPC status and reload the shell so stale components cannot hide the change.
+- Validate QML/source and inspect live status/rendering without changing the VPN connection.
+
 v0.1.15 — Match Proton icon size to the bar
 
 - Use Omarchy's standard icon canvas and status slot for the Proton icon and lock badge, reducing the bar artwork from 23 to 16 logical pixels at the default theme scale.

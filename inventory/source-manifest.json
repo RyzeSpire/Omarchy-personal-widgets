@@ -293,26 +293,26 @@
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/ProtonIcon.qml",
     "package": "plugins/ryze.proton-vpn/ProtonIcon.qml",
-    "source_sha256": "b097734887ef4344130265ac600022d7f845914b2472ae2b070bd2a9b2d924b6",
-    "package_sha256": "b097734887ef4344130265ac600022d7f845914b2472ae2b070bd2a9b2d924b6"
+    "source_sha256": "da7895b42538dc2ce7a30c6017cf0133eb3df410e92e0fae93af6379d77344b6",
+    "package_sha256": "da7895b42538dc2ce7a30c6017cf0133eb3df410e92e0fae93af6379d77344b6"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/ProtonWidget.qml",
     "package": "plugins/ryze.proton-vpn/ProtonWidget.qml",
-    "source_sha256": "ace18d91def2c4e2b8481f21730c7ffef6d7ec088b46cc6f78f335ccd743c940",
-    "package_sha256": "ace18d91def2c4e2b8481f21730c7ffef6d7ec088b46cc6f78f335ccd743c940"
+    "source_sha256": "82712592e8bf6a1af4445b6e0c885fa309cf164e96e9209fc5361d32103b6f00",
+    "package_sha256": "82712592e8bf6a1af4445b6e0c885fa309cf164e96e9209fc5361d32103b6f00"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/README.md",
     "package": "plugins/ryze.proton-vpn/README.md",
-    "source_sha256": "0ab9e1ef510656840cc1cdcf077bad411cd00256d3439959970031d1e3007a9f",
-    "package_sha256": "0ab9e1ef510656840cc1cdcf077bad411cd00256d3439959970031d1e3007a9f"
+    "source_sha256": "d26e6b6041f12c9c38f79d610d59d578236132136fd5cf62fb47d762955f2466",
+    "package_sha256": "d26e6b6041f12c9c38f79d610d59d578236132136fd5cf62fb47d762955f2466"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/manifest.json",
     "package": "plugins/ryze.proton-vpn/manifest.json",
-    "source_sha256": "ef946c06564da9367bf8f0ae2a5e716432f64899dfc9b7c83a1eb33a2e2a0edd",
-    "package_sha256": "ef946c06564da9367bf8f0ae2a5e716432f64899dfc9b7c83a1eb33a2e2a0edd"
+    "source_sha256": "142e074d9b78b697f4aba53fec19d31355b5ef853ddb5916d0d2af6b329615e1",
+    "package_sha256": "142e074d9b78b697f4aba53fec19d31355b5ef853ddb5916d0d2af6b329615e1"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/proton_status.py",

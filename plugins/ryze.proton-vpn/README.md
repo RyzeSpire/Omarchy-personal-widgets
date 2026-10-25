@@ -2,12 +2,12 @@
 
 An original Omarchy widget around the official Proton VPN GTK app; it does not restore OmaProton.
 
-- Gray Proton logo: official app is not running. White: app is running, including in the tray.
+- Grayscale Proton logo: official app is not running. Full-color logo: app is running, including in the tray. The official purple/teal artwork retains its inner shape.
 - Green closed lock: NetworkManager reports an activated Proton tunnel. Red open lock: no active Proton tunnel.
 - Amber open lock: connecting or disconnecting. Gray question mark: connection status is unavailable.
 - App status and tunnel status are independent. Closing/quitting the app does not by itself prove that the tunnel disconnected. A connected tunnel also does not imply every application uses it when split tunneling is configured.
 
-The bar icon and lock badge share Omarchy’s standard icon canvas and status slot, matching neighboring icons and theme scaling. The larger popup icon remains unchanged.
+The combined bar artwork uses a compact 12 logical pixel canvas and Omarchy’s standard status slot. The lock badge is smaller than the logo. The popup keeps its larger artwork. Theme scaling applies to the canvas. If a previous component stays cached after editing, reload the shell with `omarchy restart shell`; the live IPC status includes `iconSize` for verification.
 
 Left-click opens a compact status popup with the connected server name, Quick connect/Disconnect and Open Proton VPN / Settings. Right-click opens the official app directly. Escape/outside click dismisses the popup; Tab/Enter operates its buttons. Starting the app does not itself issue a connect command. Proton's own startup preferences still apply.
 
