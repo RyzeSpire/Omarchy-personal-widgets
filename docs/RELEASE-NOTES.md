@@ -1,3 +1,10 @@
+v0.1.19 — Remove all custom Proton addons
+
+- Remove the personal widget, server browser, app adapter, country policy and custom launcher; retain only the official native Proton VPN app.
+- Restore recorded pre-addon tunnel flags and the standard app entry point. Preserve account/settings data and unrelated widgets.
+- Extend retirement migration to both old addon IDs and prevent old ledgers/shell backups from reinstalling them. Historical releases remain historical.
+- All 46 current checks and five-plugin source validation pass. The live launcher/process use the system app, its adapter bus is absent, and all 771 official package files are unaltered.
+
 v0.1.18 — Hide and block Brazil VPN routes
 
 - Default the configurable country policy to BR; hide routes with Brazil entry, exit or declared host-country metadata, including Secure Core paths.

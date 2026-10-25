@@ -1,6 +1,6 @@
 # Omarchy personal widgets and setup
 
-Ryze's retained Omarchy Quattro desktop setup, packaged for reviewable reinstallation. Includes Spotify, Steam, Discord, Codex, keyboard and Proton VPN status widgets, plus the surrounding workspace, keyboard, browser, idle, audio, VPN and OBS camera configuration needed to recreate their behavior.
+Ryze's retained Omarchy Quattro desktop setup, packaged for reviewable reinstallation. Includes Spotify, Steam, Discord, Codex and keyboard widgets, plus the surrounding workspace, keyboard, browser, idle, audio, VPN and OBS camera configuration needed to recreate their behavior.
 
 ```bash
 git clone https://github.com/RyzeSpire/Omarchy-personal-widgets.git
@@ -13,7 +13,7 @@ Read **[installation, accounts, migration and removal](docs/RESTORE.md)** first.
 
 | Path | Purpose |
 |---|---|
-| `plugins/` | Six personal QML/Python widgets, preserved from the working installation |
+| `plugins/` | Five personal QML/Python widgets, preserved from the working installation |
 | `config/` | Audited, sanitized presets, home templates and optional system camera files |
 | `profile.json` | Captured platform baseline, preferences and curated dependencies |
 | `inventory/` | Package versions, explicit/foreign package lists and upstream provenance |
@@ -34,4 +34,4 @@ Persistent Codex instructions require future retained Omarchy changes to be pack
 
 Roblox is available through the separately restored [Sober Flatpak](docs/SOBER.md). Its helper previews by default and supports installation, updates and account-preserving removal; proprietary binaries and account state remain outside the bundle.
 
-VPN control uses the [native Proton VPN application](docs/PROTON_APP.md), with a new [status/lock widget](plugins/ryze.proton-vpn/README.md) that delegates controls to the official app. The retired addon is removed from the current restore payload; upgrades migrate its old files and bar references without touching Proton account data.
+VPN control uses the [unmodified native Proton VPN application](docs/PROTON_APP.md). All custom Proton widgets, adapters and policies are removed; upgrades restore the normal launcher and prevent addon restoration without touching account data.

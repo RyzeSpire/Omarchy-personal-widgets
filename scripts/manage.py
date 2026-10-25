@@ -170,6 +170,7 @@ def auto_monitor():
 
 
 RETIRED_PROTON_WIDGET = 'io.github.grichard99.omaproton-vpn'
+RETIRED_PROTON_WIDGETS = {RETIRED_PROTON_WIDGET, 'ryze.proton-vpn'}
 
 
 def strip_retired_widgets(config):
@@ -178,13 +179,14 @@ def strip_retired_widgets(config):
     for section, entries in layout.items():
         if isinstance(entries, list):
             layout[section] = [entry for entry in entries if
-                (entry.get('id') if isinstance(entry, dict) else entry) != RETIRED_PROTON_WIDGET]
+                (entry.get('id') if isinstance(entry, dict) else entry) not in RETIRED_PROTON_WIDGETS]
     plugins = config.get('plugins')
     if isinstance(plugins, list):
         config['plugins'] = [entry for entry in plugins if
-            (entry.get('id') if isinstance(entry, dict) else entry) != RETIRED_PROTON_WIDGET]
+            (entry.get('id') if isinstance(entry, dict) else entry) not in RETIRED_PROTON_WIDGETS]
     elif isinstance(plugins, dict):
-        plugins.pop(RETIRED_PROTON_WIDGET, None)
+        for identifier in RETIRED_PROTON_WIDGETS:
+            plugins.pop(identifier, None)
     return config
 
 
@@ -194,31 +196,76 @@ def clean_shell_backup(data):
     return json_bytes(cleaned) if cleaned != original else data
 
 
+def restore_proton_profile_flags(backup, command=None):
+    """Undo recorded addon flags only; never touch secrets, routes or kill switches."""
+    if not backup.exists():
+        return 0
+    originals = read_json(backup, {})
+    def execute(args):
+        if command is not None:
+            return command(args)
+        return subprocess.run(['nmcli', '--wait', '5', *args], check=True,
+            capture_output=True, text=True, timeout=8,
+            env=dict(os.environ, LC_ALL='C')).stdout
+    current = {}
+    for line in execute(['-t', '-f', 'UUID,TYPE,AUTOCONNECT,NAME', 'connection', 'show']).splitlines():
+        fields = line.split(':', 3)
+        if len(fields) == 4 and fields[1] in ('wireguard', 'vpn') and fields[3].startswith('ProtonVPN '):
+            current[fields[0]] = fields[2]
+    count = 0
+    for identifier, automatic in originals.items():
+        if automatic is True and current.get(identifier) == 'no':
+            uuid.UUID(identifier)
+            execute(['connection', 'modify', 'uuid', identifier, 'connection.autoconnect', 'yes'])
+            count += 1
+    backup.unlink()
+    return count
+
+
 def retire_proton_widget(home, state):
-    """Retire old active code/state and forget ledger entries that could restore it."""
-    relatives = ('.config/omarchy/plugins/' + RETIRED_PROTON_WIDGET,
-                 '.local/state/omarchy-protonvpn')
+    """Retire both Proton addons and restore the unmodified native launcher."""
+    personal_state = home / '.local/state/ryze-proton-widget'
+    if home.resolve() == Path.home().resolve():
+        restore_proton_profile_flags(personal_state / 'autoconnect-originals.json')
+    relatives = {'.config/omarchy/plugins/' + RETIRED_PROTON_WIDGET: 'plugin',
+                 '.config/omarchy/plugins/ryze.proton-vpn': 'personal-plugin',
+                 '.local/state/omarchy-protonvpn': 'widget-state',
+                 '.local/state/ryze-proton-widget': 'personal-state'}
+    launcher_relative = '.local/share/applications/proton.vpn.app.gtk.desktop'
     with state_lock(state):
         ledger_path = state / 'installation.json'
         ledger = read_json(ledger_path, {'schema': 1, 'files': {}})
         archive = state / 'history' / ('retire-proton-widget-' + uuid.uuid4().hex)
         moved = []
+        launcher = destination(home, launcher_relative)
+        launcher_before = launcher.read_bytes() if launcher.is_file() else None
+        launcher_mode = launcher.stat().st_mode & 0o777 if launcher.is_file() else 0o644
         try:
-            for relative in relatives:
+            if launcher_before is not None and b'proton_widget_app.py' in launcher_before:
+                record = ledger.get('files', {}).get(launcher_relative, {})
+                original = record.get('original', {})
+                data = (state / original['backup']).read_bytes() if original.get('exists') else None
+                if data is not None and b'proton_widget_app.py' not in data and not any(key.encode() in data for key in RETIRED_PROTON_WIDGETS):
+                    atomic_write(launcher, data, original['mode'])
+                else:
+                    launcher.unlink()
+            for relative, label in relatives.items():
                 source = destination(home, relative)
                 if source.exists() or source.is_symlink():
                     archive.mkdir(parents=True, exist_ok=True, mode=0o700)
-                    target = archive / ('plugin' if relative.startswith('.config/') else 'widget-state')
+                    target = archive / label
                     source.rename(target)
                     moved.append((source, target))
             ledger['files'] = {key: value for key, value in ledger.get('files', {}).items()
-                if not any(key == rel or key.startswith(rel + '/') for rel in relatives)}
+                if key != launcher_relative and not any(key == rel or key.startswith(rel + '/') for rel in relatives)}
             atomic_write(ledger_path, json_bytes(ledger))
         except BaseException:
             for source, target in reversed(moved):
                 target.rename(source)
+            if launcher_before is not None:
+                atomic_write(launcher, launcher_before, launcher_mode)
             raise
-        print('Retired Proton widget; official account/settings data left in place.')
+        print('Retired all custom Proton addons; native app/account/settings preserved.')
 
 
 def merge_shell(old, saved):
@@ -255,10 +302,6 @@ def install_plan(home, monitor, components):
                     if source.suffix in ('.py', '.qml', '.lua'):
                         data = data.decode().replace('HDMI-A-1', monitor).encode()
                     put(relative, data, source.stat().st_mode & 0o777)
-        # Only the widgets component owns this launcher; rollback restores any original.
-        desktop_home = str(home).replace('\\', '\\\\\\\\').replace('"', '\\\\"').replace('`', '\\\\`').replace('$', '\\\\$').replace('%', '%%')
-        launcher = (ROOT / 'config/proton-app.desktop').read_text().replace('@HOME@', desktop_home)
-        put('.local/share/applications/proton.vpn.app.gtk.desktop', launcher, 0o644)
         saved = read_json(ROOT / 'config/shell.json', {})
         put('.config/omarchy/shell.json', json_bytes(merge_shell(read_json(home / '.config/omarchy/shell.json', {}), saved)))
     for source in sorted((ROOT / 'config/home').rglob('*')):
