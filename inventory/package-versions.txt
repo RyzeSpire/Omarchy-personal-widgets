@@ -847,7 +847,7 @@ postgresql-libs 18.6-1
 power-profiles-daemon 0.30-1
 procps-ng 4.0.7-1
 protobuf 36.1-1
-proton-vpn-cli 1.0.3-1
+proton-vpn-cli 1.0.5-1
 proton-vpn-daemon 0.13.8-1
 psmisc 23.7-2
 pugixml 1.16-1

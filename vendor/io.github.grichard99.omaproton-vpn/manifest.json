@@ -20,7 +20,8 @@
     "defaultSection": "right",
     "defaults": {
       "watchIntervalSec": 4,
-      "notifications": "on"
+      "notifications": "on",
+      "blockedCountries": "BR"
     },
     "schema": [
       {
@@ -47,6 +48,12 @@
           }
         ],
         "defaultValue": "on"
+      },
+      {
+        "key": "blockedCountries",
+        "type": "string",
+        "label": "Blocked country codes (comma separated)",
+        "defaultValue": "BR"
       }
     ]
   }

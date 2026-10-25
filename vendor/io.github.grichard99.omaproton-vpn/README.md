@@ -775,3 +775,7 @@ community plugin and is not affiliated with or endorsed by Proton AG.
 ## License
 
 [MIT](LICENSE)
+
+## Personal restore-package changes (2026-10-25)
+
+This vendored MIT copy retains the upstream license and provenance. The personal version pins Connections / Settings above the scrolling content, exposes additional supported CLI switches, and filters Brazil from all widget-initiated connection paths through `connect.py`. See [local behavior and restore documentation](../../docs/PROTON_WIDGET.md). No VPN connection or Proton preference is changed merely by loading this update.

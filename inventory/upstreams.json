@@ -2,7 +2,8 @@
   "vpn": {
     "url": "https://github.com/grichard99/omaproton-vpn",
     "commit": "7db0d72234d38bcc727c261e720c1429e4d81f6e",
-    "license": "MIT"
+    "license": "MIT",
+    "local_changes": "Pinned Settings, additional supported CLI switches and fail-closed blocked-country selection via connect.py (2026-10-25)."
   },
   "keyboard_layout": {
     "origin": "Omarchy keyboard-layout clone",

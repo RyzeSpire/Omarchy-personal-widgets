@@ -21,7 +21,7 @@ Panel {
   property string tab: "connections"
   readonly property var tabs: [
     { key: "connections", label: "Connections" },
-    { key: "protection", label: "Protection" }
+    { key: "protection", label: "Settings" }
   ]
   property int nudgeIndex: 0
   property int quickIndex: 0
@@ -52,7 +52,14 @@ Panel {
   // asked first.
   readonly property string vpnKs: vpn.config["kill-switch"] || ""
   readonly property alias killSwitchDialog: killSwitchConfirm
-  readonly property int protectionCount: splitDetailVisible ? 8 : 6
+  readonly property int advancedStart: splitDetailVisible ? 7 : 5
+  readonly property var advancedOptions: [
+    {key: "vpn-accelerator", label: "VPN Accelerator", description: "Proton connection optimization"},
+    {key: "moderate-nat", label: "Moderate NAT", description: "NAT behavior for games and P2P"},
+    {key: "ipv6", label: "IPv6", description: "IPv6 support through Proton"},
+    {key: "anonymous-crash-reports", label: "Crash reports", description: "Send anonymous crash reports to Proton"}
+  ]
+  readonly property int protectionCount: advancedStart + advancedOptions.length + 1
   readonly property int signOutIndex: protectionCount - 1
 
   // App paths Proton's file already holds that the scan no longer finds, kept
@@ -540,6 +547,10 @@ Panel {
       else if (protectionIndex === 4) vpn.toggleSplitTunnel()
       else if (splitDetailVisible && protectionIndex === 5) splitModeRow.toggle()
       else if (splitDetailVisible && protectionIndex === 6) splitAppsRow.toggle()
+      else if (protectionIndex >= advancedStart && protectionIndex < advancedStart + advancedOptions.length) {
+        var option = advancedOptions[protectionIndex - advancedStart]
+        vpn.setConfig(option.key, vpn.config[option.key] === "on" ? "off" : "on")
+      }
       else requestSignOut()
     }
     else if (focusSection === "profilesHeader") setProfilesExpanded(!vpn.profilesExpanded)
@@ -902,7 +913,7 @@ Panel {
     // "tabs" scrolls the tab strip to the top; a number is an absolute contentY.
     function scroll(to: string): string {
       if (!panelFlick) return "no panel"
-      var y = String(to) === "tabs" ? tabRow.y : parseFloat(to)
+      var y = String(to) === "tabs" ? 0 : parseFloat(to)
       if (!isFinite(y)) return "bad value"
       root.anchorPending = false
       panelFlick.contentY = Math.max(0, Math.min(root.maxScroll(), y))
@@ -915,8 +926,12 @@ Panel {
     }
     // Deliberately omits the account email: anything running as this user can
     // call IPC, and the panel is the only place it should be readable.
+    function expandCountries(): string { root.setCountriesExpanded(true); return "ok" }
     function debug(): string {
       return JSON.stringify({
+        viewport: { height: panelFlick.height, contentHeight: panelFlick.contentHeight, y: panelFlick.contentY, max: root.maxScroll(), column: column.implicitHeight, card: panel.contentHeight },
+        blockedCountries: vpn.blockedCountries,
+        tab: root.tab,
         installed: vpn.installed,
         gtkAppInstalled: vpn.gtkAppInstalled,
         accountProbed: vpn.accountProbed,
@@ -1089,9 +1104,30 @@ Panel {
         onConfirmed: { opened = false; vpn.togglePortForwarding() }
       }
 
+      Row {
+        id: tabRow
+        visible: vpn.signedIn
+        width: parent.width
+        anchors.top: parent.top
+        spacing: Style.space(6)
+        readonly property real cellWidth: (width - spacing * (root.tabs.length - 1)) / root.tabs.length
+
+        Repeater {
+          model: root.tabs
+          TabPill {
+            required property var modelData
+            required property int index
+            width: tabRow.cellWidth
+            tabKey: modelData.key
+            text: modelData.label
+          }
+        }
+      }
+
       Flickable {
         id: panelFlick
         anchors.fill: parent
+        anchors.topMargin: tabRow.visible ? tabRow.implicitHeight + Style.space(12) : 0
         contentWidth: width
         contentHeight: column.implicitHeight
         clip: true
@@ -1388,27 +1424,6 @@ Panel {
             foreground: root.foreground
           }
 
-          // ── Tabs ────────────────────────────────────────────────────────
-          // Same pill strip as the network panel's DNS provider row.
-          Row {
-            id: tabRow
-            visible: vpn.signedIn
-            width: parent.width
-            spacing: Style.space(6)
-            readonly property real cellWidth: (width - spacing * (root.tabs.length - 1)) / root.tabs.length
-
-            Repeater {
-              model: root.tabs
-              TabPill {
-                required property var modelData
-                required property int index
-                width: tabRow.cellWidth
-                tabKey: modelData.key
-                text: modelData.label
-              }
-            }
-          }
-
           // ── Quick connect ───────────────────────────────────────────────
           // First thing on the Connections tab, folded behind its header
           // like the lists under it.
@@ -1638,6 +1653,32 @@ Panel {
                 font.family: root.fontFamily
                 font.pixelSize: Style.font.caption
                 wrapMode: Text.WordWrap
+              }
+
+              Text {
+                width: parent.width
+                text: "Blocked countries: " + vpn.blockedCountries + ". Applies to connections made by this widget."
+                color: root.dim
+                font.family: root.fontFamily
+                font.pixelSize: Style.font.caption
+                wrapMode: Text.WordWrap
+              }
+              Repeater {
+                model: root.advancedOptions
+                Toggle {
+                  required property var modelData
+                  required property int index
+                  width: protectionColumn.width
+                  label: modelData.label
+                  description: vpn.configPendingLabel(modelData.key) || modelData.description
+                  checked: vpn.config[modelData.key] === "on"
+                  enabled: vpn.configLoaded && vpn.configPending === "" && !vpn.busy
+                  foreground: root.foreground
+                  fontFamily: root.fontFamily
+                  hasCursor: root.cursorActive && root.focusSection === "protection" && root.protectionIndex === root.advancedStart + index
+                  onHovered: function(on) { if (on) root.setCursorFromHover("protection", root.advancedStart + index) }
+                  onClicked: vpn.setConfig(modelData.key, checked ? "off" : "on")
+                }
               }
 
               // ── Account ─────────────────────────────────────────────────

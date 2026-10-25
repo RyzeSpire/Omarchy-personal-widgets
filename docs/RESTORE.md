@@ -129,3 +129,5 @@ The retained Roblox setup uses the user Flatpak `org.vinegarhq.Sober` from Flath
 Sober launcher integration: its helper now links the official exported desktop entry and icon into standard user XDG directories during install/update. For an existing app missing from search, run `python3 -B scripts/sober.py launcher --apply` and reopen the launcher. Helper uninstall removes only its owned links, preserving custom replacements.
 
 Sober audio preference: the install helper also enables the upstream PipeWire crackling workaround for Sober only. Existing installations can apply `python3 -B scripts/sober.py audio-pipewire --apply`; restart Sober between games. `audio-default --apply` removes only that driver/socket override. Selective music/sprite authorization failures are a separate diagnostic issue; see [Sober audio notes](SOBER.md#audio-crackling-and-selective-missing-content).
+
+Proton widget updates: Connections and Settings stay visible at the top. The widget defaults to blocking Brazil (BR) across all its connect paths; this does not apply to external/manual Proton commands. See [settings, country policy and lifecycle](PROTON_WIDGET.md).

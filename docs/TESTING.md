@@ -57,3 +57,9 @@ The user reported working effects with missing music/sprite assets and occasiona
 Applied the documented Sober-only PipeWire environment/socket override, preserving unrelated existing permissions and saving the original override privately outside the repository. A fresh Sober shell sandbox verified SDL_AUDIO_DRIVER=pipewire and an accessible PipeWire socket. The active game was not restarted. Hearing crackling improvement requires a later full Sober restart and user feedback; current playback does not prove that improvement. The helper packages this preference with per-setting rollback, while no private log/account data is exported.
 
 All 39 isolated restore checks and source validation passed after this helper change. All six action previews left a temporary HOME empty. Applying audio-pipewire and audio-default against a temporary XDG data directory verified actual Flatpak environment/socket changes and preservation of an unrelated filesystem permission; the live override file hash stayed unchanged during that test.
+
+## Proton widget policy and settings (2026-10-25)
+
+Seven synthetic server-selection/entrypoint tests exercise allowed/blocked routes, no-CLI-on-block behavior, features, tiers and missing cache. Live cache selection was dry-run only. Settings display and scroll geometry were checked without changing VPN routing or protection values. The user confirmed wheel recovery after resetting the external mouse; the touchpad remained functional. Reconnection and changes to VPN/split values remain manual coverage. See PROTON_WIDGET.md.
+
+The isolated public Proton checkout passed all 46 restore/policy tests. Source/manifest validation passed. The final live panel had 467 pixels of scrollable overflow with Settings pinned, BR absent from 148 allowed country rows, and the existing connected/include-three-app state intact. A VPN connection or setting-toggle test was not performed.

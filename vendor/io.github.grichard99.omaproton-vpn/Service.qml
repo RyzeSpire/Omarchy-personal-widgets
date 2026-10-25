@@ -106,7 +106,11 @@ Item {
   readonly property var configValues: ({
     "kill-switch": ["off", "standard"],
     "netshield": ["off", "malware-only", "malware-ads-trackers"],
-    "port-forwarding": ["off", "on"]
+    "port-forwarding": ["off", "on"],
+    "vpn-accelerator": ["off", "on"],
+    "moderate-nat": ["off", "on"],
+    "ipv6": ["off", "on"],
+    "anonymous-crash-reports": ["off", "on"]
   })
 
   // The port Proton assigned on a P2P server, or "" when there isn't one.
@@ -721,6 +725,12 @@ Item {
     return "fastest"
   }
 
+  readonly property string blockedCountries: String(setting("blockedCountries", "BR"))
+  readonly property string connectScriptPath: Qt.resolvedUrl("connect.py").toString().replace(/^file:\/\//, "")
+  function countryAllowed(code) {
+    return blockedCountries.toUpperCase().split(",").map(function(c) { return c.trim() }).indexOf(String(code).toUpperCase()) === -1
+  }
+
   function connectTo(args, label, target, auto) {
     if (!installed || !signedIn || busy) return
     // Any connect that isn't a profile click ends the profile's claim.
@@ -734,7 +744,7 @@ Item {
     pendingLabel = label || "Connecting…"
     actionStatus = pendingLabel
     lastError = ""
-    connectProcess.command = ["protonvpn", "connect"].concat(args || [])
+    connectProcess.command = ["python3", connectScriptPath, "--blocked", blockedCountries, "--"].concat(args || [])
     connectProcess.running = true
   }
 
@@ -1631,7 +1641,7 @@ Item {
       try {
         var out = JSON.parse(String(citiesStdout.text || "{}"))
         var list = out ? out.cities : null
-        root.cities = Array.isArray(list) ? list : []
+        root.cities = Array.isArray(list) ? list.filter(function(c) { return root.countryAllowed(c.code) }) : []
         // Only a real tier moves this: a missing cache says nothing about
         // the account, and must not flip the panel between plans.
         if (out && typeof out.maxTier === "number" && out.maxTier >= 0) root.maxTier = out.maxTier
@@ -1672,7 +1682,7 @@ Item {
       Qt.callLater(root.drainProbes)
       if (exitCode !== 0) return
       var list = Model.parseCountries(String(countriesStdout.text || ""))
-      root.countries = list
+      root.countries = list.filter(function(c) { return root.countryAllowed(c.code) })
       root.countriesLoaded = list.length > 0
     }
   }

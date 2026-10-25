@@ -237,6 +237,23 @@
       "preserved": "Existing unrelated Flatpak permissions, active game, account state, caches and renderer settings.",
       "verification": "Fresh sandbox sees the PipeWire socket and driver environment. Crackling improvement awaits an app restart and user feedback.",
       "private_state": "Prior overrides backed up locally outside Git; no logs or account/asset identifiers included."
+    },
+    {
+      "date": "2026-10-25",
+      "action": "configured",
+      "application": "OmaProton VPN widget",
+      "upstream_version": "1.4.8",
+      "observed_cli": "proton-vpn-cli 1.0.5-1",
+      "changes": [
+        "Pinned Connections/Settings tabs",
+        "Additional supported CLI boolean settings",
+        "Configurable blockedCountries default BR",
+        "Centralized allowed-server selection for every widget connect path"
+      ],
+      "blocked_scope": "Widget-initiated connections only; no global CLI interception.",
+      "verification": "Selection/entrypoint fixtures, live cache dry selection, live panel geometry and existing split-settings display; no VPN reconnection attempted.",
+      "scrolling": "User confirmed external-mouse wheel recovery after mouse reset; no global input changes.",
+      "documentation": "docs/PROTON_WIDGET.md"
     }
   ]
 }

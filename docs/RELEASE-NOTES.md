@@ -1,3 +1,10 @@
+v0.1.12 — Proton settings access and Brazil exclusion
+
+- Pin Connections / Settings above the scrolling content and expose supported VPN Accelerator, Moderate NAT, IPv6 and crash-report controls alongside split tunneling and existing protection settings.
+- Default blockedCountries to BR and enforce it for every widget connection path, including quick/automatic/saved selections and both Secure Core hops. Cache/no-match failures refuse unrestricted fallback.
+- Diagnose the universal scroll failure as missing external-mouse wheel events; the user confirmed recovery after resetting the mouse. No global input changes were needed.
+- Add isolated country-policy tests, portable helper packaging, original-file backups and documentation. No VPN reconnection or existing preference change is performed during installation.
+
 v0.1.10 — Sober PipeWire audio preference
 
 - Retain Sober's documented PipeWire workaround for occasional audio crackling, scoped to this app and preserving other permissions.

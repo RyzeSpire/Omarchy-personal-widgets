@@ -282,8 +282,10 @@
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/Panel.qml",
     "package": "vendor/io.github.grichard99.omaproton-vpn/Panel.qml",
-    "source_sha256": "a1776f624eb40c178148bef21af9438d5e717be00fd597d6badfdc0c37980ea3",
-    "package_sha256": "a1776f624eb40c178148bef21af9438d5e717be00fd597d6badfdc0c37980ea3"
+    "source_sha256": "26de14e4d76fdb35141479b2b8e59910433aed0d02f5aec5127608c2ff054818",
+    "package_sha256": "26de14e4d76fdb35141479b2b8e59910433aed0d02f5aec5127608c2ff054818",
+    "baseline_source_sha256": "a1776f624eb40c178148bef21af9438d5e717be00fd597d6badfdc0c37980ea3",
+    "updated_on": "2026-10-25"
   },
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/ProtonIcon.qml",
@@ -294,8 +296,10 @@
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/README.md",
     "package": "vendor/io.github.grichard99.omaproton-vpn/README.md",
-    "source_sha256": "ddb120a97aa31bf0a70444499d89cb96e362f22a6b992ec5a1b788f4d8387046",
-    "package_sha256": "ddb120a97aa31bf0a70444499d89cb96e362f22a6b992ec5a1b788f4d8387046"
+    "source_sha256": "42d5502cd51cdf44a0ae3285526418419b3e2189a19afa7cf1fba45e116957a4",
+    "package_sha256": "42d5502cd51cdf44a0ae3285526418419b3e2189a19afa7cf1fba45e116957a4",
+    "baseline_source_sha256": "ddb120a97aa31bf0a70444499d89cb96e362f22a6b992ec5a1b788f4d8387046",
+    "updated_on": "2026-10-25"
   },
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/RELEASING.md",
@@ -312,8 +316,10 @@
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/Service.qml",
     "package": "vendor/io.github.grichard99.omaproton-vpn/Service.qml",
-    "source_sha256": "001e9ee4c94fa136ba4c3ce76849b0fbe17e10def09380bfb02ff4570b2f2219",
-    "package_sha256": "001e9ee4c94fa136ba4c3ce76849b0fbe17e10def09380bfb02ff4570b2f2219"
+    "source_sha256": "4c26c265517ae29cd0af1cff6237ffcf0734dd1a96984f1805b0c6a9cc046683",
+    "package_sha256": "4c26c265517ae29cd0af1cff6237ffcf0734dd1a96984f1805b0c6a9cc046683",
+    "baseline_source_sha256": "001e9ee4c94fa136ba4c3ce76849b0fbe17e10def09380bfb02ff4570b2f2219",
+    "updated_on": "2026-10-25"
   },
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/Traffic.qml",
@@ -342,8 +348,10 @@
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/manifest.json",
     "package": "vendor/io.github.grichard99.omaproton-vpn/manifest.json",
-    "source_sha256": "80f61e3bbb25489b9900acdecb342881e1206444473d9f6305303c581693039f",
-    "package_sha256": "80f61e3bbb25489b9900acdecb342881e1206444473d9f6305303c581693039f"
+    "source_sha256": "5afb858635c5e67ed7186c55c178bc4720a87c061f555cd3a9c2118f3e8bd3fb",
+    "package_sha256": "5afb858635c5e67ed7186c55c178bc4720a87c061f555cd3a9c2118f3e8bd3fb",
+    "baseline_source_sha256": "80f61e3bbb25489b9900acdecb342881e1206444473d9f6305303c581693039f",
+    "updated_on": "2026-10-25"
   },
   {
     "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/port.py",
@@ -463,5 +471,12 @@
     "source_sha256": "b5e2776b63007f0c337b98e783073e31d37bc0936b94367294e408e45ec750bd",
     "package_sha256": "b5e2776b63007f0c337b98e783073e31d37bc0936b94367294e408e45ec750bd",
     "updated_on": "2026-10-22"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/io.github.grichard99.omaproton-vpn/connect.py",
+    "package": "vendor/io.github.grichard99.omaproton-vpn/connect.py",
+    "source_sha256": "fc5ffcdec07923480a5709a917397ba30a32fa667fbea3ef7a3581d8f82e2c39",
+    "package_sha256": "fc5ffcdec07923480a5709a917397ba30a32fa667fbea3ef7a3581d8f82e2c39",
+    "updated_on": "2026-10-25"
   }
 ]
