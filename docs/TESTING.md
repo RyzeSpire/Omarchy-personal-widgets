@@ -69,3 +69,9 @@ The isolated public Proton checkout passed all 46 restore/policy tests. Source/m
 All 42 isolated public restore tests passed after replacing the addon; source validation found five retained widgets and no retired addon payload. Three new retirement fixtures verify read-only preview, repeat upgrade, preservation of unrelated/private state and no resurrection through ledger/shell-backup restoration. The GUI package/launcher and visible native app window were verified; the addon is no longer discoverable. Retirement left the official settings hash unchanged and did not issue a connect/disconnect/logout command. Account sign-in and a new VPN connection remain interactive checks.
 
 The user confirmed the official app recognizes the account and its Settings page is ready.
+
+## Native Proton status companion (v0.1.14)
+
+Nine fabricated-state/temporary-home tests cover kill-switch exclusion, unrelated VPN exclusion, connection transitions, OpenVPN authentication state, app-off/tunnel-on independence, unavailable status, exact visible/enabled menu actions, refreshed menu IDs, unavailable controls and repeated install/removal preserving private Proton settings. The complete public isolated suite passes 51 tests. Source, six manifests and QML/Lua parsing pass.
+
+Live checks confirmed official-app ownership of the tray, an active Proton tunnel in NetworkManager, the appropriate Disconnect capability and a loaded IPC status handler. The popup and white-logo/green-closed-lock rendering were visually inspected on the desktop. No live connection, disconnection, logout, app quit or country change was issued. Red/off/transition/error states are covered by fabricated state, not by disrupting the current connection. Manual connection clicks and behavior with different app versions/locales remain user-side checks.

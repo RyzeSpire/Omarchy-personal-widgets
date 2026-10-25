@@ -44,7 +44,9 @@
     "woff2-font-awesome",
     "ttf-jetbrains-mono-nerd-basic",
     "persepolis",
-    "flatpak"
+    "flatpak",
+    "python-dbus",
+    "networkmanager"
   ],
   "mise_tools": {
     "codex": "latest",

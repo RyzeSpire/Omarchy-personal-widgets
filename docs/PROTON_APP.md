@@ -17,7 +17,7 @@ Search **Proton VPN** in the launcher. Its desktop ID is `proton.vpn.app.gtk.des
 gdbus call --session --dest proton.vpn.app.gtk --object-path /proton/vpn/app/gtk --method org.freedesktop.Application.Activate '{}'
 ```
 
-Sign in privately if prompted. Use the app's Settings for split tunneling, Kill Switch, NetShield and other native features. The existing Proton settings and credentials are not reset. The older official CLI may remain installed as an optional native utility; it is not required by this restore profile and no retired widget invokes it in the background. Updates come from normal Omarchy/Arch updates.
+Sign in privately if prompted. Use the app's Settings for split tunneling, Kill Switch, NetShield and other native features. The existing Proton settings and credentials are not reset. The older official CLI may remain installed as an optional native utility; it is not required by this restore profile and the status widget does not invoke it in the background. Updates come from normal Omarchy/Arch updates.
 
 ## Retired addon and upgrade behavior
 
@@ -34,3 +34,7 @@ Close the native app and run `omarchy pkg drop proton-vpn-gtk-app` if you want t
 ## Verification
 
 The native package and launcher metadata were verified, systemd-resolved was active, the app registered its native tray/session interfaces, and a visible Proton VPN window mapped on workspace 5 after desktop activation. The retired addon was absent from shell plugin discovery and active code/state paths. The official Proton settings hash was unchanged by retirement. Isolated tests cover plan-only behavior, repeated upgrade, preserving other widgets/private settings and preventing addon resurrection during bundle uninstall. The user confirmed the official app recognizes the account and its Settings page is ready. A new VPN connection or native settings changes were not performed automatically.
+
+## Personal status widget (v0.1.14)
+
+The native app now has a small original bar companion, `ryze.proton-vpn`. See its [appearance, controls and lifecycle](../plugins/ryze.proton-vpn/README.md). The app stays the VPN controller; this widget reads local NetworkManager state and delegates explicit clicks to its official tray menu. It does not restore the retired addon, its background reconnection or its settings interface. The lock badge reflects the tunnel separately from whether the app process is running. No VPN connection was changed to install or test it.

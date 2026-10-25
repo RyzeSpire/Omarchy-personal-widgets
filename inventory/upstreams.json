@@ -19,5 +19,13 @@
     "package": "proton-vpn-gtk-app",
     "source": "Arch extra, as recommended by Proton",
     "documentation": "https://protonvpn.com/support/linux-vpn-arch"
+  },
+  "proton_status_widget": {
+    "origin": "Original personal widget; local official-app integration",
+    "app_version_verified": "4.18.7-1",
+    "status_interface": "org.freedesktop.NetworkManager.Connection.Active",
+    "control_interface": "Official GTK app StatusNotifierItem / com.canonical.dbusmenu",
+    "artwork": "proton-vpn-sign from installed official package; no artwork redistributed",
+    "source": "plugins/ryze.proton-vpn"
   }
 }

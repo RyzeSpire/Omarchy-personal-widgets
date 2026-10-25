@@ -1,3 +1,9 @@
+v0.1.14 — Native Proton VPN status companion
+
+- Add an original bar widget beside the other app widgets, using the installed Proton logo with a separate connection-lock badge: gray/white for app off/on, red open/green closed for disconnected/connected, amber transitions and unknown-status fallback.
+- Add a compact popup with status/server, guarded Quick connect/Disconnect via the official app tray, and Open Proton VPN / Settings. No account import, CLI polling, network status service or automatic VPN changes.
+- Keep the old addon retired and native app settings intact. Package dependencies and temporary-home install/update/removal coverage; 51 isolated tests and six-plugin source validation pass. Live connected rendering/status verified; real connect/disconnect clicks were not automated.
+
 v0.1.13 — Replace Proton addon with the native app
 
 - Remove the retired VPN addon source, assets, tests and bar entry from the current restore payload.

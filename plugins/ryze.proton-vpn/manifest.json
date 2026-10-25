@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "ryze.proton-vpn",
+  "name": "Proton VPN status",
+  "version": "1.0.0",
+  "author": "ryze",
+  "description": "Official Proton app status and connection controls with a lock badge",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "ProtonWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Proton VPN",
+    "description": "Gray/white app icon with a red open or green closed connection lock",
+    "category": "Apps",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}
