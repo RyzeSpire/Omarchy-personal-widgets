@@ -1,3 +1,10 @@
+v0.1.20 — Read-only Proton indicator and native app opener
+
+- Add a compact dim/color app logo with an independent connection lock. Prefer the official tray status and fall back to local NetworkManager state.
+- Clicking focuses/activates the official app or starts its ordinary executable. No popup, server controls, app wrapper, launcher override or connection changes.
+- Keep retired adapters/policies removed and preserve native account/settings. Package repeat install/removal and read-only status/opener checks.
+- All 59 isolated checks and six-plugin source validation pass. Live status, compact rendering and native app opening verified with the same app PID and active network connections.
+
 v0.1.19 — Remove all custom Proton addons
 
 - Remove the personal widget, server browser, app adapter, country policy and custom launcher; retain only the official native Proton VPN app.

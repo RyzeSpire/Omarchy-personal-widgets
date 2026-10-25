@@ -19,5 +19,17 @@
     "package": "proton-vpn-gtk-app",
     "source": "Arch extra, as recommended by Proton",
     "documentation": "https://protonvpn.com/support/linux-vpn-arch"
+  },
+  "proton_indicator": {
+    "origin": "Original minimal read-only Omarchy indicator",
+    "source": "plugins/ryze.proton-indicator",
+    "app_package": "proton-vpn-gtk-app",
+    "app_version_verified": "4.18.7-1",
+    "status_interfaces": [
+      "org.kde.StatusNotifierItem",
+      "org.freedesktop.NetworkManager"
+    ],
+    "open_interface": "Verified-PID Hyprland focus; native tray Show with revision/property checks; standard desktop activation/executable startup",
+    "artwork": "Installed proton-vpn-sign; not redistributed"
   }
 }

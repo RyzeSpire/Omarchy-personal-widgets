@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "ryze.proton-indicator",
+  "name": "Proton VPN indicator",
+  "version": "1.0.0",
+  "author": "ryze",
+  "description": "Read-only app/tunnel status; click opens the unmodified official app",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "ProtonIndicator.qml"
+  },
+  "barWidget": {
+    "displayName": "Proton VPN status",
+    "description": "Dim/color app logo and connection lock; opens official app",
+    "category": "Apps",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}

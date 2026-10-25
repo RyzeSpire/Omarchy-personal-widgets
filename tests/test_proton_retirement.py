@@ -73,7 +73,7 @@ class ProtonRetirement(unittest.TestCase):
         self.assertEqual(restored['bar']['layout']['center'],[{'id':'personal.other'}])
         self.assertEqual(self.proton.read_bytes(),private)
 
-    def test_current_payload_has_only_native_proton(self):
+    def test_current_payload_has_no_retired_proton_adapter_or_launcher(self):
         plan=manage.install_plan(self.home,'DP-2',{'widgets'})
         self.assertFalse(any('ryze.proton-vpn' in key for key in plan))
         self.assertNotIn('.local/share/applications/proton.vpn.app.gtk.desktop',plan)
@@ -97,3 +97,18 @@ class ProtonRetirement(unittest.TestCase):
         self.assertEqual(manage.restore_proton_profile_flags(backup,command),1)
         self.assertEqual(calls,[['connection','modify','uuid',a,'connection.autoconnect','yes']])
         self.assertFalse(backup.exists())
+
+    def test_simple_indicator_survives_adapter_retirement_and_uninstalls(self):
+        relative='.config/omarchy/plugins/ryze.proton-indicator/ProtonIndicator.qml'
+        with contextlib.redirect_stdout(io.StringIO()):
+            for _ in range(2):
+                manage.apply_files(self.home,self.state,manage.install_plan(self.home,'DP-2',{'widgets'}))
+                manage.retire_proton_widget(self.home,self.state)
+            self.assertTrue((self.home/relative).exists())
+            shell=json.loads((self.home/'.config/omarchy/shell.json').read_text())
+            ids=[v['id'] for entries in shell['bar']['layout'].values() for v in entries]
+            self.assertIn('ryze.proton-indicator',ids)
+            self.assertNotIn('ryze.proton-vpn',ids)
+            self.assertFalse((self.home/'.local/share/applications/proton.vpn.app.gtk.desktop').exists())
+            self.assertEqual(manage.remove_files(self.home,self.state,True),0)
+        self.assertFalse((self.home/relative).exists())

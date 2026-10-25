@@ -289,5 +289,35 @@
     "source_sha256": "b5e2776b63007f0c337b98e783073e31d37bc0936b94367294e408e45ec750bd",
     "package_sha256": "b5e2776b63007f0c337b98e783073e31d37bc0936b94367294e408e45ec750bd",
     "updated_on": "2026-10-22"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.proton-indicator/ProtonIcon.qml",
+    "package": "plugins/ryze.proton-indicator/ProtonIcon.qml",
+    "source_sha256": "da7895b42538dc2ce7a30c6017cf0133eb3df410e92e0fae93af6379d77344b6",
+    "package_sha256": "da7895b42538dc2ce7a30c6017cf0133eb3df410e92e0fae93af6379d77344b6"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.proton-indicator/ProtonIndicator.qml",
+    "package": "plugins/ryze.proton-indicator/ProtonIndicator.qml",
+    "source_sha256": "69e87a1ddf9379daa4ba3a54d5586570e5ee4e3b2c9a31b16c5ffd814097b25b",
+    "package_sha256": "69e87a1ddf9379daa4ba3a54d5586570e5ee4e3b2c9a31b16c5ffd814097b25b"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.proton-indicator/README.md",
+    "package": "plugins/ryze.proton-indicator/README.md",
+    "source_sha256": "1bb47d428f6b489658337c7c567c0988832f5be021d8a9d082d6e9a89b2e7e7a",
+    "package_sha256": "1bb47d428f6b489658337c7c567c0988832f5be021d8a9d082d6e9a89b2e7e7a"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.proton-indicator/manifest.json",
+    "package": "plugins/ryze.proton-indicator/manifest.json",
+    "source_sha256": "5dbad5639524114a34dfdfd08aa9187ef52fb9d58dd91cb83420301a99da15f6",
+    "package_sha256": "5dbad5639524114a34dfdfd08aa9187ef52fb9d58dd91cb83420301a99da15f6"
+  },
+  {
+    "source": "~/.config/omarchy/plugins/ryze.proton-indicator/proton_indicator.py",
+    "package": "plugins/ryze.proton-indicator/proton_indicator.py",
+    "source_sha256": "485378b1c14a989831d4fb83702d85896a521ee06d35c0b895da13faeded0892",
+    "package_sha256": "485378b1c14a989831d4fb83702d85896a521ee06d35c0b895da13faeded0892"
   }
 ]
