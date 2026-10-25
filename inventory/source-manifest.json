@@ -299,20 +299,20 @@
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/ProtonWidget.qml",
     "package": "plugins/ryze.proton-vpn/ProtonWidget.qml",
-    "source_sha256": "1657b22292c4f0dfbf8a0e66c5a3505b9930b8b82a2e7a47536e7af4670c7668",
-    "package_sha256": "1657b22292c4f0dfbf8a0e66c5a3505b9930b8b82a2e7a47536e7af4670c7668"
+    "source_sha256": "ace18d91def2c4e2b8481f21730c7ffef6d7ec088b46cc6f78f335ccd743c940",
+    "package_sha256": "ace18d91def2c4e2b8481f21730c7ffef6d7ec088b46cc6f78f335ccd743c940"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/README.md",
     "package": "plugins/ryze.proton-vpn/README.md",
-    "source_sha256": "44ddf04632ac50dbeebf1d3736e2ea726937101d51d4d513871701a161c85ebd",
-    "package_sha256": "44ddf04632ac50dbeebf1d3736e2ea726937101d51d4d513871701a161c85ebd"
+    "source_sha256": "0ab9e1ef510656840cc1cdcf077bad411cd00256d3439959970031d1e3007a9f",
+    "package_sha256": "0ab9e1ef510656840cc1cdcf077bad411cd00256d3439959970031d1e3007a9f"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/manifest.json",
     "package": "plugins/ryze.proton-vpn/manifest.json",
-    "source_sha256": "d98ae3a446b19c15bf421ad73dc5ae4a482b50b86b000fbb7ed6a536158248c3",
-    "package_sha256": "d98ae3a446b19c15bf421ad73dc5ae4a482b50b86b000fbb7ed6a536158248c3"
+    "source_sha256": "ef946c06564da9367bf8f0ae2a5e716432f64899dfc9b7c83a1eb33a2e2a0edd",
+    "package_sha256": "ef946c06564da9367bf8f0ae2a5e716432f64899dfc9b7c83a1eb33a2e2a0edd"
   },
   {
     "source": "~/.config/omarchy/plugins/ryze.proton-vpn/proton_status.py",

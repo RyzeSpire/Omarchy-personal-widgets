@@ -7,6 +7,8 @@ An original Omarchy widget around the official Proton VPN GTK app; it does not r
 - Amber open lock: connecting or disconnecting. Gray question mark: connection status is unavailable.
 - App status and tunnel status are independent. Closing/quitting the app does not by itself prove that the tunnel disconnected. A connected tunnel also does not imply every application uses it when split tunneling is configured.
 
+The bar icon and lock badge share Omarchy’s standard icon canvas and status slot, matching neighboring icons and theme scaling. The larger popup icon remains unchanged.
+
 Left-click opens a compact status popup with the connected server name, Quick connect/Disconnect and Open Proton VPN / Settings. Right-click opens the official app directly. Escape/outside click dismisses the popup; Tab/Enter operates its buttons. Starting the app does not itself issue a connect command. Proton's own startup preferences still apply.
 
 Quick connect and Disconnect invoke the current official app tray-menu action only after a user click. No separate CLI/account session is started, no credentials are read, and no settings are rewritten. Controls are disabled when absent, hidden, disabled, ambiguous or unavailable; open the official app and sign in privately if needed. Quick connect uses Proton's own fastest-server selection and settings, with no custom country blacklist. Countries, split tunneling and advanced settings remain in the official app; the button opens its main window, where Settings is available.

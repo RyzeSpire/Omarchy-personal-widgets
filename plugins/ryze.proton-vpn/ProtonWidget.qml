@@ -80,8 +80,8 @@ Ui.BarWidget {
         id: button
         anchors.fill: parent
         bar: root.bar
-        slotSize: Commons.Style.space(28)
-        opticalSize: Commons.Style.space(23)
+        slotSize: Commons.Style.bar.statusSlot
+        opticalSize: Commons.Style.bar.iconCanvas
         iconComponent: Component {
             ProtonIcon { appRunning: root.status.running === true; connectionState: root.status.state || "unknown" }
         }

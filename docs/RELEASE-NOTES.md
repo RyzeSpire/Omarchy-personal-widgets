@@ -1,3 +1,8 @@
+v0.1.15 — Match Proton icon size to the bar
+
+- Use Omarchy's standard icon canvas and status slot for the Proton icon and lock badge, reducing the bar artwork from 23 to 16 logical pixels at the default theme scale.
+- Keep the popup artwork and VPN controls unchanged. QML/source validation and live status/rendering checked; no VPN connection change.
+
 v0.1.14 — Native Proton VPN status companion
 
 - Add an original bar widget beside the other app widgets, using the installed Proton logo with a separate connection-lock badge: gray/white for app off/on, red open/green closed for disconnected/connected, amber transitions and unknown-status fallback.
