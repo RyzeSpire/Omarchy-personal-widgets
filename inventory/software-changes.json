@@ -254,6 +254,22 @@
       "verification": "Selection/entrypoint fixtures, live cache dry selection, live panel geometry and existing split-settings display; no VPN reconnection attempted.",
       "scrolling": "User confirmed external-mouse wheel recovery after mouse reset; no global input changes.",
       "documentation": "docs/PROTON_WIDGET.md"
+    },
+    {
+      "date": "2026-10-25",
+      "action": "replaced",
+      "removed": "Third-party OmaProton VPN addon",
+      "installed": "Native Proton VPN GTK app",
+      "package": "proton-vpn-gtk-app",
+      "version": "4.18.7-1",
+      "source": "Arch extra; recommended by https://protonvpn.com/support/linux-vpn-arch",
+      "installation_command": "omarchy pkg add proton-vpn-gtk-app",
+      "launch_command": "protonvpn-app",
+      "removed_scope": "Current addon source/assets/tests/bar references and active widget state; old restoration-ledger entries retired.",
+      "preserved": "Official Proton settings/account data and unrelated widgets; older official CLI remains optional.",
+      "retired_behavior": "Addon-specific Always On/profiles/recent list/Brazil block are not present in native app integration.",
+      "manual": "Sign in if prompted; review native routing/settings before connecting.",
+      "documentation": "docs/PROTON_APP.md"
     }
   ]
 }

@@ -1,3 +1,10 @@
+v0.1.13 — Replace Proton addon with the native app
+
+- Remove the retired VPN addon source, assets, tests and bar entry from the current restore payload.
+- Install Proton's native GTK application through Arch's recommended proton-vpn-gtk-app package; preserve official account and connection settings.
+- Add safe upgrade retirement: preserve unrelated widgets, archive only retired active code/state privately, and prevent old ledger/shell backups from resurrecting it on uninstall.
+- The former widget's Always On, profiles and Brazil block are removed; use the native app's own settings. Historical commits/releases remain historical.
+
 v0.1.12 — Proton settings access and Brazil exclusion
 
 - Pin Connections / Settings above the scrolling content and expose supported VPN Accelerator, Moderate NAT, IPv6 and crash-report controls alongside split tunneling and existing protection settings.

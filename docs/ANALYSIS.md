@@ -14,7 +14,7 @@ The working desktop was inspected before packaging. The installed setup is not c
 | Keyboard | US/Brazilian ABNT2; Alt+Alt toggle; compose Caps; custom keyboard widget | Plugin and input settings |
 | Bar/idle | Existing layout, clock format, tray pins; idle screensaver/lock 3600 seconds | Merge the saved bar/idle values, preserve unrelated top-level settings |
 | Firefox | Default web URL/HTML associations; Wayland environment | Merge selected MIME defaults and install environment file |
-| VPN | OmaProton 1.4.8 at recorded upstream commit; Proton CLI; include split tunnel for Discord and Chromium, WireGuard, NetShield 1, kill switch off | Vendored MIT source and settings preset; no credentials or live connection automation |
+| VPN | Native Proton VPN GTK app from Arch extra; existing split-tunneling/account settings preserved | Reproducible native package install, sanitized optional settings preset, retired-addon upgrade cleanup |
 | Both screens in Discord | OBS collection/profile, 3840x1080 canvas, 2560x720 30fps camera, video42 loopback driver and launcher | Scene/profile sanitized, driver config supplied as separate root setup; portal choices must be renewed |
 | Audio | Bluetooth A2DP WirePlumber rule; saved device choices in WirePlumber state | Rule public; hardware-specific defaults/routing kept in optional encrypted migration |
 | Discord/Vencord | Patched client with enabled plugins/preferences | Sanitized preferences; preserve full account-linked settings only in encrypted backup; patcher must be installed separately |

@@ -14,7 +14,6 @@ Read **[installation, accounts, migration and removal](docs/RESTORE.md)** first.
 | Path | Purpose |
 |---|---|
 | `plugins/` | Five personal QML/Python widgets, preserved from the working installation |
-| `vendor/` | Pinned OmaProton VPN source with its original MIT license |
 | `config/` | Audited, sanitized presets, home templates and optional system camera files |
 | `profile.json` | Captured platform baseline, preferences and curated dependencies |
 | `inventory/` | Package versions, explicit/foreign package lists and upstream provenance |
@@ -34,3 +33,5 @@ Create an export artifact with `python3 scripts/make-release.py`. Recreate accou
 Persistent Codex instructions require future retained Omarchy changes to be packaged and published here. See [the packaging policy](docs/PACKAGING_POLICY.md). The desktop installer restores this global policy while preserving existing unrelated guidance. Restart existing Codex sessions to load new global instructions.
 
 Roblox is available through the separately restored [Sober Flatpak](docs/SOBER.md). Its helper previews by default and supports installation, updates and account-preserving removal; proprietary binaries and account state remain outside the bundle.
+
+VPN control now uses the [native Proton VPN application](docs/PROTON_APP.md). The retired addon is removed from the current restore payload; upgrades migrate its old files and bar references without touching Proton account data.

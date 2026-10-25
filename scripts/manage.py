@@ -139,7 +139,10 @@ def remove_files(base, state, apply=False):
             if apply:
                 original = record['original']
                 if original['exists']:
-                    atomic_write(path, (state / original['backup']).read_bytes(), original['mode'])
+                    data = (state / original['backup']).read_bytes()
+                    if relative == '.config/omarchy/shell.json':
+                        data = clean_shell_backup(data)
+                    atomic_write(path, data, original['mode'])
                 else:
                     path.unlink(missing_ok=True)
         if apply:
@@ -165,6 +168,59 @@ def auto_monitor():
     return PROFILE['secondary_monitor']
 
 
+
+RETIRED_PROTON_WIDGET = 'io.github.grichard99.omaproton-vpn'
+
+
+def strip_retired_widgets(config):
+    """Remove only the retired widget's shell references; retain other settings."""
+    layout = config.get('bar', {}).get('layout', {})
+    for section, entries in layout.items():
+        if isinstance(entries, list):
+            layout[section] = [entry for entry in entries if
+                (entry.get('id') if isinstance(entry, dict) else entry) != RETIRED_PROTON_WIDGET]
+    plugins = config.get('plugins')
+    if isinstance(plugins, list):
+        config['plugins'] = [entry for entry in plugins if
+            (entry.get('id') if isinstance(entry, dict) else entry) != RETIRED_PROTON_WIDGET]
+    elif isinstance(plugins, dict):
+        plugins.pop(RETIRED_PROTON_WIDGET, None)
+    return config
+
+
+def clean_shell_backup(data):
+    original = json.loads(data)
+    cleaned = strip_retired_widgets(json.loads(data))
+    return json_bytes(cleaned) if cleaned != original else data
+
+
+def retire_proton_widget(home, state):
+    """Retire old active code/state and forget ledger entries that could restore it."""
+    relatives = ('.config/omarchy/plugins/' + RETIRED_PROTON_WIDGET,
+                 '.local/state/omarchy-protonvpn')
+    with state_lock(state):
+        ledger_path = state / 'installation.json'
+        ledger = read_json(ledger_path, {'schema': 1, 'files': {}})
+        archive = state / 'history' / ('retire-proton-widget-' + uuid.uuid4().hex)
+        moved = []
+        try:
+            for relative in relatives:
+                source = destination(home, relative)
+                if source.exists() or source.is_symlink():
+                    archive.mkdir(parents=True, exist_ok=True, mode=0o700)
+                    target = archive / ('plugin' if relative.startswith('.config/') else 'widget-state')
+                    source.rename(target)
+                    moved.append((source, target))
+            ledger['files'] = {key: value for key, value in ledger.get('files', {}).items()
+                if not any(key == rel or key.startswith(rel + '/') for rel in relatives)}
+            atomic_write(ledger_path, json_bytes(ledger))
+        except BaseException:
+            for source, target in reversed(moved):
+                target.rename(source)
+            raise
+        print('Retired Proton widget; official account/settings data left in place.')
+
+
 def merge_shell(old, saved):
     # Keep unrelated modules, keys and plugin enable/disable preferences.
     new = deep_merge(old, {k: v for k, v in saved.items() if k != 'plugins'})
@@ -176,7 +232,7 @@ def merge_shell(old, saved):
             if entry['id'] not in known:
                 layout.setdefault(section, []).append(entry)
                 known.add(entry['id'])
-    return new
+    return strip_retired_widgets(new)
 
 
 def install_plan(home, monitor, components):
@@ -186,6 +242,8 @@ def install_plan(home, monitor, components):
         files[relative] = (data.encode() if isinstance(data, str) else data, mode)
     if 'widgets' in components:
         for kind in ('plugins', 'vendor'):
+            if not (ROOT / kind).is_dir():
+                continue
             for plugin in sorted((ROOT / kind).iterdir()):
                 for source in sorted(plugin.rglob('*')):
                     if source.is_symlink():
@@ -310,7 +368,7 @@ def main():
         raise ValueError('This restore profile uses standard XDG directories; adapt its destinations before applying to custom XDG roots.')
     state = home / '.local/state/omarchy-personal-widgets'
     if args.action == 'check':
-        required = ('omarchy', 'hyprctl', 'python3', 'foot', 'mise', 'spotify', 'discord', 'steam', 'protonvpn', 'obs', 'busctl', 'xkbcli')
+        required = ('omarchy', 'hyprctl', 'python3', 'foot', 'mise', 'spotify', 'discord', 'steam', 'protonvpn-app', 'obs', 'busctl', 'xkbcli')
         missing = [command for command in required if not shutil.which(command)]
         print('Missing commands:', ', '.join(missing) or 'none')
         if shutil.which('pacman'):
@@ -319,6 +377,8 @@ def main():
         print('Accounts: reconnect Spotify, Steam API, Proton, Discord and GitHub independently.')
         return bool(missing)
     if args.action == 'uninstall':
+        if args.apply:
+            retire_proton_widget(home, state)
         conflicts = remove_files(home, state, args.apply)
         if args.apply and live:
             validate_desktop()
@@ -353,6 +413,8 @@ def main():
             raise ValueError('Install Omarchy Quattro first; this is not an operating-system installer.')
         print('Close OBS/Vencord/Proton before replacing their settings. The installer does not stop applications.')
     apply_files(home, state, files)
+    if 'widgets' in components:
+        retire_proton_widget(home, state)
     if live:
         validate_desktop()
         if args.theme:

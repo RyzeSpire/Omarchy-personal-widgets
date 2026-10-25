@@ -1,10 +1,4 @@
 {
-  "vpn": {
-    "url": "https://github.com/grichard99/omaproton-vpn",
-    "commit": "7db0d72234d38bcc727c261e720c1429e4d81f6e",
-    "license": "MIT",
-    "local_changes": "Pinned Settings, additional supported CLI switches and fail-closed blocked-country selection via connect.py (2026-10-25)."
-  },
   "keyboard_layout": {
     "origin": "Omarchy keyboard-layout clone",
     "url": "https://github.com/omacom/omarchy",
@@ -19,5 +13,11 @@
     "source_sha256": "c8b3b0fd52d8a79469675e925ff851e1dd0588eb1eeb90bd4df004a4c7d72a0a",
     "local_file": "plugins/ryze.keyboard-layout/CursorPanel.qml",
     "changes": "Added pointer anchor and edge-aware card position; remaining focus/dismissal/theme behavior is copied from the installed upstream component."
+  },
+  "proton_vpn_app": {
+    "url": "https://github.com/ProtonVPN/proton-vpn-gtk-app",
+    "package": "proton-vpn-gtk-app",
+    "source": "Arch extra, as recommended by Proton",
+    "documentation": "https://protonvpn.com/support/linux-vpn-arch"
   }
 }

@@ -60,6 +60,12 @@ All 39 isolated restore checks and source validation passed after this helper ch
 
 ## Proton widget policy and settings (2026-10-25)
 
-Seven synthetic server-selection/entrypoint tests exercise allowed/blocked routes, no-CLI-on-block behavior, features, tiers and missing cache. Live cache selection was dry-run only. Settings display and scroll geometry were checked without changing VPN routing or protection values. The user confirmed wheel recovery after resetting the external mouse; the touchpad remained functional. Reconnection and changes to VPN/split values remain manual coverage. See PROTON_WIDGET.md.
+Seven synthetic server-selection/entrypoint tests exercise allowed/blocked routes, no-CLI-on-block behavior, features, tiers and missing cache. Live cache selection was dry-run only. Settings display and scroll geometry were checked without changing VPN routing or protection values. The user confirmed wheel recovery after resetting the external mouse; the touchpad remained functional. Reconnection and changes to VPN/split values remain manual coverage. Historical addon behavior is superseded by PROTON_APP.md.
 
 The isolated public Proton checkout passed all 46 restore/policy tests. Source/manifest validation passed. The final live panel had 467 pixels of scrollable overflow with Settings pinned, BR absent from 148 allowed country rows, and the existing connected/include-three-app state intact. A VPN connection or setting-toggle test was not performed.
+
+## Native Proton app replacement (2026-10-25)
+
+All 42 isolated public restore tests passed after replacing the addon; source validation found five retained widgets and no retired addon payload. Three new retirement fixtures verify read-only preview, repeat upgrade, preservation of unrelated/private state and no resurrection through ledger/shell-backup restoration. The GUI package/launcher and visible native app window were verified; the addon is no longer discoverable. Retirement left the official settings hash unchanged and did not issue a connect/disconnect/logout command. Account sign-in and a new VPN connection remain interactive checks.
+
+The user confirmed the official app recognizes the account and its Settings page is ready.

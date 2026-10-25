@@ -125,6 +125,7 @@ plocate
 postgresql-libs
 power-profiles-daemon
 proton-vpn-cli
+proton-vpn-gtk-app
 python-gobject
 python-poetry-core
 qemu-user-static-binfmt
