@@ -12,6 +12,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "plugins/ryze.proton-vpn"))
 def load(name, path):
     spec = importlib.util.spec_from_file_location(name, ROOT / path)
     module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
@@ -22,7 +23,7 @@ status = load("picker_proton_status", "plugins/ryze.proton-vpn/proton_status.py"
 
 def server(name="TEST#1", country="Example", city="Test City", tier=0, enabled=True, score=10):
     return SimpleNamespace(name=name, exit_country_name=country, exit_country="ZZ", location=city,
-                           entry_country_name=country, load=30, score=score, features=[], tier=tier, enabled=enabled)
+                           entry_country_name=country, entry_country="ZZ", host_country=None, load=30, score=score, features=[], tier=tier, enabled=enabled)
 
 
 def controller(rows):

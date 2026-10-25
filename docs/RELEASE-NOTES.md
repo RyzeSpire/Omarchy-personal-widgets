@@ -1,3 +1,10 @@
+v0.1.18 — Hide and block Brazil VPN routes
+
+- Default the configurable country policy to BR; hide routes with Brazil entry, exit or declared host-country metadata, including Secure Core paths.
+- Apply the filtered catalog to native fastest/country/startup/pinned selections and recheck cached DTOs at the SDK connection boundary so reconnection cannot bypass the block.
+- Refuse unadapted-tray connection fallback; provide a read-only native fastest-candidate preview. Preserve the saved-profile auto-connect guard and native account/cache state.
+- All 90 isolated checks and source validation pass. Live Brazil searches return zero, blocked validation is refused, and the native fastest preview selects an allowed route without changing the active tunnel.
+
 v0.1.17 — Search and select Proton servers in the widget
 
 - Add debounced country/city/server search, a scrollable 50-result page, cached loads and location/feature labels. Selecting a row does not connect; an explicit Connect button submits that exact server.

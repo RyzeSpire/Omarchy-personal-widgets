@@ -10,6 +10,7 @@ import sys
 import time
 import unicodedata
 from types import MethodType
+from proton_country_policy import allowed, require_allowed, install as install_country_policy, BLOCKED_COUNTRIES, notice as country_notice
 
 BUS = "io.github.ryzespire.ProtonWidget"
 OBJECT = "/io/github/ryzespire/ProtonWidget"
@@ -46,7 +47,7 @@ class Picker:
         ready = bool(self.controller.user_logged_in)
         allowed = ready and not self.controller.server_selection_requires_upgrade
         return dict(ok=True, schema=1, ready=ready, selection_allowed=allowed,
-                    pending=self.pending, error=self.error, target=self.target)
+                    pending=self.pending, error=self.error, target=self.target, blocked_countries=sorted(BLOCKED_COUNTRIES))
 
     def validate(self, name):
         if not isinstance(name, str) or not name or len(name) > 80:
@@ -56,7 +57,7 @@ class Picker:
             raise ValueError("Sign in to the official Proton VPN app first.")
         if not info["selection_allowed"]:
             raise ValueError("Your Proton plan does not allow specific server selection.")
-        server = self.controller._api.server_list.get_by_name(name)
+        server = require_allowed(self.controller._api.server_list.get_by_name(name))
         if server.name != name or not server.enabled or int(server.tier) > int(self.controller.user_tier):
             raise ValueError("This server is unavailable for your account. Refresh the list.")
         return server
@@ -72,7 +73,7 @@ class Picker:
         if time.monotonic() >= self.cache_until:
             rows = []
             for server in self.controller._api.server_list.logicals:
-                if not server.enabled or int(server.tier) > int(self.controller.user_tier):
+                if not allowed(server) or not server.enabled or int(server.tier) > int(self.controller.user_tier):
                     continue
                 row = dict(name=str(server.name), country=str(server.exit_country_name),
                            country_code=str(server.exit_country), city=str(server.location or ""),
@@ -91,7 +92,7 @@ class Picker:
         result = [{k: v for k, v in row.items() if k not in ("search", "score")} for row in matches[offset:offset + PAGE_SIZE]]
         return dict(ok=True, rows=result, total=len(matches), offset=offset, page_size=PAGE_SIZE,
                     selection_allowed=info["selection_allowed"],
-                    notice="" if info["selection_allowed"] else "Your Proton plan restricts specific server selection.")
+                    notice=country_notice() + ("" if info["selection_allowed"] else " Your Proton plan restricts specific server selection."))
 
     def connect(self, name):
         if self.pending:
@@ -163,6 +164,7 @@ def main():
     xml = """<node><interface name="io.github.ryzespire.ProtonWidget">
       <method name="Info"><arg direction="out" type="s"/></method>
       <method name="QuickConnect"><arg direction="out" type="s"/></method>
+      <method name="PreviewFastest"><arg direction="out" type="s"/></method>
       <method name="Disconnect"><arg direction="out" type="s"/></method>
       <method name="Search"><arg direction="in" type="s"/><arg direction="in" type="u"/><arg direction="out" type="s"/></method>
       <method name="Validate"><arg direction="in" type="s"/><arg direction="out" type="s"/></method>
@@ -188,6 +190,10 @@ def main():
                     result = dict(ok=True, name=server.name)
                 elif method == "Connect": result = self.picker.connect(*args)
                 elif method == "QuickConnect": result = self.picker.request(self._controller.connect_to_fastest_server)
+                elif method == "PreviewFastest":
+                    server = require_allowed(self._controller._api.server_list.get_fastest())
+                    result = dict(ok=True, name=server.name, entry_country=server.entry_country,
+                                  exit_country=server.exit_country, host_country=server.host_country)
                 elif method == "Disconnect": result = self.picker.request(self._controller.disconnect)
                 else: raise ValueError("Unsupported widget request.")
             except Exception as error:
@@ -200,6 +206,9 @@ def main():
     guard()
     with AsyncExecutor() as executor, ExceptionHandler() as exception_handler:
         controller = Controller.get(executor, exception_handler)
+        if install_country_policy(controller):
+            # The user explicitly blocked this route; never replace it with another.
+            executor.submit(controller.disconnect).result(timeout=20)
         if resume:
             # Preserve the active tunnel for an internal GUI-only migration restart.
             controller.run_startup_actions = MethodType(skip_migration_startup, controller)

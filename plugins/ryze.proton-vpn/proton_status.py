@@ -104,7 +104,7 @@ class Desktop:
 
     def picker_call(self, method, *args):
         obj = self.picker()
-        signature = {"Info": "", "Search": "su", "Validate": "s", "Connect": "s", "QuickConnect": "", "Disconnect": ""}[method]
+        signature = {"Info": "", "Search": "su", "Validate": "s", "Connect": "s", "QuickConnect": "", "Disconnect": "", "PreviewFastest": ""}[method]
         result = getattr(obj, method)(*args, signature=signature, dbus_interface=PICKER_BUS, timeout=8)
         data = json.loads(str(result))
         if not isinstance(data, dict):
@@ -114,7 +114,7 @@ class Desktop:
     def status(self):
         running = self.running()
         result = dict(ok=True, running=running, state="unknown", server="",
-                      can_connect=False, can_disconnect=False, picker_available=False, selection_allowed=False, picker_pending=False, picker_error="", error="")
+                      can_connect=False, can_disconnect=False, picker_available=False, selection_allowed=False, picker_pending=False, picker_error="", blocked_countries=[], error="")
         try:
             bus = self.dbus.SystemBus()
             active = self.props(bus, NM, "/org/freedesktop/NetworkManager", NM)["ActiveConnections"]
@@ -141,13 +141,17 @@ class Desktop:
                 result.update(picker_available=info.get("ok") is True,
                               selection_allowed=info.get("selection_allowed") is True,
                               picker_pending=info.get("pending") is True,
-                              picker_error=info.get("error", ""))
+                              picker_error=info.get("error", ""),
+                              blocked_countries=info.get("blocked_countries", []))
                 if result["picker_available"]:
                     ready = info.get("ready") is True and not result["picker_pending"]
                     result["can_connect"] = ready and result["state"] == "disconnected"
                     result["can_disconnect"] = ready and result["state"] in ("connected", "connecting")
             except Exception:
                 pass
+        if not result["picker_available"]:
+            # An unadapted app cannot enforce this widget's country policy.
+            result["can_connect"] = False
         return result
 
     def action(self, action):
@@ -169,6 +173,8 @@ class Desktop:
             if not response.get("ok"):
                 raise ValueError(response.get("error", "Could not complete the Proton request."))
             return
+        if action == "connect":
+            raise ValueError("Start Proton VPN through its launcher to enforce the blocked-country policy.")
         obj, items = self.tray_menu()
         item_id = menu_action(items, action)
         if obj is None or item_id is None:
@@ -181,7 +187,7 @@ class Desktop:
 def main():
     args = sys.argv[1:]
     action = args[0] if args else ""
-    if not ((action in ("status", "open", "connect", "disconnect") and len(args) == 1)
+    if not ((action in ("status", "open", "connect", "disconnect", "preview-fastest") and len(args) == 1)
             or (action == "search" and len(args) == 3)
             or (action in ("select", "validate") and len(args) == 2)):
         print(json.dumps(dict(ok=False, error="Invalid widget request.")))
@@ -190,6 +196,8 @@ def main():
         desktop = Desktop()
         if action == "status":
             result = desktop.status()
+        elif action == "preview-fastest":
+            result = desktop.picker_call("PreviewFastest")
         elif action == "search":
             result = desktop.picker_call("Search", args[1], desktop.dbus.UInt32(int(args[2])))
         elif action in ("select", "validate"):

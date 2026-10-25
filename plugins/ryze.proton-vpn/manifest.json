@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ryze.proton-vpn",
   "name": "Proton VPN status",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "ryze",
   "description": "Official Proton app status, searchable servers and explicit connection controls",
   "kinds": [

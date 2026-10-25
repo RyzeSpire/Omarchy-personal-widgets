@@ -28,6 +28,13 @@
     "artwork": "proton-vpn-sign from installed official package; no artwork redistributed",
     "source": "plugins/ryze.proton-vpn",
     "adapter_file": "plugins/ryze.proton-vpn/proton_widget_app.py",
-    "search_source": "Official controller server model; no additional account/session/cache export"
+    "search_source": "Official controller server model; no additional account/session/cache export",
+    "country_policy": {
+      "config": "plugins/ryze.proton-vpn/country-policy.json",
+      "blocked_countries": [
+        "BR"
+      ],
+      "scope": "Adapted native app catalog and SDK connect/reconnect; independent clients/manual network profiles are outside this policy"
+    }
   }
 }
